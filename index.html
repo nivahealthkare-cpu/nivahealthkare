@@ -3,45 +3,120 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NIVA HEALTH KARE</title>
+  <title>NIVA HEALTH KARE | Healthcare & Wellness Services</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Niva Health Kare provides quality healthcare and wellness services in Bengaluru. Contact us at +91 7892287102 for trusted health solutions." />
+  <meta name="keywords" content="Niva Health Kare, Healthcare, Wellness, Bengaluru Health Services, Health Solutions, Medical Services" />
+  <meta name="author" content="Niva Health Kare" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:title" content="NIVA HEALTH KARE | Healthcare & Wellness Services" />
+  <meta property="og:description" content="Providing quality healthcare and wellness services in Bengaluru. Contact us today!" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://nivahealthkare.com" />
+  <meta property="og:image" content="https://nivahealthkare.com/og-image.jpg" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+
+  <!-- Structured Data (JSON-LD for Payment Gateway & SEO) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MedicalOrganization",
+    "name": "Niva Health Kare",
+    "url": "https://nivahealthkare.com",
+    "logo": "https://nivahealthkare.com/logo.png",
+    "telephone": "+917892287102",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "2ND FLOOR, 1222, 80 Feet Road, Chandra Layout Stage 2",
+      "addressLocality": "Bengaluru",
+      "postalCode": "560040",
+      "addressRegion": "Karnataka",
+      "addressCountry": "IN"
+    },
+    "sameAs": [
+      "https://www.facebook.com/nivahealthkare",
+      "https://www.instagram.com/nivahealthkare"
+    ]
+  }
+  </script>
 
   <style>
+    /* Reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
       background-color: #f4f6f8;
       color: #333;
+      line-height: 1.6;
     }
 
     header {
-      background-color: #0a7cff;
-      color: white;
-      padding: 20px;
+      background: linear-gradient(90deg, #0a7cff, #005bb5);
+      color: #fff;
       text-align: center;
+      padding: 40px 20px;
     }
 
-    main {
-      max-width: 800px;
-      margin: 40px auto;
-      background: white;
-      padding: 30px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
     }
 
-    h1 {
+    header p {
+      font-size: 1.2rem;
       margin-top: 0;
     }
 
+    main {
+      max-width: 900px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #0a7cff;
+      margin-top: 30px;
+      margin-bottom: 15px;
+    }
+
     p {
-      line-height: 1.6;
+      margin-bottom: 20px;
+      font-size: 1rem;
+    }
+
+    a {
+      color: #0a7cff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
     }
 
     footer {
       text-align: center;
-      padding: 15px;
+      padding: 20px;
+      background-color: #e6eaf0;
+      color: #555;
       font-size: 14px;
-      color: #666;
+    }
+
+    .contact-info {
+      line-height: 1.8;
+    }
+
+    @media(max-width: 600px){
+      header h1 { font-size: 2rem; }
+      main { padding: 20px; margin: 20px; }
     }
   </style>
 </head>
@@ -50,33 +125,30 @@
 
   <header>
     <h1>NIVA HEALTH KARE</h1>
-    <p>Healthcare & Wellness Services</p>
+    <p>Healthcare & Wellness Services in Bengaluru</p>
   </header>
 
   <main>
     <h2>About Us</h2>
     <p>
-      Niva Health Kare is a healthcare-focused organization committed to providing
-      quality health and wellness services. Our goal is to improve lives through
-      reliable, transparent, and customer-centric healthcare solutions.
+      Niva Health Kare is a trusted healthcare organization committed to delivering
+      quality health and wellness services. Our mission is to enhance lives with
+      transparent, reliable, and patient-focused healthcare solutions.
     </p>
 
     <h2>Our Services</h2>
     <p>
-      We offer health-related services and solutions designed to support individuals
-      and organizations. Detailed service information will be updated soon.
+      We offer a wide range of healthcare services and wellness solutions for individuals and organizations. 
+      Detailed service information will be updated soon. Stay connected for the latest updates.
     </p>
 
-    <h2>Contact</h2>
-    <p>
-      Email: nivahealthkare.com<br />
-      Website: https://nivahealthkare.com
-      Phone: +91 7892287102
-      Address:  2ND FLOOR, 1222, 80 Feet Road,
-                Chandra Layout Stage 2,
-                Bengaluru 560040, Karnataka, India
-
-    </p>
+    <h2>Contact Us</h2>
+    <div class="contact-info">
+      <strong>Email:</strong> <a href="mailto:nivahealthkare.com">nivahealthkare.com</a><br />
+      <strong>Website:</strong> <a href="https://nivahealthkare.com">https://nivahealthkare.com</a><br />
+      <strong>Phone:</strong> +91 7892287102<br />
+      <strong>Address:</strong> 2ND FLOOR, 1222, 80 Feet Road, Chandra Layout Stage 2, Bengaluru 560040, Karnataka, India
+    </div>
   </main>
 
   <footer>
