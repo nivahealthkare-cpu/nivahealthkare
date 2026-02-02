@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- Primary SEO -->
+  <title>Diagnostic Scan Tests & Imaging Services | Niva Health Kare Bangalore</title>
+  <meta name="description" content="Book diagnostic scanning and imaging services at Niva Health Kare Bangalore. MRI scan, CT scan, Ultrasound, X-Ray, ECG, Echo and advanced diagnostic scan tests with trusted centers." />
+  <meta name="keywords" content="scan tests Bangalore, diagnostic scans, MRI scan Bangalore, CT scan Bangalore, ultrasound scan, x-ray test, imaging services, Niva Health Kare">
+  <meta name="robots" content="index, follow">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://www.nivahealthkare.com/scans" />
+
+  <!-- Open Graph (Facebook / WhatsApp) -->
+  <meta property="og:title" content="Diagnostic Scan Tests & Imaging Services | Niva Health Kare">
+  <meta property="og:description" content="Book MRI, CT, Ultrasound, X-Ray and other diagnostic scan tests with trusted imaging centers in Bangalore.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.nivahealthkare.com/scans">
+  <meta property="og:image" content="https://www.nivahealthkare.com/images/scans-og.webp">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/viewall.css">
+  <link rel="stylesheet" href="css/teststyle.css">
+
+  <!-- Font Awesome -->
+  <link rel="preload"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        as="style"
+        onload="this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  </noscript>
+
+</head>
+<body>
+
+<header>
+
+  <!-- ================= DESKTOP HEADER ================= -->
+  <div class="desktop-header">
+
+    <!-- LEFT: LOGO + LOCATION -->
+    <div class="logo-location">
+
+      <div class="logo-section">
+        <div class="lab-name">
+          <span class="niva">Niva</span>
+          <span class="healthcare">Health Kare</span>
+        </div>
+      </div>
+
+      <!-- LOCATION TRIGGER -->
+      <div class="location-trigger" id="openLocation">
+        <span class="label">Location</span>
+        <span class="city">
+          <i class="fa-solid fa-location-dot location-icon"></i>
+          <span id="selectedCity">Select city</span>
+          <i class="fa-solid fa-chevron-down chevron"></i>
+        </span>
+      </div>
+
+
+    </div>
+
+    <!-- RIGHT: MENU ICONS -->
+    <div class="header-actions">
+      <a href="index.html" class="header-item">
+        <i class="fas fa-home header-icon"></i>
+        <span class="header-text">Home</span>
+      </a>
+
+      <a href="surgeries.html" class="header-item">
+        <i class="fas fa-procedures header-icon"></i>
+        <span class="header-text">Surgeries</span>
+      </a>
+
+      <a href="test.html" class="header-item">
+        <i class="fas fa-vials header-icon"></i>
+        <span class="header-text">Lab Tests</span>
+      </a>
+
+      <div class="header-item" onclick="openModal()">
+        <i class="fas fa-heartbeat header-icon"></i>
+        <span class="header-text">Checkup</span>
+      </div>
+
+      <div class="header-item" onclick="toggleDrawer()">
+        <i class="fas fa-shopping-cart header-icon">
+          <span id="cart-count" class="cart-count">0</span>
+        </i>
+        <span class="header-text">Cart</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================= MOBILE HEADER ================= -->
+  <div class="mobile-header">
+    <div class="logo-section">
+      <div class="lab-name">
+        <span class="niva">Niva</span>
+        <span class="healthcare">Health Kare</span>
+      </div>
+    </div>
+
+    <div class="location-section" id="mobileLocation">
+      <i class="fas fa-map-marker-alt location-icon"></i>
+
+      <div class="location-info">
+        <span class="label">Your Location</span>
+        <span class="city">
+          <span id="mobileSelectedCity">Bangalore</span>
+          <i class="fas fa-chevron-down chevron"></i>
+        </span>
+
+
+      </div>
+    </div>
+
+  </div>
+
+</header>
+
+
+<!-- LOCATION POPUP (OUTSIDE header) -->
+<div class="location-popup" id="locationPopup">
+  <div class="popup-card">
+
+    <div class="popup-header">
+      <h3>Select your city</h3>
+      <button class="close-btn" id="closePopup">×</button>
+    </div>
+
+    <input
+      type="text"
+      placeholder="Search city"
+      class="city-search"
+      id="citySearch"
+    />
+
+    <div class="city-list" id="cityList"></div>
+
+    <p class="coverage">
+      Services available across major cities in Karnataka
+    </p>
+
+  </div>
+</div>
+<!-- Minimal Consultation Modal -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+  <div class="modal-box" onclick="event.stopPropagation()">
+
+    <!-- Header -->
+    <div class="modal-header">
+      <h3>Get a call from our medical team</h3>
+      <button class="close-btn" onclick="closeModal()">×</button>
+    </div>
+
+    <!-- Subtext -->
+    <p class="modal-subtext">
+      Enter your mobile number and we’ll call you shortly.
+    </p>
+
+    <form id="consultationForm" onsubmit="return false;">
+
+      <!-- Service (readonly / auto-filled) -->
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Your name"
+        />
+
+      <!-- Mobile -->
+      <input
+        type="tel"
+        id="mobile"
+        name="mobile"
+        placeholder="Mobile number *"
+        required
+      />
+
+      <!-- Optional message -->
+      <textarea
+        id="message"
+        name="message"
+        placeholder="Message (optional)"
+        rows="3"
+      ></textarea>
+
+        <button type="button" onclick="showConfirmation()">
+          Request Call Back
+        </button>
+
+
+      <p class="trust-text">
+        📞 Usually calls within 5 minutes
+      </p>
+
+    </form>
+
+    <div id="checkupConfirmationMessage" class="confirmation-message" style="display:none;">
+      ✅ Thank you! Our expert will call you shortly.
+    </div>
+
+  </div>
+</div>
+
+  
+  <!-- Cart Drawer (Right Side) -->
+ 
+<!-- Background Blur Overlay -->
+<div id="cartOverlay" class="cart-overlay" onclick="closeDrawer()"></div>
+
+
+<!-- Cart Drawer -->
+<div class="drawer mobile-drawer" id="drawer">
+  <div class="drawer-header">
+    <h3>Your Cart</h3>
+    <button onclick="closeDrawer()">✕</button>
+
+  </div>
+
+  <div class="drawer-body" id="cartItemsContainer"></div>
+
+  <div class="cart-summary">
+    <div class="summary-left">
+      <span class="total-tests">
+        checkout test: <strong id="totalTests">0</strong>
+      </span>
+      <span class="total-price">
+        Total Price: <strong id="totalPrice">₹0</strong>
+      </span>
+    </div>
+    <a href="checkout.html" class="proceed-btn">Proceed</a>
+  </div>
+</div>
+
+
+
+<!-- Mobile Bottom Bar -->
+<div class="mobile-bottom">
+
+  <!-- Home -->
+  <a href="index.html">
+    <i class="fas fa-home"></i>
+  </a>
+
+  <!-- Surgeries -->
+  <a href="surgeries.html">
+    <i class="fas fa-procedures"></i>
+  </a>
+
+  <!-- Lab Tests -->
+  <a href="test.html">
+    <i class="fas fa-vials"></i>
+  </a>
+
+  <!-- Checkups -->
+  <a href="#" onclick="openModal()">
+    <i class="fas fa-heartbeat"></i>
+  </a>
+
+  <!-- Cart -->
+  <a href="#" onclick="toggleDrawer()">
+    <i class="fas fa-shopping-cart"></i>
+  </a>
+
+</div>
+
+
+
+<section class="health-banner">
+  <div class="health-banner-inner">
+
+    <h1>
+      Affordable Diagnostic Scanning Services
+    </h1>
+
+    <p class="subtitle">
+      We are a growing healthcare startup providing essential diagnostic scanning services
+      with trusted centers and clear, accurate scan reports.
+    </p>
+
+    <div class="stats">
+      <div>
+        <strong>10+</strong>
+        <span>Scan Types</span>
+      </div>
+      <div>
+        <strong>Same Day</strong>
+        <span>Scan Reporting</span>
+      </div>
+      <div>
+        <strong>Verified</strong>
+        <span>Scan Accuracy</span>
+      </div>
+    </div>
+
+    <div class="features">
+      <span>✔ Certified Diagnostic Scan Centers</span>
+      <span>✔ Clear & Easy-to-Understand Scan Reports</span>
+      <span>✔ Suitable for All Age Groups</span>
+    </div>
+
+      <button class="cta-btn" onclick="window.location.href='tel:+917892287102'">
+        Call to Book a Scan
+      </button>
+
+
+    <p class="trust">
+      Focused on accurate and accessible diagnostic imaging
+    </p>
+
+  </div>
+</section>
+
+
+
+
+<!-- display cards -->
+<!-- ✅ Complete Scans Available in Bangalore -->
+<section class="all-tests-section">
+  <h2>Advanced Scans in Bangalore</h2>
+  
+  <div class="all-tests-grid">
+
+    <!-- MRI -->
+    <div class="test-card" data-id="201">
+      <div class="card-top">
+        <span class="tag">Scan</span>
+        <h3>MRI Scan</h3>
+      </div>
+
+      <div class="price-box">
+        <del>₹6233</del>
+        <span class="final-price">₹4299</span>
+        <span class="discount">40% OFF</span>
+      </div>
+
+      <div class="card-info">
+        <span><i class="fas fa-vials"></i> Certified Diagnostic Center</span>
+        <span><i class="fas fa-clock"></i> Reports in 12 hrs</span>
+      </div>
+
+      <div class="card-actions">
+        <a href="view-all1.html#package1" class="btn outline">View Details</a>
+        <button class="btn cart-btn" onclick="toggleCartItem(201)">Book Now</button>
+      </div>
+    </div>
+
+
+    <!-- CT Scan -->
+    <div class="test-card" data-id="202">
+      <div class="card-top">
+        <span class="tag">Scan</span>
+        <h3>CT Scan</h3>
+      </div>
+
+      <div class="price-box">
+        <del>₹4619</del>
+        <span class="final-price">₹3299</span>
+        <span class="discount">40% OFF</span>
+      </div>
+
+      <div class="card-info">
+        <span><i class="fas fa-vials"></i> Certified Diagnostic Center</span>
+        <span><i class="fas fa-clock"></i> Reports in 10 hrs</span>
+      </div>
+
+      <div class="card-actions">
+        <a href="view-all1.html#package2" class="btn outline">View Details</a>
+        <button class="btn cart-btn" onclick="toggleCartItem(202)">Book Now</button>
+      </div>
+    </div>
+
+
+    <!-- Ultrasound Scan -->
+    <div class="test-card" data-id="203">
+      <div class="card-top">
+        <span class="tag">Scan</span>
+        <h3>Ultrasound Scan</h3>
+      </div>
+
+      <div class="price-box">
+        <del>₹1400</del>
+        <span class="final-price">₹1000</span>
+        <span class="discount">40% OFF</span>
+      </div>
+
+      <div class="card-info">
+        <span><i class="fas fa-vials"></i> Certified Diagnostic Center</span>
+        <span><i class="fas fa-clock"></i> Reports in 4 hrs</span>
+      </div>
+
+      <div class="card-actions">
+        <a href="view-all1.html#package3" class="btn outline">View Details</a>
+        <button class="btn cart-btn" onclick="toggleCartItem(203)">Book Now</button>
+      </div>
+    </div>
+
+
+    <!-- PET Scan -->
+    <div class="test-card" data-id="204">
+      <div class="card-top">
+        <span class="tag">Scan</span>
+        <h3>PET Scan</h3>
+      </div>
+
+      <div class="price-box">
+        <del>₹25,900</del>
+        <span class="final-price">₹18,500</span>
+        <span class="discount">40% OFF</span>
+      </div>
+
+      <div class="card-info">
+        <span><i class="fas fa-vials"></i> Certified Diagnostic Center</span>
+        <span><i class="fas fa-clock"></i> Reports in 24 hrs</span>
+      </div>
+
+      <div class="card-actions">
+        <a href="view-all1.html#package4" class="btn outline">View Details</a>
+        <button class="btn cart-btn" onclick="toggleCartItem(204)">Book Now</button>
+      </div>
+    </div>
+
+
+    <!-- X-Ray -->
+    <div class="test-card" data-id="205">
+      <div class="card-top">
+        <span class="tag">Scan</span>
+        <h3>X-Ray</h3>
+      </div>
+
+      <div class="price-box">
+        <del>₹560</del>
+        <span class="final-price">₹400</span>
+        <span class="discount">40% OFF</span>
+      </div>
+
+      <div class="card-info">
+        <span><i class="fas fa-vials"></i> Certified Diagnostic Center</span>
+        <span><i class="fas fa-clock"></i> Reports in 2 hrs</span>
+      </div>
+
+      <div class="card-actions">
+        <a href="view-all1.html#package5" class="btn outline">View Details</a>
+        <button class="btn cart-btn" onclick="toggleCartItem(205)">Book Now</button>
+      </div>
+    </div>
+
+
+  <!-- DEXA Scan -->
+<div class="test-card" data-id="206">
+  <div class="card-top">
+    <span class="tag">Scan</span>
+    <h3>DEXA Scan</h3>
+  </div>
+
+  <div class="price-box">
+    <del>₹2240</del>
+    <span class="final-price">₹1600</span>
+    <span class="discount">40% OFF</span>
+  </div>
+
+  <div class="card-info">
+    <span><i class="fas fa-vials"></i> Certified Diagnostic Center</span>
+    <span><i class="fas fa-clock"></i> Reports in 6 hrs</span>
+  </div>
+
+  <div class="card-actions">
+    <a href="view-all1.html#package6" class="btn outline">View Details</a>
+    <button class="btn cart-btn" onclick="toggleCartItem(206)">Book Now</button>
+  </div>
+</div>
+
+
+  </div>
+</section>
+
+
+
+
+<section class="core-organs-section">
+  <div class="core-organs-container">
+    <div class="organs-text">
+      <h2>Complete Health Screening for Your<strong> Vital Organs</strong></h2>
+      <p> 
+        At Niva Health Kare, we provide a wide range of diagnostic tests to monitor
+        the health and function of your vital organs.
+      </p>
+
+      <a href="Core-Body-Organs.html" class="view-all-button">
+        View All Checkups
+      </a>
+    </div>
+
+    <div class="organs-grid">
+
+      <a href="Core-Body-Organs.html#heart" class="organ-card">
+<div class="icon-circle">
+  <img
+    src="images/Heart.webp"
+    alt="Heart health icon, cardiology services"
+    width="100"
+    height="100"
+    loading="lazy">
+</div>
+
+        <p>Heart</p>
+      </a>
+
+      <a href="Core-Body-Organs.html#kidney" class="organ-card">
+<div class="icon-circle">
+  <img
+    src="images/Kidney.webp"
+    alt="Kidney health icon, nephrology services"
+    width="100"
+    height="100"
+    loading="lazy">
+</div>
+
+        <p>Kidney</p>
+      </a>
+
+      <a href="Core-Body-Organs.html#liver" class="organ-card">
+<div class="icon-circle">
+  <img
+    src="images/Liver.webp"
+    alt="Liver health icon, hepatology services"
+    width="100"
+    height="100"
+    loading="lazy">
+</div>
+
+        <p>Liver</p>
+      </a>
+
+      <a href="Core-Body-Organs.html#bone" class="organ-card">
+<div class="icon-circle">
+  <img
+    src="images/Bone.webp"
+    alt="Bone health icon, orthopedics services"
+    width="100"
+    height="100"
+    loading="lazy">
+</div>
+
+        <p>Bone</p>
+      </a>
+
+      <a href="Core-Body-Organs.html#vitamin" class="organ-card">
+<div class="icon-circle">
+  <img
+    src="images/Vitamin.webp"
+    alt="Vitamin and nutrition icon, dietary and wellness services"
+    width="100"
+    height="100"
+    loading="lazy">
+</div>
+
+        <p>Vitamin</p>
+      </a>
+
+      <a href="Core-Body-Organs.html#hormone" class="organ-card">
+<div class="icon-circle">
+  <img
+    src="images/Hormones.webp"
+    alt="Hormones and endocrine health icon, endocrinology services"
+    width="100"
+    height="100"
+    loading="lazy">
+</div>
+
+        <p>Hormones</p>
+      </a>
+
+      <a href="Core-Body-Organs.html#gut" class="organ-card">
+<div class="icon-circle">
+  <img
+    src="images/Gut Health.webp"
+    alt="Gut health icon, gastroenterology and digestive services"
+    width="100"
+    height="100"
+    loading="lazy">
+</div>
+
+        <p>Gut Health</p>
+      </a>
+
+      <a href="Core-Body-Organs.html#blood" class="organ-card">
+<div class="icon-circle">
+  <img
+    src="images/Blood.webp"
+    alt="Blood health icon, hematology and lab services"
+    width="100"
+    height="100"
+    loading="lazy">
+</div>
+
+        <p>Blood</p>
+      </a>
+
+      <a href="Core-Body-Organs.html#reproductive" class="organ-card">
+<div class="icon-circle">
+  <img
+    src="images/Reproductive.webp"
+    alt="Reproductive health icon, gynecology and fertility services"
+    width="100"
+    height="100"
+    loading="lazy">
+</div>
+
+        <p>Reproductive</p>
+      </a>
+
+      <a href="Core-Body-Organs.html#thyroid" class="organ-card">
+<div class="icon-circle">
+  <img
+    src="images/thyroid.webp"
+    alt="Thyroid health icon, endocrinology services"
+    width="100"
+    height="100"
+    loading="lazy">
+</div>
+
+        <p>Thyroid</p>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section class="reviews-banner">
+
+  <div class="reviews-container">
+
+    <!-- LEFT: AUTO SLIDING REVIEWS -->
+    <div class="reviews-slider">
+      <div class="reviews-track">
+
+        <div class="review-item">
+          <p>“Fast reports & polite support. Highly recommended.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=15" alt="">
+            <div>
+              <strong>Shashank N.</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+        <div class="review-item">
+          <p>“Home sample collection was on time and very hygienic.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=22" alt="">
+            <div>
+              <strong>Ananya R.</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+        <div class="review-item">
+          <p>“Booked a full body checkup. Got reports within hours.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=5" alt="">
+            <div>
+              <strong>Rohit Kumar</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+        <div class="review-item">
+          <p>“Very smooth experience. Support team was helpful.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=9" alt="">
+            <div>
+              <strong>Divya M.</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT: TRUST CONTENT (DESKTOP ONLY) -->
+    <div class="reviews-info">
+      <h2>What Patients Say<br>On Google</h2>
+
+      <p>
+        Trusted by thousands for accurate reports and convenient home
+        sample collection. Rated <strong>4.3★ on Google</strong>.
+      </p>
+
+      <div class="trust-stats">
+        <div>
+          ⭐<br><strong>4.3</strong><br>Rating
+        </div>
+        <div>
+          👥<br><strong>10k+</strong><br>Users
+        </div>
+        <div>
+          🏥<br><strong>NABL</strong><br>Labs
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+
+<div id="sticky-icon-popup">
+
+  <a href="https://wa.me/+917892287102" target="_blank" class="icon-btn whatsapp" aria-label="Chat on WhatsApp" rel="noopener">
+    <i class="fab fa-whatsapp"></i>
+    <span class="tooltip">WhatsApp</span>
+  </a>
+
+  <a href="tel:+917892287102" class="icon-btn call" aria-label="Call Support" rel="noopener">
+    <i class="fas fa-phone-alt"></i>
+    <span class="tooltip">Call Support</span>
+  </a>
+
+</div>
+
+<section class="faq-section">
+  <div class="container">
+    <h2>Frequently Asked Questions</h2>
+
+    <details class="faq-item">
+      <summary>What types of diagnostic scans do you offer?</summary>
+      <p>
+        We offer a range of diagnostic scans including MRI Scan, CT Scan, PET Scan,
+        Ultrasound, X-Ray, and DEXA Scan through certified diagnostic centers.
+      </p>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is an MRI scan used for?</summary>
+      <p>
+        An MRI scan provides detailed images of organs, soft tissues, joints,
+        brain, and spine, helping doctors diagnose various medical conditions.
+      </p>
+    </details>
+
+    <details class="faq-item">
+      <summary>When is a CT scan recommended?</summary>
+      <p>
+        A CT scan is commonly recommended for detailed imaging of bones, organs,
+        internal injuries, and certain medical conditions where quick diagnosis
+        is required.
+      </p>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is the purpose of a PET scan?</summary>
+      <p>
+        A PET scan helps evaluate organ and tissue function and is often used in
+        cancer evaluation, neurological conditions, and cardiac assessments.
+      </p>
+    </details>
+
+    <details class="faq-item">
+      <summary>What does an Ultrasound scan check?</summary>
+      <p>
+        Ultrasound scans are used to examine internal organs, pregnancy-related
+        assessments, abdominal conditions, and soft tissue structures using
+        sound waves.
+      </p>
+    </details>
+
+    <details class="faq-item">
+      <summary>How long does it take to receive scan reports?</summary>
+      <p>
+        Report availability depends on the scan type. Most scan reports are
+        typically shared within <strong>a few hours to 24 hours</strong>.
+      </p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Is preparation required before a scan?</summary>
+      <p>
+        Some scans may require preparation such as fasting or removing metal
+        objects. Specific instructions will be shared at the time of booking.
+      </p>
+    </details>
+
+    <details class="faq-item">
+      <summary>How do I choose the right scan for my condition?</summary>
+      <p>
+        The appropriate scan is usually advised by a doctor based on your
+        symptoms and medical history. Our team can help with booking once
+        the scan is prescribed.
+      </p>
+    </details>
+
+  </div>
+</section>
+
+<footer class="footer-section">
+  <div class="footer-container">
+
+    <!-- Brand / Trust -->
+    <div class="footer-left">
+      <h2 class="footer-brand">
+        <span class="footer-niva">Niva</span>
+        <span class="footer-healthcare">Health Kare</span>
+      </h2>
+
+      <p class="footer-tagline">
+        Trusted healthcare services delivering quality, care, and compassion.
+      </p>
+
+      <div class="social-icons">
+        <a href="https://www.instagram.com/nivahealthkare/" aria-label="Instagram">
+      <img
+        src="images/instagram.webp"
+        alt="Follow Niva Health Kare on Instagram"
+        width="24"
+        height="24"
+        loading="lazy">
+      </a>
+        <a href="https://www.facebook.com/profile.php?id=61583126009241" aria-label="Facebook">
+        <img
+          src="images/facebook.webp"
+          alt="Follow Niva Health Kare on Facebook"
+          width="24"
+          height="24"
+          loading="lazy">
+
+        </a>
+        <a href="https://www.youtube.com/@nivahealthkare" aria-label="YouTube">
+        <img
+          src="images/youtube.webp"
+          alt="Subscribe to Niva Health Kare on YouTube"
+          width="24"
+          height="24"
+          loading="lazy">
+
+        </a>
+      </div>
+    </div>
+
+    <!-- Links -->
+    <div class="footer-right">
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="index.html">Home</a>
+        <a href="about-us.html">About Us</a>
+        <a href="locate-us.html">Locate Us</a>
+        
+      </div>
+
+      <div class="footer-col">
+        <h4>Medical Network</h4>
+        <a href="our-partners.html">Our Partners</a>
+        <a href="for-doctors.html">Doctors</a>
+        <a href="service.html">Our Services</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="refund-policy.html">Refund Policy</a>
+        <a href="disclaimer.html">Disclaimer</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom -->
+  <div class="footer-bottom">
+    <p>
+      © 2025 Niva Health Kare Pvt. Ltd. All rights reserved.  
+      <span>An initiative by Vinayaka Hospital.</span>
+    </p>
+
+    <div class="footer-links">
+      <a href="terms.html">Terms</a>
+      <a href="privacy-policy.html">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+<section class="simple-seo-footer">
+  <div class="simple-seo-container">
+
+    <div class="seo-item">
+      <h4>Diagnostic Scan Services</h4>
+      <p>
+        We provide essential diagnostic scanning services including MRI Scan,
+        CT Scan, PET Scan, Ultrasound, X-Ray, and DEXA Scan through trusted
+        and certified diagnostic centers.
+      </p>
+    </div>
+
+    <div class="seo-item">
+      <h4>Advanced Imaging & Diagnostics</h4>
+      <p>
+        Our imaging services focus on accurate diagnostic scans with modern
+        equipment and clear reporting to support effective medical evaluation
+        and treatment decisions.
+      </p>
+    </div>
+
+    <div class="seo-item">
+      <h4>Scan Services in Bangalore</h4>
+      <p>
+        We offer convenient access to diagnostic scan services in Bangalore,
+        helping individuals and families book scans easily with reliable
+        reporting and transparent pricing.
+      </p>
+    </div>
+
+    <div class="seo-item">
+      <h4>Why Choose Our Scan Services</h4>
+      <p>
+        Affordable pricing, certified diagnostic partners, clear scan reports,
+        and a simple booking experience make our services suitable for routine
+        and specialized diagnostic imaging needs.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+
+<!-- ✅ Toast Notification -->
+<div id="toast" class="toast">Added to Cart</div>
+
+  <script src="javascript/slider.js"></script>
+  <script src="javascript/lab-carousel.js"></script>
+  <script src="javascript/script.js"></script>
+  <script src="javascript/search.js"></script>
+  <script src="javascript/booking.js"></script>
+  <script src="javascript/testscript.js"></script>
+  <script src="javascript/location.js"></script>
+
+
+</body>
+</html>

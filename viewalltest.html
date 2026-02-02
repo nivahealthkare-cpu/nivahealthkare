@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- Primary SEO -->
+  <title>All Lab Tests & Diagnostic Tests | Niva Health Kare Bangalore</title>
+  <meta name="description" content="Book all lab tests at Niva Health Kare Bangalore. Blood tests, urine tests, diabetes tests, thyroid tests, cholesterol tests, hormone tests and preventive diagnostic tests with trusted labs." />
+  <meta name="keywords" content="lab tests Bangalore, blood test Bangalore, diagnostic tests, urine test, thyroid test, diabetes test, cholesterol test, Niva Health Kare">
+  <meta name="robots" content="index, follow">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://www.nivahealthkare.com/tests" />
+
+  <!-- Open Graph (Facebook / WhatsApp) -->
+  <meta property="og:title" content="All Lab & Diagnostic Tests | Niva Health Kare">
+  <meta property="og:description" content="Explore and book blood tests, urine tests, diabetes, thyroid and preventive diagnostic lab tests in Bangalore with Niva Health Kare.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.nivahealthkare.com/tests">
+  <meta property="og:image" content="https://www.nivahealthkare.com/images/tests-og.webp">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/viewall.css">
+  <link rel="stylesheet" href="css/teststyle.css">
+
+  <!-- Font Awesome (performance optimized) -->
+  <link rel="preload"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        as="style"
+        onload="this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  </noscript>
+
+</head>
+<body>
+
+
+<header>
+
+  <!-- ================= DESKTOP HEADER ================= -->
+  <div class="desktop-header">
+
+    <!-- LEFT: LOGO + LOCATION -->
+    <div class="logo-location">
+
+      <div class="logo-section">
+        <div class="lab-name">
+          <span class="niva">Niva</span>
+          <span class="healthcare">Health Kare</span>
+        </div>
+      </div>
+
+      <!-- LOCATION TRIGGER -->
+      <div class="location-trigger" id="openLocation">
+        <span class="label">Location</span>
+        <span class="city">
+          <i class="fa-solid fa-location-dot location-icon"></i>
+          <span id="selectedCity">Select city</span>
+          <i class="fa-solid fa-chevron-down chevron"></i>
+        </span>
+      </div>
+
+
+    </div>
+
+    <!-- RIGHT: MENU ICONS -->
+    <div class="header-actions">
+      <a href="index.html" class="header-item">
+        <i class="fas fa-home header-icon"></i>
+        <span class="header-text">Home</span>
+      </a>
+
+      <a href="surgeries.html" class="header-item">
+        <i class="fas fa-procedures header-icon"></i>
+        <span class="header-text">Surgeries</span>
+      </a>
+
+      <a href="test.html" class="header-item">
+        <i class="fas fa-vials header-icon"></i>
+        <span class="header-text">Lab Tests</span>
+      </a>
+
+      <div class="header-item" onclick="openModal()">
+        <i class="fas fa-heartbeat header-icon"></i>
+        <span class="header-text">Checkup</span>
+      </div>
+
+      <div class="header-item" onclick="toggleDrawer()">
+        <i class="fas fa-shopping-cart header-icon">
+          <span id="cart-count" class="cart-count">0</span>
+        </i>
+        <span class="header-text">Cart</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================= MOBILE HEADER ================= -->
+  <div class="mobile-header">
+    <div class="logo-section">
+      <div class="lab-name">
+        <span class="niva">Niva</span>
+        <span class="healthcare">Health Kare</span>
+      </div>
+    </div>
+
+    <div class="location-section" id="mobileLocation">
+      <i class="fas fa-map-marker-alt location-icon"></i>
+
+      <div class="location-info">
+        <span class="label">Your Location</span>
+        <span class="city">
+          <span id="mobileSelectedCity">Bangalore</span>
+          <i class="fas fa-chevron-down chevron"></i>
+        </span>
+
+
+      </div>
+    </div>
+
+  </div>
+
+</header>
+
+
+<!-- LOCATION POPUP -->
+<div class="location-popup" id="locationPopup">
+  <div class="popup-card">
+
+    <!-- HEADER -->
+    <div class="popup-header">
+      <h3>Select your city</h3>
+      <button class="close-btn" id="closePopup">×</button>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="search-wrapper">
+      <span class="search-icon">🔍</span>
+
+      <input
+        type="text"
+        id="citySearch"
+        class="city-search"
+        placeholder="Search city (e.g. Mysuru)"
+        autocomplete="off"
+      />
+
+      <!-- Suggestions dropdown -->
+      <ul class="suggestions" id="citySuggestions"></ul>
+    </div>
+
+
+    <!-- POPULAR CITIES -->
+    <p class="section-label" id="popularLabel">Popular cities</p>
+    <div class="city-list popular" id="popularCities"></div>
+
+    <!-- ALL / SEARCH RESULTS -->
+    <div class="city-list" id="cityList"></div>
+
+    <p class="coverage">
+      Services available across major cities in Karnataka
+    </p>
+
+  </div>
+</div>
+
+
+<!-- Minimal Consultation Modal -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+  <div class="modal-box" onclick="event.stopPropagation()">
+
+    <!-- Header -->
+    <div class="modal-header">
+      <h3>Get a call from our medical team</h3>
+      <button class="close-btn" onclick="closeModal()">×</button>
+    </div>
+
+    <!-- Subtext -->
+    <p class="modal-subtext">
+      Enter your mobile number and we’ll call you shortly.
+    </p>
+
+    <form id="consultationForm" onsubmit="return false;">
+
+      <!-- Service (readonly / auto-filled) -->
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Your name"
+        />
+
+      <!-- Mobile -->
+      <input
+        type="tel"
+        id="mobile"
+        name="mobile"
+        placeholder="Mobile number *"
+        required
+      />
+
+      <!-- Optional message -->
+      <textarea
+        id="message"
+        name="message"
+        placeholder="Message (optional)"
+        rows="3"
+      ></textarea>
+
+        <button type="button" onclick="showConfirmation()">
+          Request Call Back
+        </button>
+
+
+      <p class="trust-text">
+        📞 Usually calls within 5 minutes
+      </p>
+
+    </form>
+
+    <div id="checkupConfirmationMessage" class="confirmation-message" style="display:none;">
+      ✅ Thank you! Our expert will call you shortly.
+    </div>
+
+  </div>
+</div>
+
+
+
+  
+  <!-- Cart Drawer (Right Side) -->
+ 
+<!-- Background Blur Overlay -->
+<div id="cartOverlay" class="cart-overlay" onclick="closeDrawer()"></div>
+
+
+<!-- Cart Drawer -->
+<div class="drawer mobile-drawer" id="drawer">
+  <div class="drawer-header">
+    <h3>Your Cart</h3>
+    <button onclick="closeDrawer()">✕</button>
+
+  </div>
+
+  <div class="drawer-body" id="cartItemsContainer"></div>
+
+  <div class="cart-summary">
+    <div class="summary-left">
+      <span class="total-tests">
+        checkout test: <strong id="totalTests">0</strong>
+      </span>
+      <span class="total-price">
+        Total Price: <strong id="totalPrice">₹0</strong>
+      </span>
+    </div>
+    <a href="checkout.html" class="proceed-btn">Proceed</a>
+  </div>
+</div>
+
+
+
+<!-- Mobile Bottom Bar -->
+<div class="mobile-bottom">
+
+  <!-- Home -->
+  <a href="index.html">
+    <i class="fas fa-home"></i>
+  </a>
+
+  <!-- Surgeries -->
+  <a href="surgeries.html">
+    <i class="fas fa-procedures"></i>
+  </a>
+
+  <!-- Lab Tests -->
+  <a href="test.html">
+    <i class="fas fa-vials"></i>
+  </a>
+
+  <!-- Checkups -->
+  <a href="#" onclick="openModal()">
+    <i class="fas fa-heartbeat"></i>
+  </a>
+
+  <!-- Cart -->
+  <a href="#" onclick="toggleDrawer()">
+    <i class="fas fa-shopping-cart"></i>
+  </a>
+
+</div>
+
+<section class="health-banner">
+  <div class="health-banner-inner">
+
+    <h1>
+      Affordable Health Checkup Packages
+    </h1>
+
+    <p class="subtitle">
+      We are a growing healthcare startup offering essential health checkups with certified labs and clear, reliable reports.
+    </p>
+
+    <div class="stats">
+      <div>
+        <strong>15+</strong>
+        <span>Health Packages</span>
+      </div>
+      <div>
+        <strong>24–48 hrs</strong>
+        <span>Report Turnaround</span>
+      </div>
+      <div>
+        <strong>Quality</strong>
+        <span>Verified Reports</span>
+      </div>
+    </div>
+
+    <div class="features">
+      <span>✔ NABL-Certified Partner Labs</span>
+      <span>✔ Clear & Easy-to-Read Reports</span>
+      <span>✔ Suitable for Individuals & Families</span>
+    </div>
+
+    <button class="cta-btn">
+      Explore Packages
+    </button>
+
+    <p class="trust">
+      Built with care for preventive healthcare
+    </p>
+
+  </div>
+</section>
+
+
+<!-- display cards -->
+
+<section class="all-tests-section">
+  <h2 class="section-title">Total Health Examination in Bangalore</h2>
+
+  <div class="all-tests-grid">
+
+    <!-- Card 1 -->
+    <div class="test-card" data-id="101">
+    <div class="card-top">
+      <span class="tag">Checkup</span>
+      <h3>Full Body Checkup</h3>
+    </div>
+
+      <div class="price-box">
+        <del>₹2700</del>
+        <span class="final-price">₹1890</span>
+        <span class="discount">30% OFF</span>
+      </div>
+
+      <div class="card-info">
+        <span><i class="fas fa-vials"></i> 50 Parameters</span>
+        <span><i class="fas fa-clock"></i> Reports in 6 hrs</span>
+      </div>
+
+      <div class="card-actions">
+        <a href="view-all.html#package1" class="btn outline">View Details</a>
+        <button class="btn cart-btn" onclick="toggleCartItem(101)">Add to Cart</button>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="test-card" data-id="102">
+      <div class="card-top">
+        <span class="tag">Checkup</span>
+        <h3>Master Health Check Up</h3>
+      </div>
+
+      <div class="price-box">
+        <del>₹5500</del>
+        <span class="final-price">₹3850</span>
+        <span class="discount">30% OFF</span>
+      </div>
+
+      <div class="card-info">
+        <span><i class="fas fa-vials"></i> 80 Parameters</span>
+        <span><i class="fas fa-clock"></i> Reports in 6 hrs</span>
+      </div>
+
+      <div class="card-actions">
+        <a href="view-all.html#package2" class="btn outline">View Details</a>
+        <button class="btn cart-btn" onclick="toggleCartItem(102)">Add to Cart</button>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="test-card" data-id="103">
+      <div class="card-top">
+        <span class="tag">Checkup</span>
+        <h3>Heart Check Up</h3>
+      </div>
+
+      <div class="price-box">
+        <del>₹4000</del>
+        <span class="final-price">₹2800</span>
+        <span class="discount">30% OFF</span>
+      </div>
+
+      <div class="card-info">
+        <span><i class="fas fa-vials"></i> 50 Parameters</span>
+        <span><i class="fas fa-clock"></i> Reports in 6 hrs</span>
+      </div>
+
+      <div class="card-actions">
+        <a href="view-all.html#package3" class="btn outline">View Details</a>
+        <button class="btn cart-btn" onclick="toggleCartItem(103)">Add to Cart</button>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="test-card" data-id="104">
+      <div class="card-top">
+        <span class="tag">Checkup</span>
+        <h3>Well Women Check Up</h3>
+      </div>
+
+      <div class="price-box">
+        <del>₹3000</del>
+        <span class="final-price">₹2100</span>
+        <span class="discount">30% OFF</span>
+      </div>
+
+      <div class="card-info">
+        <span><i class="fas fa-vials"></i> 50 Parameters</span>
+        <span><i class="fas fa-clock"></i> Reports in 6 hrs</span>
+      </div>
+
+      <div class="card-actions">
+        <a href="view-all.html#package4" class="btn outline">View Details</a>
+        <button class="btn cart-btn" onclick="toggleCartItem(104)">Add to Cart</button>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="test-card" data-id="105">
+      <div class="card-top">
+        <span class="tag">Checkup</span>
+        <h3>Diabetic Profile</h3>
+      </div>
+
+      <div class="price-box">
+        <del>₹900</del>
+        <span class="final-price">₹630</span>
+        <span class="discount">30% OFF</span>
+      </div>
+
+      <div class="card-info">
+        <span><i class="fas fa-vials"></i> 25 Parameters</span>
+        <span><i class="fas fa-clock"></i> Reports in 6 hrs</span>
+      </div>
+
+      <div class="card-actions">
+        <a href="view-all.html#package5" class="btn outline">View Details</a>
+        <button class="btn cart-btn" onclick="toggleCartItem(105)">Add to Cart</button>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="test-card" data-id="106">
+      <div class="card-top">
+        <span class="tag">Checkup</span>
+        <h3>Executive Health Check Up</h3>
+      </div>
+
+      <div class="price-box">
+        <del>₹8000</del>
+        <span class="final-price">₹5600</span>
+        <span class="discount">30% OFF</span>
+      </div>
+
+      <div class="card-info">
+        <span><i class="fas fa-vials"></i> 100 Parameters</span>
+        <span><i class="fas fa-clock"></i> Reports in 6 hrs</span>
+      </div>
+
+      <div class="card-actions">
+        <a href="view-all.html#package6" class="btn outline">View Details</a>
+        <button class="btn cart-btn" onclick="toggleCartItem(106)">Add to Cart</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+
+
+
+
+<section class="core-organs-section">
+  <div class="core-organs-container">
+    <div class="organs-text">
+      <h2>Complete Health Screening for Your<strong> Vital Organs</strong></h2>
+      <p> 
+        At Niva Health Kare, we provide a wide range of diagnostic tests to monitor
+        the health and function of your vital organs.
+      </p>
+
+      <a href="Core-Body-Organs.html" class="view-all-button">
+        View All Checkups
+      </a>
+    </div>
+
+    <div class="organs-grid">
+
+      <a href="Core-Body-Organs.html#heart" class="organ-card">
+<div class="icon-circle">
+  <img
+    src="images/Heart.webp"
+    alt="Heart health icon, cardiology services"
+    width="100"
+    height="100"
+    loading="lazy">
+</div>
+
+        <p>Heart</p>
+      </a>
+
+      <a href="Core-Body-Organs.html#kidney" class="organ-card">
+<div class="icon-circle">
+  <img
+    src="images/Kidney.webp"
+    alt="Kidney health icon, nephrology services"
+    width="100"
+    height="100"
+    loading="lazy">
+</div>
+
+        <p>Kidney</p>
+      </a>
+
+      <a href="Core-Body-Organs.html#liver" class="organ-card">
+<div class="icon-circle">
+  <img
+    src="images/Liver.webp"
+    alt="Liver health icon, hepatology services"
+    width="100"
+    height="100"
+    loading="lazy">
+</div>
+
+        <p>Liver</p>
+      </a>
+
+      <a href="Core-Body-Organs.html#bone" class="organ-card">
+<div class="icon-circle">
+  <img
+    src="images/Bone.webp"
+    alt="Bone health icon, orthopedics services"
+    width="100"
+    height="100"
+    loading="lazy">
+</div>
+
+        <p>Bone</p>
+      </a>
+
+      <a href="Core-Body-Organs.html#vitamin" class="organ-card">
+<div class="icon-circle">
+  <img
+    src="images/Vitamin.webp"
+    alt="Vitamin and nutrition icon, dietary and wellness services"
+    width="100"
+    height="100"
+    loading="lazy">
+</div>
+
+        <p>Vitamin</p>
+      </a>
+
+      <a href="Core-Body-Organs.html#hormone" class="organ-card">
+<div class="icon-circle">
+  <img
+    src="images/Hormones.webp"
+    alt="Hormones and endocrine health icon, endocrinology services"
+    width="100"
+    height="100"
+    loading="lazy">
+</div>
+
+        <p>Hormones</p>
+      </a>
+
+      <a href="Core-Body-Organs.html#gut" class="organ-card">
+<div class="icon-circle">
+  <img
+    src="images/Gut Health.webp"
+    alt="Gut health icon, gastroenterology and digestive services"
+    width="100"
+    height="100"
+    loading="lazy">
+</div>
+
+        <p>Gut Health</p>
+      </a>
+
+      <a href="Core-Body-Organs.html#blood" class="organ-card">
+<div class="icon-circle">
+  <img
+    src="images/Blood.webp"
+    alt="Blood health icon, hematology and lab services"
+    width="100"
+    height="100"
+    loading="lazy">
+</div>
+
+        <p>Blood</p>
+      </a>
+
+      <a href="Core-Body-Organs.html#reproductive" class="organ-card">
+<div class="icon-circle">
+  <img
+    src="images/Reproductive.webp"
+    alt="Reproductive health icon, gynecology and fertility services"
+    width="100"
+    height="100"
+    loading="lazy">
+</div>
+
+        <p>Reproductive</p>
+      </a>
+
+      <a href="Core-Body-Organs.html#thyroid" class="organ-card">
+<div class="icon-circle">
+  <img
+    src="images/thyroid.webp"
+    alt="Thyroid health icon, endocrinology services"
+    width="100"
+    height="100"
+    loading="lazy">
+</div>
+
+        <p>Thyroid</p>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+
+<section class="reviews-banner">
+
+  <div class="reviews-container">
+
+    <!-- LEFT: AUTO SLIDING REVIEWS -->
+    <div class="reviews-slider">
+      <div class="reviews-track">
+
+        <div class="review-item">
+          <p>“Fast reports & polite support. Highly recommended.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=15" alt="">
+            <div>
+              <strong>Shashank N.</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+        <div class="review-item">
+          <p>“Home sample collection was on time and very hygienic.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=22" alt="">
+            <div>
+              <strong>Ananya R.</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+        <div class="review-item">
+          <p>“Booked a full body checkup. Got reports within hours.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=5" alt="">
+            <div>
+              <strong>Rohit Kumar</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+        <div class="review-item">
+          <p>“Very smooth experience. Support team was helpful.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=9" alt="">
+            <div>
+              <strong>Divya M.</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT: TRUST CONTENT (DESKTOP ONLY) -->
+    <div class="reviews-info">
+      <h2>What Patients Say<br>On Google</h2>
+
+      <p>
+        Trusted by thousands for accurate reports and convenient home
+        sample collection. Rated <strong>4.3★ on Google</strong>.
+      </p>
+
+      <div class="trust-stats">
+        <div>
+          ⭐<br><strong>4.3</strong><br>Rating
+        </div>
+        <div>
+          👥<br><strong>10k+</strong><br>Users
+        </div>
+        <div>
+          🏥<br><strong>NABL</strong><br>Labs
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+
+<div id="sticky-icon-popup">
+
+  <a href="https://wa.me/+917892287102" target="_blank" class="icon-btn whatsapp" aria-label="Chat on WhatsApp" rel="noopener">
+    <i class="fab fa-whatsapp"></i>
+    <span class="tooltip">WhatsApp</span>
+  </a>
+
+  <a href="tel:+917892287102" class="icon-btn call" aria-label="Call Support" rel="noopener">
+    <i class="fas fa-phone-alt"></i>
+    <span class="tooltip">Call Support</span>
+  </a>
+
+</div>
+
+<section class="faq-section">
+  <div class="container">
+    <h2>Frequently Asked Questions</h2>
+
+    <details class="faq-item">
+      <summary>What is included in the Master Health Checkup?</summary>
+      <p>
+        The Master Health Checkup covers a comprehensive set of tests including blood, liver, kidney, lipid profile, sugar levels, and other essential parameters for an overall health assessment.
+      </p>
+    </details>
+
+    <details class="faq-item">
+      <summary>What tests are covered under the Heart Health Checkup?</summary>
+      <p>
+        The Heart Health Checkup focuses on cholesterol levels, lipid profile, blood sugar, and other cardiac-related parameters that help assess heart health.
+      </p>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is the Basic Health Checkup suitable for?</summary>
+      <p>
+        The Basic Health Checkup is ideal for routine health screening and includes essential blood tests to monitor general health and wellness.
+      </p>
+    </details>
+
+    <details class="faq-item">
+      <summary>What does the Diabetic Health Checkup include?</summary>
+      <p>
+        The Diabetic Health Checkup includes tests such as fasting blood sugar, post-prandial blood sugar, HbA1c, and other related parameters to monitor diabetes effectively.
+      </p>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is covered in the Women’s Health Checkup?</summary>
+      <p>
+        The Women’s Health Checkup includes tests focused on overall wellness, hormonal balance, nutritional health, and other parameters important for women’s health.
+      </p>
+    </details>
+
+    <details class="faq-item">
+      <summary>How do I choose the right health checkup package?</summary>
+      <p>
+        You can choose a package based on your age, medical history, lifestyle, and health concerns. Our team can also help guide you to the most suitable package.
+      </p>
+    </details>
+
+    <details class="faq-item">
+      <summary>How long does it take to receive health checkup reports?</summary>
+      <p>
+        Report turnaround time varies by package and test type. Most reports are typically available within <strong>24–48 hours</strong>.
+      </p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Are these health checkup packages suitable for preventive care?</summary>
+      <p>
+        Yes, regular health checkups help in early detection and prevention of health issues, making them an important part of preventive healthcare.
+      </p>
+    </details>
+
+  </div>
+</section>
+
+<footer class="footer-section">
+  <div class="footer-container">
+
+    <!-- Brand / Trust -->
+    <div class="footer-left">
+      <h2 class="footer-brand">
+        <span class="footer-niva">Niva</span>
+        <span class="footer-healthcare">Health Kare</span>
+      </h2>
+
+      <p class="footer-tagline">
+        Trusted healthcare services delivering quality, care, and compassion.
+      </p>
+
+      <div class="social-icons">
+        <a href="https://www.instagram.com/nivahealthkare/" aria-label="Instagram">
+      <img
+        src="images/instagram.webp"
+        alt="Follow Niva Health Kare on Instagram"
+        width="24"
+        height="24"
+        loading="lazy">
+      </a>
+        <a href="https://www.facebook.com/profile.php?id=61583126009241" aria-label="Facebook">
+        <img
+          src="images/facebook.webp"
+          alt="Follow Niva Health Kare on Facebook"
+          width="24"
+          height="24"
+          loading="lazy">
+
+        </a>
+        <a href="https://www.youtube.com/@nivahealthkare" aria-label="YouTube">
+        <img
+          src="images/youtube.webp"
+          alt="Subscribe to Niva Health Kare on YouTube"
+          width="24"
+          height="24"
+          loading="lazy">
+
+        </a>
+      </div>
+    </div>
+
+    <!-- Links -->
+    <div class="footer-right">
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="index.html">Home</a>
+        <a href="about-us.html">About Us</a>
+        <a href="locate-us.html">Locate Us</a>
+        
+      </div>
+
+      <div class="footer-col">
+        <h4>Medical Network</h4>
+        <a href="our-partners.html">Our Partners</a>
+        <a href="for-doctors.html">Doctors</a>
+        <a href="service.html">Our Services</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="refund-policy.html">Refund Policy</a>
+        <a href="disclaimer.html">Disclaimer</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom -->
+  <div class="footer-bottom">
+    <p>
+      © 2025 Niva Health Kare Pvt. Ltd. All rights reserved.  
+      <span>An initiative by Vinayaka Hospital.</span>
+    </p>
+
+    <div class="footer-links">
+      <a href="terms.html">Terms</a>
+      <a href="privacy-policy.html">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+<section class="simple-seo-footer">
+  <div class="simple-seo-container">
+
+    <div class="seo-item">
+      <h4>Health Checkup Packages</h4>
+      <p>
+        We offer a range of health checkup packages including basic health checkups,
+        master health checkups, heart health packages, diabetic health checkups,
+        and women’s health checkups designed for preventive care and early detection.
+      </p>
+    </div>
+
+    <div class="seo-item">
+      <h4>Diagnostic Tests & Lab Services</h4>
+      <p>
+        Our diagnostic services include blood tests, urine tests, and pathology
+        investigations processed through certified partner labs following
+        standard quality and reporting practices.
+      </p>
+    </div>
+
+    <div class="seo-item">
+      <h4>Health Checkups in Bangalore</h4>
+      <p>
+        We provide reliable health checkup services in Bangalore with a focus on
+        accurate testing, clear digital reports, and timely report turnaround
+        for individuals and families.
+      </p>
+    </div>
+
+    <div class="seo-item">
+      <h4>Why Choose Our Health Packages</h4>
+      <p>
+        Transparent pricing, certified lab partners, easy-to-understand reports,
+        and thoughtfully curated health packages make our services suitable for
+        regular health monitoring and preventive healthcare.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+<!-- ✅ Toast Notification -->
+<div id="toast" class="toast">Added to Cart</div>
+
+  <script src="javascript/slider.js"></script>
+  <script src="javascript/lab-carousel.js"></script>
+  <script src="javascript/script.js"></script>
+  <script src="javascript/search.js"></script>
+  <script src="javascript/booking.js"></script>
+  <script src="javascript/testscript.js"></script>
+  <script src="javascript/location.js"></script>
+
+
+</body>
+</html>

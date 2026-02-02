@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- Primary SEO -->
+  <title>Book Lab Tests, Diagnostic & Health Packages | Niva Health Kare</title>
+  <meta name="description" content="Niva Health Kare offers diagnostic lab tests, imaging services, and health checkup packages. Book blood tests, scan tests, and full body checkups with trusted labs and home sample collection." />
+  <meta name="robots" content="index, follow">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://www.nivahealthkare.com/" />
+
+  <!-- Open Graph (WhatsApp / Facebook) -->
+  <meta property="og:title" content="Niva Health Kare – Diagnostic Tests & Health Packages">
+  <meta property="og:description" content="Book lab tests, blood tests, imaging scans, and health checkup packages online with trusted diagnostic labs.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.nivahealthkare.com/">
+  <meta property="og:image" content="https://www.nivahealthkare.com/images/og-image.webp">
+
+  <!-- Stylesheets (we will merge later) -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/Surgeries.css">
+  <link rel="stylesheet" href="css/booking.routes.css">
+
+  <!-- Font Awesome (non-blocking for speed) -->
+  <link rel="preload"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        as="style"
+        onload="this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  </noscript>
+</head>
+<body>
+
+<header>
+
+  <!-- ================= DESKTOP HEADER ================= -->
+  <div class="desktop-header">
+
+    <!-- LEFT: LOGO + LOCATION -->
+    <div class="logo-location">
+
+      <div class="logo-section">
+        <div class="lab-name">
+          <span class="niva">Niva</span>
+          <span class="healthcare">Health Kare</span>
+        </div>
+      </div>
+
+      <!-- LOCATION TRIGGER -->
+      <div class="location-trigger" id="openLocation">
+        <span class="label">Location</span>
+        <span class="city">
+          <i class="fa-solid fa-location-dot location-icon"></i>
+          <span id="selectedCity">Select city</span>
+          <i class="fa-solid fa-chevron-down chevron"></i>
+        </span>
+      </div>
+
+
+    </div>
+
+    <!-- RIGHT: MENU ICONS -->
+    <div class="header-actions">
+      <a href="index.html" class="header-item">
+        <i class="fas fa-home header-icon"></i>
+        <span class="header-text">Home</span>
+      </a>
+
+      <a href="surgeries.html" class="header-item">
+        <i class="fas fa-procedures header-icon"></i>
+        <span class="header-text">Surgeries</span>
+      </a>
+
+      <a href="test.html" class="header-item">
+        <i class="fas fa-vials header-icon"></i>
+        <span class="header-text">Lab Tests</span>
+      </a>
+
+      <div class="header-item" onclick="openCheckupModal()">
+        <i class="fas fa-heartbeat header-icon"></i>
+        <span class="header-text">Checkup</span>
+      </div>
+
+      <div class="header-item" onclick="toggleDrawer()">
+        <i class="fas fa-shopping-cart header-icon">
+          <span id="cart-count" class="cart-count">0</span>
+        </i>
+        <span class="header-text">Cart</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================= MOBILE HEADER ================= -->
+  <div class="mobile-header">
+    <div class="logo-section">
+      <div class="lab-name">
+        <span class="niva">Niva</span>
+        <span class="healthcare">Health Kare</span>
+      </div>
+    </div>
+
+    <div class="location-section" id="mobileLocation">
+      <i class="fas fa-map-marker-alt location-icon"></i>
+
+      <div class="location-info">
+        <span class="label">Your Location</span>
+        <span class="city">
+          <span id="mobileSelectedCity">Bangalore</span>
+          <i class="fas fa-chevron-down chevron"></i>
+        </span>
+
+
+      </div>
+    </div>
+
+  </div>
+
+</header>
+
+
+<!-- LOCATION POPUP -->
+<div class="location-popup" id="locationPopup">
+  <div class="popup-card">
+
+    <!-- HEADER -->
+    <div class="popup-header">
+      <h3>Select your city</h3>
+      <button class="close-btn" id="closePopup">×</button>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="search-wrapper">
+      <span class="search-icon">🔍</span>
+
+      <input
+        type="text"
+        id="citySearch"
+        class="city-search"
+        placeholder="Search city (e.g. Mysuru)"
+        autocomplete="off"
+      />
+
+      <!-- Suggestions dropdown -->
+      <ul class="suggestions" id="citySuggestions"></ul>
+    </div>
+
+
+    <!-- POPULAR CITIES -->
+    <p class="section-label" id="popularLabel">Popular cities</p>
+    <div class="city-list popular" id="popularCities"></div>
+
+    <!-- ALL / SEARCH RESULTS -->
+    <div class="city-list" id="cityList"></div>
+
+    <p class="coverage">
+      Services available across major cities in Karnataka
+    </p>
+
+  </div>
+</div>
+
+
+
+<!-- Checkup Modal -->
+<div class="modal-overlay" id="checkupModalOverlay" onclick="closeCheckupModal()" style="display:none;">
+  <div class="modal-box" onclick="event.stopPropagation()">
+
+    <!-- Header -->
+    <div class="modal-header">
+      <h3>Get a call from our medical team</h3>
+      <button class="close-btn" onclick="closeCheckupModal()">×</button>
+    </div>
+
+    <!-- Subtext -->
+    <p class="modal-subtext">
+      Enter your mobile number and we’ll call you shortly.
+    </p>
+
+    <!-- Form -->
+    <form id="checkupForm" onsubmit="return false;">
+      <!-- Name -->
+      <input
+        type="text"
+        id="checkupName"
+        name="name"
+        placeholder="Your name"
+      />
+
+      <!-- Mobile -->
+      <input
+        type="tel"
+        id="checkupMobile"
+        name="mobile_no"
+        placeholder="Mobile number *"
+        required
+      />
+
+      <!-- Optional Message -->
+      <textarea
+        id="checkupMessage"
+        name="message"
+        placeholder="Message (optional)"
+        rows="3"
+      ></textarea>
+
+      <button type="button" onclick="submitCheckupForm()">
+        Request Call Back
+      </button>
+
+      <p class="trust-text">📞 Usually calls within 5 minutes</p>
+    </form>
+
+      <!-- Popup for success -->
+      <div id="simplePopup" style="display:none;">
+        ✅ Thank you! Our expert will call you shortly.
+      </div>
+
+
+  </div>
+</div>
+
+
+  
+  <!-- Cart Drawer (Right Side) -->
+ 
+<!-- Background Blur Overlay -->
+<div id="cartOverlay" class="cart-overlay" onclick="closeDrawer()"></div>
+
+
+<!-- Cart Drawer -->
+<div class="drawer mobile-drawer" id="drawer">
+  <div class="drawer-header">
+    <h3>Your Cart</h3>
+    <button onclick="closeDrawer()">✕</button>
+
+  </div>
+
+  <div class="drawer-body" id="cartItemsContainer"></div>
+
+  <div class="cart-summary">
+    <div class="summary-left">
+      <span class="total-tests">
+        checkout test: <strong id="totalTests">0</strong>
+      </span>
+      <span class="total-price">
+        Total Price: <strong id="totalPrice">₹0</strong>
+      </span>
+    </div>
+    <a href="checkout.html" class="proceed-btn">Proceed</a>
+  </div>
+</div>
+
+
+
+<!-- Mobile Bottom Bar -->
+<div class="mobile-bottom">
+
+  <!-- Home -->
+  <a href="index.html">
+    <i class="fas fa-home"></i>
+  </a>
+
+  <!-- Surgeries -->
+  <a href="surgeries.html">
+    <i class="fas fa-procedures"></i>
+  </a>
+
+  <!-- Lab Tests -->
+  <a href="test.html">
+    <i class="fas fa-vials"></i>
+  </a>
+
+  <!-- Checkups -->
+  <a href="#" onclick="openModal()">
+    <i class="fas fa-heartbeat"></i>
+  </a>
+
+  <!-- Cart -->
+  <a href="#" onclick="toggleDrawer()">
+    <i class="fas fa-shopping-cart"></i>
+  </a>
+
+</div>
+
+  
+<section class="hospital-banner-slider">
+
+  <!-- ===================== Banner Slide 1 ===================== -->
+  <div class="banner-slide">
+    <div class="banner-inner">
+
+      <!-- Banner Text -->
+      <div class="banner-text">
+        <h1>Expert Surgeons, Seamless Procedures</h1>
+        <p>Certified surgical teams with advanced tools for the highest safety standards</p>
+        <div class="banner-points">
+          <span><i class="fas fa-user-md"></i> Expert Doctors</span>
+          <span><i class="fas fa-hospital"></i> Modern Facilities</span>
+        </div>
+      </div>
+
+      <!-- Banner Image / Brand Animation -->
+      <div class="banner-image">
+        <div class="professional-brand-animation">
+          <!-- Subtle geometric background -->
+          <div class="geo-lines"></div>
+
+          <!-- Central brand name -->
+          <h2 class="brand-name">ℕ𝕀𝕍𝔸</h2>
+
+          <!-- Optional subtle pulse under brand -->
+          <div class="brand-pulse"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================== Banner Slide 2 ===================== -->
+  <div class="banner-slide">
+    <div class="banner-inner">
+
+      <!-- Banner Text -->
+      <div class="banner-text">
+        <h1>Expert Surgeons, Seamless Procedures</h1>
+        <p>Certified surgical teams with advanced tools for the highest safety standards</p>
+        <div class="banner-points">
+          <span><i class="fas fa-user-md"></i> Expert Doctors</span>
+          <span><i class="fas fa-hospital"></i> Modern Facilities</span>
+        </div>
+      </div>
+
+      <!-- Banner Image / Bloom Animation -->
+      <div class="banner-image">
+        <div class="medical-bloom">
+          <span class="bloom-layer layer1"></span>
+          <span class="bloom-layer layer2"></span>
+          <span class="bloom-layer layer3"></span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================== Banner Slide 3 ===================== -->
+  <div class="banner-slide">
+    <div class="banner-inner">
+
+      <!-- Banner Text -->
+      <div class="banner-text">
+        <h1>Trusted Labs. Accurate Reports</h1>
+        <p>Certified labs delivering precise results you can trust</p>
+        <div class="banner-points">
+          <span><i class="fas fa-vials"></i> Accurate Results</span>
+          <span><i class="fas fa-shield-alt"></i> Safe & Secure</span>
+        </div>
+      </div>
+
+      <!-- Banner Image / Right-side Bars Animation -->
+      <div class="banner-image">
+        <div class="right-animation">
+          <!-- Bars -->
+          <div class="bar bar1"></div>
+          <div class="bar bar2"></div>
+          <div class="bar bar3"></div>
+
+          <!-- Dots above bars -->
+          <span class="dot dot1"></span>
+          <span class="dot dot2"></span>
+          <span class="dot dot3"></span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+
+
+<!-- surgieries -->
+<section class="surgeries-section">
+  <h2 class="section-title">Our Surgeries</h2>
+  <p class="section-subtitle">
+    Comprehensive surgical care with experienced specialists
+  </p>
+
+  <div class="surgery-grid">
+
+    <!-- Card 1 -->
+    <div class="surgery-card">
+      <img 
+          src="images/fracture.webp"
+          alt="Fracture diagnosis and orthopedic imaging test services"
+          width="600"
+          height="400"
+          loading="lazy">
+
+      <div class="surgery-content">
+        <h3>Fracture Surgery</h3>
+        <p>Wrist, ankle & long bone fracture fixation for faster recovery.</p>
+        <div class="surgery-actions">
+          <a href="viewallsurgries.html#common-fractures" class="btn-outline">Know More</a>
+          <button onclick="openBooking('Fracture Surgery')" class="book-now-btn">Book Now</button>
+
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="surgery-card">
+          <img
+        src="images/orthopedic.webp"
+        alt="Orthopedic diagnosis, bone and joint imaging services"
+        width="600"
+        height="400"
+        loading="lazy">
+
+      <div class="surgery-content">
+        <h3>Orthopedic Surgeries</h3>
+        <p>Joint replacement, ligament repair & spine procedures.</p>
+        <div class="surgery-actions">
+          <a href="viewallsurgries.html#common-orthopedic" class="btn-outline">Know More</a>
+          <button onclick="openBooking('Orthopedic Surgeries')" class="book-now-btn">Book Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="surgery-card">
+      <img
+        src="images/onco.webp"
+        alt="Cancer diagnosis and oncology imaging test services"
+        width="600"
+        height="400"
+        loading="lazy">
+
+      <div class="surgery-content">
+        <h3>Onco Surgeries (Cancer)</h3>
+        <p>Advanced tumor removal & cancer-related surgical care.</p>
+        <div class="surgery-actions">
+          <a href="viewallsurgries.html#common-onco" class="btn-outline">Know More</a>
+         <button onclick="openBooking('Onco Surgeries (Cancer)')" class="book-now-btn">Book Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="surgery-card">
+    <img
+      src="images/general.webp"
+      alt="General surgery diagnosis and medical imaging services"
+      width="600"
+      height="400"
+      loading="lazy">
+
+      <div class="surgery-content">
+        <h3>General & Diagnostic Procedures</h3>
+        <p>Hernia, appendectomy, biopsies & endoscopic procedures.</p>
+        <div class="surgery-actions">
+          <a href="viewallsurgries.html#common-surgical" class="btn-outline">Know More</a>
+          <button onclick="openBooking('General & Diagnostic Procedures')" class="book-now-btn">Book Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 5 (OBG – INCLUDED, NOT SKIPPED) -->
+    <div class="surgery-card">
+    <img
+      src="images/obg.webp"
+      alt="OBGYN diagnosis, women’s health and gynecology imaging services"
+      width="600"
+      height="400"
+      loading="lazy">
+
+      <div class="surgery-content">
+        <h3>Obstetrics & Gynecology (OBG)</h3>
+        <p>Normal delivery, C-section, hysterectomy & fertility care.</p>
+        <div class="surgery-actions">
+          <a href="viewallsurgries.html#common-obg" class="btn-outline">Know More</a>
+          <button onclick="openBooking('Obstetrics & Gynecology (OBG)')" class="book-now-btn">Book Now</button>
+        </div>
+      </div>
+    </div>
+
+
+
+  <!-- Card 6 : View All -->
+  <div class="surgery-card viewall-card">
+    <div class="viewall-content">
+      <h3>Explore All Surgeries</h3>
+      <p>View the complete list of surgical procedures we offer.</p>
+      <a href="surgeries.html" class="btn-viewall">View All Surgeries</a>
+    </div>
+  </div>
+  </div>
+</section>
+
+
+
+
+
+
+<section class="test-slider-section">
+  <h2>Health Checkup Packages in Bangalore</h2>
+  <div class="slider-container">
+    <div class="slider" id="testSlider">
+
+      <div class="test-card" data-id="1">
+        <div class="card-header">Checkup</div>
+        <h3>Basic Health Check Up</h3>
+        <p class="price"><del>₹2700</del> ₹1890 <span class="discount">30% Off</span></p>
+        <div class="card-info">
+        <span style="font-weight:bold; color:#00897b;">
+         <i class="fas fa-flask"></i> 50 Parameters
+        </span>
+        <span style="font-weight:bold; color:#1565c0;">
+          <i class="fas fa-clock"></i> Reports within 6 hours
+        </span>
+
+        </div>
+        <div class="card-actions">
+          <a class="btn view-details" href="view-all.html#package1">View Details</a>
+          <button class="cart-btn" onclick="addToCart(1)">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="test-card" data-id="2">
+        <div class="card-header">Checkup</div>
+        <h3>Master Health Check Up</h3>
+        <p class="price"><del>₹5500</del> ₹3850 <span class="discount">30% Off</span></p>
+        <div class="card-info">
+        <span style="font-weight:bold; color:#00897b;">
+         <i class="fas fa-flask"></i> 80 Parameters
+        </span>
+        <span style="font-weight:bold; color:#1565c0;">
+          <i class="fas fa-clock"></i> Reports within 6 hours
+        </span>
+        </div>
+        <div class="card-actions">
+          <a class="btn view-details" href="view-all.html#package2">View Details</a>
+          <button class="cart-btn" onclick="addToCart(2)">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="test-card" data-id="3">
+        <div class="card-header">Checkup</div>
+        <h3>Heart Check up</h3>
+        <p class="price"><del>₹4000</del> ₹2800<span class="discount">30% Off</span></p>
+        <div class="card-info">
+        <span style="font-weight:bold; color:#00897b;">
+         <i class="fas fa-flask"></i> 50 Parameters
+        </span>
+        <span style="font-weight:bold; color:#1565c0;">
+          <i class="fas fa-clock"></i> Reports within 6 hours
+        </span>
+        </div>
+        <div class="card-actions">
+          <a class="btn view-details" href="view-all.html#package3">View Details</a>
+          <button class="cart-btn" onclick="addToCart(3)">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="test-card" data-id="4">
+        <div class="card-header">Checkup</div>
+        <h3>Well Women Check up</h3>
+        <p class="price"><del>₹3000</del> ₹2100 <span class="discount">30% Off</span></p>
+        <div class="card-info">
+        <span style="font-weight:bold; color:#00897b;">
+         <i class="fas fa-flask"></i> 50 Parameters
+        </span>
+        <span style="font-weight:bold; color:#1565c0;">
+          <i class="fas fa-clock"></i> Reports within 6 hours
+        </span>
+        </div>
+        <div class="card-actions">
+          <a class="btn view-details" href="view-all.html#package4">View Details</a>
+          <button class="cart-btn" onclick="addToCart(4)">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- View All Card -->
+    <div class="test-card">
+      <a class="view-all-btn" href="viewalltest.html">
+        VIEW ALL <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+
+
+    </div>
+    <button class="slider-btn left" onclick="slideMonsoonLeft()">❮</button>
+    <button class="slider-btn right" onclick="slideMonsoonRight()">❯</button>
+  
+  </div>
+
+  
+<div class="slider-dots" id="sliderDots"></div>
+
+
+</section>
+
+ <!-- 2nd banner details  -->
+<!-- ✅ scanning -->
+<section class="test-slider-section">
+  <h2>Advanced Radiology Services in Bangalore</h2>
+  <div class="slider-container">
+    <div class="slider" id="monsoonSlider">
+
+      <div class="test-card" data-id="201">
+        <div class="card-header">Scans</div>
+        <h3>MRI Scan</h3>
+        <p class="price">
+          Starting at ₹4299 <del>₹6233</del>
+          <span class="discount">45% Off</span>
+        </p>
+
+        <div class="card-info">
+          <span style="font-weight:bold; color:#2e7d32;">
+            <i class="fas fa-certificate"></i> Quality Benchmarked with CMC Vellore Standards
+          </span>
+          <span style="font-weight:bold; color:#1565c0;">
+            <i class="fas fa-clock"></i> Reports in 6 hours
+          </span>
+
+        </div>
+        <div class="card-actions">
+          <a class="btn view-details" href="view-all1.html#package1">View Details</a>
+          <button class="cart-btn" onclick="addToCart(201)">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="test-card" data-id="202">
+        <div class="card-header">Scans</div>
+        <h3>CT Scan</h3>
+        <p class="price">
+          Starting at  ₹3299 <del>₹4619</del>
+          <span class="discount">40% Off</span>
+        </p>
+        <div class="card-info">
+          <span style="font-weight:bold; color:#2e7d32;">
+            <i class="fas fa-certificate"></i> Quality Benchmarked with CMC Vellore Standards
+          </span>
+          <span style="font-weight:bold; color:#1565c0;">
+            <i class="fas fa-clock"></i> Reports in 6 hours
+          </span>
+        </div>
+        <div class="card-actions">
+          <a class="btn view-details" href="view-all1.html#package2">View Details</a>
+          <button class="cart-btn" onclick="addToCart(202)">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="test-card" data-id="203">
+        <div class="card-header">Scans</div>
+        <h3>Ultrasound (USG) Scans</h3>
+        <p class="price">
+          Starting at   ₹800 <del>₹1120</del>
+          <span class="discount">40% Off</span>
+        </p>
+        <div class="card-info">
+          <span style="font-weight:bold; color:#2e7d32;">
+            <i class="fas fa-certificate"></i> Quality Benchmarked with CMC Vellore Standards
+          </span>
+          <span style="font-weight:bold; color:#1565c0;">
+            <i class="fas fa-clock"></i> Reports in 6 hours
+          </span>
+        </div>
+        <div class="card-actions">
+          <a class="btn view-details" href="view-all1.html#package3">View Details</a>
+          <button class="cart-btn" onclick="addToCart(203)">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="test-card" data-id="204">
+        <div class="card-header">Scans</div>
+        <h3>PET Scan</h3>
+        <p class="price">
+          Starting at  ₹18,500 <del>₹25,900</del>
+          <span class="discount">40% Off</span>
+        </p>
+        <div class="card-info">
+          <span style="font-weight:bold; color:#2e7d32;">
+            <i class="fas fa-certificate"></i> Quality Benchmarked with CMC Vellore Standards
+          </span>
+          <span style="font-weight:bold; color:#1565c0;">
+            <i class="fas fa-clock"></i> Reports in 6 hours
+          </span>
+        </div>
+        <div class="card-actions">
+          <a class="btn view-details" href="view-all1.html#package4">View Details</a>
+          <button class="cart-btn" onclick="addToCart(204)">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- View All -->
+      <div class="test-card">
+      <a class="view-all-btn" href="viewallscan.html">
+        VIEW ALL <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+    </div>
+    <button class="slider-btn left" onclick="slideMonsoonLeft()">❮</button>
+    <button class="slider-btn right" onclick="slideMonsoonRight()">❯</button>
+  </div>
+
+<div class="slider-dots" id="monsoonSliderDots"></div>
+
+  
+</section>
+
+
+
+
+
+
+
+
+<section class="neo-med-slider">
+  <div class="neo-med-track">
+
+    <article class="neo-med-card">
+      <div class="neo-med-icon">
+        ✓
+      </div>
+
+      <span class="neo-med-accent"></span>
+
+      <h4 class="neo-med-title">NABL Accredited Laboratory</h4>
+      <p class="neo-med-text">
+        Accredited as per ISO/IEC 17025 standards ensuring precise,
+        reliable, and quality diagnostic testing.
+      </p>
+
+      <span class="neo-med-foot">Govt. of India Approved</span>
+    </article>
+
+    <article class="neo-med-card">
+      <div class="neo-med-icon">
+        🛡
+      </div>
+
+      <span class="neo-med-accent"></span>
+
+      <h4 class="neo-med-title">ISO 9001:2015 Certified</h4>
+      <p class="neo-med-text">
+        Globally recognized quality management systems focused
+        on patient safety and service excellence.
+      </p>
+
+      <span class="neo-med-foot">International Standards</span>
+    </article>
+
+    <article class="neo-med-card">
+      <div class="neo-med-icon">
+        🔒
+      </div>
+
+      <span class="neo-med-accent"></span>
+
+      <h4 class="neo-med-title">Data Privacy & Security</h4>
+      <p class="neo-med-text">
+        End-to-end healthcare data protection ensuring patient
+        confidentiality at every stage.
+      </p>
+
+      <span class="neo-med-foot">HIPAA & Healthcare Norms</span>
+    </article>
+
+  </div>
+</section>
+
+
+
+
+<section class="surgery-journey">
+  <h2>Your Step-by-Step Surgery Journey</h2>
+
+  <div class="journey-track">
+
+    <!-- STEP 1 -->
+    <div class="journey-step">
+      <div class="step-circle">
+        <svg viewBox="0 0 24 24" class="step-icon">
+          <circle cx="12" cy="7" r="4"/>
+          <path d="M4 20v-1a8 8 0 0 1 16 0v1"/>
+        </svg>
+      </div>
+      <p>Consult Specialists</p>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="journey-step">
+      <div class="step-circle">
+        <svg viewBox="0 0 24 24" class="step-icon">
+          <circle cx="8" cy="7" r="3"/>
+          <circle cx="16" cy="7" r="3"/>
+          <path d="M2 20v-1a6 6 0 0 1 12 0v1"/>
+          <path d="M10 20v-1a6 6 0 0 1 12 0v1"/>
+        </svg>
+      </div>
+      <p>Personal Care Coordinator</p>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="journey-step">
+      <div class="step-circle">
+        <svg viewBox="0 0 24 24" class="step-icon">
+          <path d="M6 2h8l4 4v16H6z"/>
+          <path d="M14 2v4h4"/>
+          <path d="M9 13h6"/>
+          <path d="M9 17h6"/>
+        </svg>
+      </div>
+      <p>Insurance Made Easy</p>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="journey-step">
+      <div class="step-circle">
+        <svg viewBox="0 0 24 24" class="step-icon">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <path d="M12 7v10"/>
+          <path d="M7 12h10"/>
+        </svg>
+      </div>
+      <p>Safe & Timely Surgery</p>
+    </div>
+
+    <!-- STEP 5 -->
+    <div class="journey-step">
+      <div class="step-circle">
+        <svg viewBox="0 0 24 24" class="step-icon">
+          <rect x="3" y="11" width="18" height="6" rx="2"/>
+          <circle cx="7" cy="18" r="2"/>
+          <circle cx="17" cy="18" r="2"/>
+        </svg>
+      </div>
+      <p>Free Pickup & Drop</p>
+    </div>
+
+    <!-- STEP 6 -->
+    <div class="journey-step">
+      <div class="step-circle">
+        <svg viewBox="0 0 24 24" class="step-icon">
+          <path d="M12 21s-7-4.5-9-8.5C1 7.5 4.5 4 8.5 6.5 10.5 7.7 12 10 12 10s1.5-2.3 3.5-3.5C19.5 4 23 7.5 21 12.5 19 16.5 12 21 12 21z"/>
+        </svg>
+      </div>
+      <p>Recovery Support</p>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+<section class="reviews-banner">
+
+  <div class="reviews-container">
+
+    <!-- LEFT: AUTO SLIDING REVIEWS -->
+    <div class="reviews-slider">
+      <div class="reviews-track">
+
+        <div class="review-item">
+          <p>“Fast reports & polite support. Highly recommended.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=15" alt="">
+            <div>
+              <strong>Shashank N.</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+        <div class="review-item">
+          <p>“Home sample collection was on time and very hygienic.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=22" alt="">
+            <div>
+              <strong>Ananya R.</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+        <div class="review-item">
+          <p>“Booked a full body checkup. Got reports within hours.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=5" alt="">
+            <div>
+              <strong>Rohit Kumar</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+        <div class="review-item">
+          <p>“Very smooth experience. Support team was helpful.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=9" alt="">
+            <div>
+              <strong>Divya M.</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT: TRUST CONTENT (DESKTOP ONLY) -->
+    <div class="reviews-info">
+      <h2>What Patients Say<br>On Google</h2>
+
+      <p>
+        Trusted by thousands for accurate reports and convenient home
+        sample collection. Rated <strong>4.3★ on Google</strong>.
+      </p>
+
+      <div class="trust-stats">
+        <div>
+          ⭐<br><strong>4.3</strong><br>Rating
+        </div>
+        <div>
+          👥<br><strong>10k+</strong><br>Users
+        </div>
+        <div>
+          🏥<br><strong>NABL</strong><br>Labs
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+
+<div id="sticky-icon-popup">
+
+  <a href="https://wa.me/+917892287102" target="_blank" class="icon-btn whatsapp" aria-label="Chat on WhatsApp" rel="noopener">
+    <i class="fab fa-whatsapp"></i>
+    <span class="tooltip">WhatsApp</span>
+  </a>
+
+  <a href="tel:+917892287102" class="icon-btn call" aria-label="Call Support" rel="noopener">
+    <i class="fas fa-phone-alt"></i>
+    <span class="tooltip">Call Support</span>
+  </a>
+
+</div>
+
+
+    <!-- FAQ -->
+    <section class="faq-container">
+      <h3>Frequently Asked Questions</h3>
+
+      <div class="faq-section">
+    
+    <div class="faq-item">
+      <div class="faq-question">1. How does the sample collection work? <span>+</span></div>
+      <div class="faq-answer">
+        A certified phlebotomist from <strong>Niva Health kare</strong> will visit your home at your chosen time slot to collect the sample safely. The process is hygienic, painless, and convenient — no need to travel anywhere.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">2. Can I reschedule or cancel my booking? <span>+</span></div>
+      <div class="faq-answer">
+        Yes, you can reschedule or cancel up to 2 hours before your appointment. Simply visit your booking details or call our support team — we’ll help you choose a new time slot with no extra charge.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">3. Do I need to fast before giving a sample? <span>+</span></div>
+      <div class="faq-answer">
+        Some tests, such as fasting blood sugar and lipid profile, require fasting for 8–10 hours. Don’t worry — you’ll see all fasting requirements clearly mentioned during booking and in your confirmation message.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">4. When will I receive my reports? <span>+</span></div>
+      <div class="faq-answer">
+        Most reports are available within <strong>6 to 24 hours</strong>, depending on the type of test. Reports are sent directly to your registered <strong>email, WhatsApp, and SMS</strong>, and you can also view them on your dashboard.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">5. Are your labs certified? <span>+</span></div>
+      <div class="faq-answer">
+        Absolutely. All tests are processed at <strong>NABL and ISO certified labs</strong> that meet national quality standards, ensuring 100% reliable and accurate diagnostic results.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">6. Is home sample collection safe? <span>+</span></div>
+      <div class="faq-answer">
+        Yes. At <strong>Niva Health kare</strong>, safety and hygiene come first. Our phlebotomists wear gloves, masks, and use sterilized, single-use equipment for every collection. 
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">7. Can I talk to a doctor after getting my reports? <span>+</span></div>
+      <div class="faq-answer">
+        Yes. You can request a <strong>free teleconsultation</strong> with our partnered doctors for most tests. Simply click on the “Consult Doctor” button next to your report to connect with a certified professional.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">8. What if I miss my sample collection slot? <span>+</span></div>
+      <div class="faq-answer">
+        If you miss your scheduled slot, you can easily reschedule at no additional cost. We recommend informing our team in advance for a smoother experience.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">9. What payment methods are accepted? <span>+</span></div>
+      <div class="faq-answer">
+        We accept <strong>UPI and cash on collection</strong>. All online transactions are secured using 256-bit encryption to protect your data and payment details.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">10. Is my personal data safe with Niva Health kare? <span>+</span></div>
+      <div class="faq-answer">
+        Yes, completely. We follow strict data protection protocols and comply with healthcare data privacy laws. Your information is encrypted and never shared with any third party without your consent.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+
+<footer class="footer-section">
+  <div class="footer-container">
+
+    <!-- Brand / Trust -->
+    <div class="footer-left">
+      <h2 class="footer-brand">
+        <span class="footer-niva">Niva</span>
+        <span class="footer-healthcare">Health Kare</span>
+      </h2>
+
+      <p class="footer-tagline">
+        Trusted healthcare services delivering quality, care, and compassion.
+      </p>
+
+      <div class="social-icons">
+        <a href="https://www.instagram.com/nivahealthkare/" aria-label="Instagram">
+      <img
+        src="images/instagram.webp"
+        alt="Follow Niva Health Kare on Instagram"
+        width="24"
+        height="24"
+        loading="lazy">
+      </a>
+        <a href="https://www.facebook.com/profile.php?id=61583126009241" aria-label="Facebook">
+        <img
+          src="images/facebook.webp"
+          alt="Follow Niva Health Kare on Facebook"
+          width="24"
+          height="24"
+          loading="lazy">
+
+        </a>
+        <a href="https://www.youtube.com/@nivahealthkare" aria-label="YouTube">
+        <img
+          src="images/youtube.webp"
+          alt="Subscribe to Niva Health Kare on YouTube"
+          width="24"
+          height="24"
+          loading="lazy">
+
+        </a>
+      </div>
+    </div>
+
+    <!-- Links -->
+    <div class="footer-right">
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="index.html">Home</a>
+        <a href="about-us.html">About Us</a>
+        <a href="locate-us.html">Locate Us</a>
+        
+      </div>
+
+      <div class="footer-col">
+        <h4>Medical Network</h4>
+        <a href="our-partners.html">Our Partners</a>
+        <a href="for-doctors.html">Doctors</a>
+        <a href="service.html">Our Services</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="refund-policy.html">Refund Policy</a>
+        <a href="disclaimer.html">Disclaimer</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom -->
+  <div class="footer-bottom">
+    <p>
+      © 2025 Niva Health Kare Pvt. Ltd. All rights reserved.  
+      <span>An initiative by Vinayaka Hospital.</span>
+    </p>
+
+    <div class="footer-links">
+      <a href="terms.html">Terms</a>
+      <a href="privacy-policy.html">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+<section class="simple-seo-footer">
+  <div class="simple-seo-container">
+
+    <div class="seo-item">
+      <h4>Our Medical Services</h4>
+      <p>
+        Blood tests, scan services, health checkups, heart tests,
+        women health tests, full body checkups, and regular medical tests.
+      </p>
+    </div>
+
+    <div class="seo-item">
+      <h4>Diagnostic Center</h4>
+      <p>
+        Trusted diagnostic center for scan tests, lab tests,
+        health reports, and medical checkups with accurate results.
+      </p>
+    </div>
+
+    <div class="seo-item">
+      <h4>Healthcare in Bangalore</h4>
+      <p>
+        Medical tests in Bangalore, nearby diagnostic centers,
+        health checkups at home, and easy appointment booking.
+      </p>
+    </div>
+
+    <div class="seo-item">
+      <h4>Why People Trust Us</h4>
+      <p>
+        Experienced doctors, trained staff, clean facilities,
+        modern machines, quick reports, and patient-friendly service.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ===== BOOKING MODAL ===== -->
+<div id="bookingModal" class="booking-modal">
+
+  <div class="booking-box">
+
+    <!-- Close -->
+    <button type="button" class="booking-close" onclick="closeBooking()">×</button>
+
+    <!-- STEP INDICATOR -->
+    <div class="step-indicator">
+      <div class="step active" id="stepIndicator1">1</div>
+      <div class="step-line"></div>
+      <div class="step" id="stepIndicator2">2</div>
+      <div class="step-line"></div>
+      <div class="step" id="stepIndicator3">3</div>
+    </div>
+
+    <!-- ===== STEP 1 ===== -->
+    <div class="booking-step active" id="step1">
+      <h3>Enter Mobile Number</h3>
+
+      <label>Mobile Number</label>
+      <input
+        type="tel"
+        id="bookingMobile"
+        placeholder="10-digit mobile number"
+        maxlength="10"
+      >
+
+      <button
+        type="button"
+        class="primary-btn"
+        onclick="goToStep2()"
+      >
+        Continue
+      </button>
+    </div>
+
+    <!-- ===== STEP 2 ===== -->
+    <div class="booking-step" id="step2">
+      <h3>Complete Booking</h3>
+
+      <label>Your Name</label>
+      <input type="text" id="custName" placeholder="Enter your name">
+
+      <label>Email (optional)</label>
+      <input type="email" id="custEmail" placeholder="Enter your email">
+
+      <label>Service</label>
+      <input
+        type="text"
+        id="serviceType"
+        value="Health Checkup"
+        readonly
+      >
+
+      <button
+        type="button"
+        class="primary-btn"
+        onclick="confirmBooking()"
+      >
+        Confirm Booking
+      </button>
+    </div>
+
+    <!-- ===== STEP 3 ===== -->
+    <div class="booking-step" id="step3">
+      <h3>Booking Confirmed 🎉</h3>
+
+      <p class="confirmation-text" id="confirmationMessage">
+        Thank you! Our team will call you shortly to confirm your booking.
+      </p>
+
+      <button
+        type="button"
+        class="primary-btn"
+        onclick="closeBooking()"
+      >
+        Done
+      </button>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- ✅ Toast Notification -->
+<div id="toast" class="toast">Added to Cart</div>
+
+
+  <script src="javascript/lab-carousel.js"></script>
+  <script src="javascript/script.js"></script>
+  <script src="javascript/testscript.js"></script>
+  <script src="javascript/location.js"></script>
+  <script src="javascript/booking.controller.js"></script>
+  <button onclick="startPayment()">Pay ₹500</button>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+async function startPayment() {
+    try {
+        // 1. Create order from backend
+        const response = await fetch("http://localhost:5000/create-order", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                amount: 500, // ₹500
+                receipt: "healthcheck_001"
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error("Order creation failed");
+        }
+
+        const orderData = await response.json();
+
+        // 2. Razorpay Checkout options
+        const options = {
+            key: "rzp_test_S7I859kX36Fl1l", // TEST Key
+            amount: orderData.amount,
+            currency: orderData.currency,
+            name: "NIVA HEALTH KARE",
+            description: "Health Checkup Booking",
+            order_id: orderData.order_id,
+
+            handler: function (response) {
+                alert("Payment Successful");
+                console.log("Payment Response:", response);
+            },
+
+            prefill: {
+                name: "Test User",
+                email: "test@example.com",
+                contact: "9999999999"
+            },
+
+            theme: {
+                color: "#3399cc"
+            },
+
+            // ✅ Enable ALL payment methods
+            method: {
+                upi: true,
+                card: true,
+                netbanking: true,
+                wallet: true,
+                emi: false,
+                paylater: false
+            },
+
+            modal: {
+                ondismiss: function () {
+                    console.log("Checkout closed");
+                }
+            }
+        };
+
+        // 3. Open Razorpay Checkout
+        const rzp = new Razorpay(options);
+        rzp.open();
+
+    } catch (error) {
+        console.error("Payment initiation failed:", error);
+        alert("Payment failed. Please try again.");
+    }
+}
+</script>
+
+
+
+
+
+</body>
+</html>

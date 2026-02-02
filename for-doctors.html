@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Primary SEO -->
+  <title>Our Doctors - Niva Health Kare Bangalore | Expert Specialists & Consultants</title>
+  <meta name="description" content="Meet the expert doctors at Niva Health Kare Bangalore. Our team of specialists, surgeons, and diagnostic experts provide trusted healthcare, surgeries, and patient-focused care.">
+
+  <!-- Robots & Canonical -->
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.nivahealthkare.com/our-doctors.html">
+
+  <!-- Open Graph (Social Sharing) -->
+  <meta property="og:title" content="Our Doctors - Niva Health Kare Bangalore">
+  <meta property="og:description" content="Discover the experienced doctors and specialists at Niva Health Kare Bangalore, delivering expert healthcare, diagnostics, and surgical care.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.nivahealthkare.com/our-doctors.html">
+  <meta property="og:image" content="https://www.nivahealthkare.com/images/team-banner.webp">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/footer.css">
+
+  <!-- Font Awesome -->
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  </noscript>
+</head>
+<body>
+/* --------------------------
+   DOCTOR CARDS – PREMIUM
+---------------------------- */
+.doctor-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 22px;
+}
+
+/* Card */
+.doctor-card {
+  background: linear-gradient(180deg, #ffffff, #f9fbff);
+  border-radius: 18px;
+  padding: 22px 16px 20px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(13, 59, 102, 0.08);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle top accent */
+.doctor-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  background: linear-gradient(90deg, #00a6fb, #4cc9f0);
+}
+
+/* Hover */
+.doctor-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 45px rgba(13, 59, 102, 0.15);
+}
+
+/* Avatar */
+.doctor-initials {
+  background: linear-gradient(135deg, #00a6fb, #4cc9f0);
+  color: #fff;
+  font-weight: 700;
+  font-size: 22px;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+  box-shadow: 0 6px 16px rgba(0, 166, 251, 0.35);
+  transition: transform 0.3s ease;
+}
+
+.doctor-card:hover .doctor-initials {
+  transform: scale(1.12);
+}
+
+/* Name */
+.doctor-card h3 {
+  font-size: 17px;
+  font-weight: 600;
+  color: #0d3b66;
+  margin-bottom: 6px;
+}
+
+/* Specialty / text */
+.doctor-card p {
+  font-size: 13.5px;
+  color: #5f6f82;
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+
+/* Call to action */
+.doctor-card .call-btn {
+  display: inline-block;
+  padding: 9px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #0d3b66;
+  border-radius: 999px;
+  background: rgba(0, 166, 251, 0.1);
+  transition: all 0.25s ease;
+}
+
+.doctor-card:hover .call-btn {
+  background: #00a6fb;
+  color: #fff;
+}
+
+/* --------------------------
+   MOBILE OPTIMIZATION
+---------------------------- */
+@media (max-width: 600px) {
+  .doctor-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .doctor-card {
+    padding: 18px 12px 16px;
+  }
+
+  .doctor-initials {
+    width: 52px;
+    height: 52px;
+    font-size: 20px;
+  }
+
+  .doctor-card h3 {
+    font-size: 15px;
+  }
+}
+
+/* --------------------------
+   ACTION BUTTONS
+---------------------------- */
+.doctor-actions {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  transition: 0.3s;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.call-btn {
+  background: #f1f1f1;
+  color: #00a6fb;
+  border: 1px solid #d0e4f8;
+}
+
+.call-btn:hover {
+  background: #d0e4f8;
+}
+.callback-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 6000;
+}
+
+.callback-box {
+  background: #ffffff;
+  width: 92%;
+  max-width: 400px;
+  padding: 26px;
+  border-radius: 18px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+  position: relative;
+  animation: popupIn 0.25s ease;
+}
+
+@keyframes popupIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.callback-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: #f3f4f6;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.callback-box h3 {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.callback-sub {
+  text-align: center;
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 18px;
+}
+
+.callback-box label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  margin-top: 10px;
+  display: block;
+}
+
+.callback-box input,
+.callback-box textarea {
+  width: 100%;
+  padding: 12px 14px;
+  margin-top: 6px;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+}
+
+.callback-box input[readonly] {
+  background: #f9fafb;
+  font-weight: 600;
+}
+
+.callback-btn {
+  width: 100%;
+  margin-top: 16px;
+  padding: 14px;
+  border-radius: 14px;
+  border: none;
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.callback-note {
+  text-align: center;
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 10px;
+}
+
+
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+<header>
+  <!-- Desktop Header -->
+  <div class="desktop-header">
+    <div class="logo-location">
+      <div class="logo-section">
+        <div class="lab-name">
+          <span class="niva">Niva</span>
+          <span class="healthcare">Health Kare</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <a href="tel:+917892287102"><i class="fa-solid fa-phone"></i></a>
+      <a href="https://wa.me/+917892287102" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+    </div>
+  </div>
+
+  <!-- Mobile Header -->
+  <div class="mobile-header">
+    <div class="logo-section">
+      <div class="lab-name">
+        <span class="niva">Niva</span>
+        <span class="healthcare">Health Kare</span>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <a href="tel:+917892287102"><i class="fa-solid fa-phone"></i></a>
+    </div>
+  </div>
+</header>
+
+    <!-- Doctor Panel Section -->
+    <section class="doctor-panel">
+      <h2>Our Expert Doctors</h2>
+
+  <div class="specialty-section">
+    <h3 class="specialty-title">🩺 General Medicine</h3>
+    <div class="doctor-container">
+
+      <!-- Doctor Card 1 -->
+      <div class="doctor-card">
+        <div class="doctor-initials">SR</div>
+        <h3>Dr. Sunil R</h3>
+        <p>MBBS, MD (General Medicine)</p>
+        <div class="doctor-actions">
+          <a href="tel:+917892287102" class="btn call-btn">📞 Call</a>
+          <button class="btn" onclick="openCallback('Dr. Sunil R')">
+          Book Consultation
+        </button>
+
+        </div>
+      </div>
+
+      <!-- Doctor Card 2 -->
+      <div class="doctor-card">
+        <div class="doctor-initials">H</div>
+        <h3>Dr. Hema</h3>
+        <p>MBBS, MD (General Medicine)</p>
+        <div class="doctor-actions">
+          <a href="tel:+917892287102" class="btn call-btn">📞 Call</a>
+          <button class="btn" onclick="openCallback('Dr. Hema')">
+          Book Consultation
+        </button>
+        </div>
+      </div>
+
+      <!-- Doctor Card 3 -->
+      <div class="doctor-card">
+        <div class="doctor-initials">S</div>
+        <h3>Dr. Sonam</h3>
+        <p>MBBS, MD (General Medicine)</p>
+        <div class="doctor-actions">
+          <a href="tel:+917892287102" class="btn call-btn">📞 Call</a>
+          <button class="btn" onclick="openCallback('Dr. Sonam')">
+          Book Consultation
+        </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="specialty-section">
+    <h3 class="specialty-title">🩺 Gynecology</h3>
+    <div class="doctor-container">
+
+      <!-- Doctor Card 1 -->
+      <div class="doctor-card">
+        <div class="doctor-initials">Y</div>
+        <h3>Dr. Yashodha</h3>
+        <p>MBBS, DGO (OBST Gynecology)</p>
+        <div class="doctor-actions">
+          <a href="tel:+917892287102" class="btn call-btn">📞 Call</a>
+          <button class="btn" onclick="openCallback('Dr. Yashodha')">
+          Book Consultation
+        </button>
+        </div>
+      </div>
+
+      <!-- Doctor Card 2 -->
+      <div class="doctor-card">
+        <div class="doctor-initials">PG</div>
+        <h3>Dr. Preethi Gowda K</h3>
+        <p>MBBS, MD (OBST Gynecology)</p>
+        <div class="doctor-actions">
+          <a href="tel:+917892287102" class="btn call-btn">📞 Call</a>
+          <button class="btn" onclick="openCallback('Dr. Preethi Gowda K')">
+          Book Consultation
+        </button>
+        </div>
+      </div>
+
+      <!-- Doctor Card 3 -->
+      <div class="doctor-card">
+        <div class="doctor-initials">D</div>
+        <h3>Dr. Dakshayani</h3>
+        <p>MBBS, MD</p>
+        <div class="doctor-actions">
+          <a href="tel:+917892287102" class="btn call-btn">📞 Call</a>
+          <button class="btn" onclick="openCallback('Dr. Dakshayani')">
+          Book Consultation
+        </button>
+        </div>
+      </div>
+
+      <!-- Doctor Card 4 -->
+      <div class="doctor-card">
+        <div class="doctor-initials">M</div>
+        <h3>Dr. Mamatha</h3>
+        <p>MBBS, DGO, DNB, PGDR</p>
+        <div class="doctor-actions">
+          <a href="tel:+917892287102" class="btn call-btn">📞 Call</a>
+          <button class="btn" onclick="openCallback('Dr. Mamatha')">
+          Book Consultation
+        </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="specialty-section">
+    <h3 class="specialty-title">🩺 General Surgeon</h3>
+    <div class="doctor-container">
+
+      <!-- Doctor Card 1 -->
+      <div class="doctor-card">
+        <div class="doctor-initials">M</div>
+        <h3>Dr. Manjunath</h3>
+        <p>MBBS, MS</p>
+        <div class="doctor-actions">
+          <a href="tel:+917892287102" class="btn call-btn">📞 Call</a>
+          <button class="btn" onclick="openCallback('Dr. Manjunath')">
+          Book Consultation
+        </button>
+        </div>
+      </div>
+
+      <!-- Doctor Card 2 -->
+      <div class="doctor-card">
+        <div class="doctor-initials">G</div>
+        <h3>Dr. Giridhar</h3>
+        <p>MBBS, MS (Lap Surgeon)</p>
+        <div class="doctor-actions">
+          <a href="tel:+917892287102" class="btn call-btn">📞 Call</a>
+          <button class="btn" onclick="openCallback('Dr. Giridhar')">
+          Book Consultation
+        </button>
+        </div>
+      </div>
+
+      <!-- Doctor Card 3 -->
+      <div class="doctor-card">
+        <div class="doctor-initials">S</div>
+        <h3>Dr. Shridhar</h3>
+        <p>MBBS, MS (Lap Surgeon)</p>
+        <div class="doctor-actions">
+          <a href="tel:+917892287102" class="btn call-btn">📞 Call</a>
+          <button class="btn" onclick="openCallback('Dr. Shridhar')">
+          Book Consultation
+        </button>
+        </div>
+      </div>
+
+      <!-- Doctor Card 4 -->
+      <div class="doctor-card">
+        <div class="doctor-initials">R</div>
+        <h3>Dr. Ranjith</h3>
+        <p>MBBS, MS (Lap Surgeon)</p>
+        <div class="doctor-actions">
+          <a href="tel:+917892287102" class="btn call-btn">📞 Call</a>
+          <button class="btn" onclick="openCallback('Dr. Ranjith')">
+          Book Consultation
+        </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="specialty-section">
+    <h3 class="specialty-title">🦴 Orthopaedic Surgeon</h3>
+    <div class="doctor-container">
+
+      <!-- Doctor Card 1 -->
+      <div class="doctor-card">
+        <div class="doctor-initials">Y</div>
+        <h3>Dr. Yathish</h3>
+        <p>MBBS, MS (Ortho)</p>
+        <div class="doctor-actions">
+          <a href="tel:+917892287102" class="btn call-btn">📞 Call</a>
+          <button class="btn" onclick="openCallback('Dr. Yathish')">
+          Book Consultation
+        </button>
+        </div>
+      </div>
+
+      <!-- Doctor Card 2 -->
+      <div class="doctor-card">
+        <div class="doctor-initials">A</div>
+        <h3>Dr. Abhijith</h3>
+        <p>MBBS, MS (Ortho)</p>
+        <div class="doctor-actions">
+          <a href="tel:+917892287102" class="btn call-btn">📞 Call</a>
+          <button class="btn" onclick="openCallback('Dr. Abhijith')">
+          Book Consultation
+        </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="specialty-section">
+    <h3 class="specialty-title">👂 ENT (Otorhinolaryngology)</h3>
+    <div class="doctor-container">
+
+      <!-- Doctor Card 1 -->
+      <div class="doctor-card">
+        <div class="doctor-initials">Y</div>
+        <h3>Dr. Yogesh</h3>
+        <p>MBBS, MS (ENT)</p>
+        <div class="doctor-actions">
+          <a href="tel:+917892287102" class="btn call-btn">📞 Call</a>
+          <button class="btn" onclick="openCallback('Dr. Yogesh')">
+          Book Consultation
+        </button>
+        </div>
+      </div>
+
+      <!-- Doctor Card 2 -->
+      <div class="doctor-card">
+        <div class="doctor-initials">MP</div>
+        <h3>Dr. M. H. Prasad</h3>
+        <p>MBBS, MAS, MS</p>
+        <div class="doctor-actions">
+          <a href="tel:+917892287102" class="btn call-btn">📞 Call</a>
+          <button class="btn" onclick="openCallback('Dr. M. H. Prasad')">
+          Book Consultation
+        </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="specialty-section">
+    <h3 class="specialty-title">🧒 Paediatrician</h3>
+    <div class="doctor-container">
+
+      <!-- Doctor Card 1 -->
+      <div class="doctor-card">
+        <div class="doctor-initials">AS</div>
+        <h3>Dr. Avinash S. S</h3>
+        <p>MBBS, DCH (Paediatrics)</p>
+        <div class="doctor-actions">
+          <a href="tel:+917892287102" class="btn call-btn">📞 Call</a>
+          <button class="btn" onclick="openCallback('Dr. Avinash S. S')">
+          Book Consultation
+        </button>
+        </div>
+      </div>
+
+      <!-- Doctor Card 2 -->
+      <div class="doctor-card">
+        <div class="doctor-initials">SB</div>
+        <h3>Dr. Sunil B.</h3>
+        <p>MBBS, DCH</p>
+        <div class="doctor-actions">
+          <a href="tel:+917892287102" class="btn call-btn">📞 Call</a>
+          <button class="btn" onclick="openCallback('Dr. Sunil B')">
+          Book Consultation
+        </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="specialty-section">
+    <h3 class="specialty-title">❤️ Cardiology</h3>
+    <div class="doctor-container">
+
+      <!-- Doctor Card 1 -->
+      <div class="doctor-card">
+        <div class="doctor-initials">N</div>
+        <h3>Dr. Nagesh</h3>
+        <p>MBBS, PGDCC (Cardiology)</p>
+        <div class="doctor-actions">
+          <a href="tel:+917892287102" class="btn call-btn">📞 Call</a>
+          <button class="btn" onclick="openCallback('Dr. Nagesh')">
+          Book Consultation
+        </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="specialty-section">
+    <h3 class="specialty-title">🩻 Radiology</h3>
+    <div class="doctor-container">
+
+      <!-- Doctor Card 1 -->
+      <div class="doctor-card">
+        <div class="doctor-initials">JR</div>
+        <h3>Dr. Javaji Raviprasad</h3>
+        <p>MBBS, MD (Radiology)</p>
+        <div class="doctor-actions">
+          <a href="tel:+917892287102" class="btn call-btn">📞 Call</a>
+          <button class="btn" onclick="openCallback('Dr. Javaji Raviprasad')">
+          Book Consultation
+        </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="specialty-section">
+    <h3 class="specialty-title">🧬 Urology</h3>
+    <div class="doctor-container">
+
+      <!-- Doctor Card 1 -->
+      <div class="doctor-card">
+        <div class="doctor-initials">S</div>
+        <h3>Dr. Suprith</h3>
+        <p>MBBS, MS, MCH (Urology)</p>
+        <div class="doctor-actions">
+          <a href="tel:+917892287102" class="btn call-btn">📞 Call</a>
+          <button class="btn" onclick="openCallback('Dr. Suprith')">
+          Book Consultation
+        </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="specialty-section">
+    <h3 class="specialty-title">🌟 Dermatology</h3>
+    <div class="doctor-container">
+
+      <!-- Doctor Card 1 -->
+      <div class="doctor-card">
+        <div class="doctor-initials">AS</div>
+        <h3>Dr. Abhishek Shetty</h3>
+        <p>MBBS, MD (Dermatology)</p>
+        <div class="doctor-actions">
+          <a href="tel:+917892287102" class="btn call-btn">📞 Call</a>
+          <button class="btn" onclick="openCallback('Dr. Abhishek Shetty')">
+          Book Consultation
+        </button>
+        </div>
+      </div>
+
+      <!-- Doctor Card 2 -->
+      <div class="doctor-card">
+        <div class="doctor-initials">R</div>
+        <h3>Dr. Rashmi</h3>
+        <p>MBBS, MD (Dermatology)</p>
+        <div class="doctor-actions">
+          <a href="tel:+917892287102" class="btn call-btn">📞 Call</a>
+          <button class="btn" onclick="openCallback('Dr. Rashmi')">
+          Book Consultation
+        </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="specialty-section">
+    <h3 class="specialty-title">💉 Anaesthesiology</h3>
+    <div class="doctor-container">
+
+      <!-- Doctor Card 1 -->
+      <div class="doctor-card">
+        <div class="doctor-initials">KS</div>
+        <h3>Dr. Kumarswamy</h3>
+        <p>MBBS, DA (Anaesthesiology)</p>
+        <div class="doctor-actions">
+          <a href="tel:+917892287102" class="btn call-btn">📞 Call</a>
+          <button class="btn" onclick="openCallback('Dr. Kumarswamy')">
+          Book Consultation
+        </button>
+        </div>
+      </div>
+
+      <!-- Doctor Card 2 -->
+      <div class="doctor-card">
+        <div class="doctor-initials">M</div>
+        <h3>Dr. Mithun</h3>
+        <p>MBBS, DA</p>
+        <div class="doctor-actions">
+          <a href="tel:+917892287102" class="btn call-btn">📞 Call</a>
+          <button class="btn" onclick="openCallback('Dr. Mithun')">
+          Book Consultation
+        </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+    </section>
+
+<!-- ===== SIMPLE CALLBACK MODAL ===== -->
+<div id="callbackModal" class="callback-modal">
+
+  <div class="callback-box">
+
+    <button class="callback-close" onclick="closeCallback()">×</button>
+
+    <h3>Request a Call Back</h3>
+    <p class="callback-sub">
+      Enter your mobile number — our agent will call you back in a few minutes.
+    </p>
+
+    <label>Doctor</label>
+    <input type="text" id="callbackDoctor" readonly />
+
+    <label>Mobile Number</label>
+    <input type="tel" id="callbackMobile" placeholder="Enter mobile number" maxlength="10" />
+
+    <label>Message (optional)</label>
+    <textarea id="callbackMessage" rows="3"
+      placeholder="Tell us anything you want (optional)"></textarea>
+
+    <button class="callback-btn" onclick="submitCallback()">
+      Request Call Back
+    </button>
+
+    <p class="callback-note">
+      📞 We respect your privacy. No spam.
+    </p>
+
+  </div>
+</div>
+<footer class="footer-section">
+  <div class="footer-container">
+
+    <!-- Brand / Trust -->
+    <div class="footer-left">
+      <h2 class="footer-brand">
+        <span class="footer-niva">Niva</span>
+        <span class="footer-healthcare">Health Kare</span>
+      </h2>
+
+      <p class="footer-tagline">
+        Trusted healthcare services delivering quality, care, and compassion.
+      </p>
+
+      <div class="social-icons">
+        <a href="https://www.instagram.com/nivahealthkare/" aria-label="Instagram">
+      <img
+        src="images/instagram.webp"
+        alt="Follow Niva Health Kare on Instagram"
+        width="24"
+        height="24"
+        loading="lazy">
+      </a>
+        <a href="https://www.facebook.com/profile.php?id=61583126009241" aria-label="Facebook">
+        <img
+          src="images/facebook.webp"
+          alt="Follow Niva Health Kare on Facebook"
+          width="24"
+          height="24"
+          loading="lazy">
+
+        </a>
+        <a href="https://www.youtube.com/@nivahealthkare" aria-label="YouTube">
+        <img
+          src="images/youtube.webp"
+          alt="Subscribe to Niva Health Kare on YouTube"
+          width="24"
+          height="24"
+          loading="lazy">
+
+        </a>
+      </div>
+    </div>
+
+    <!-- Links -->
+    <div class="footer-right">
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="index.html">Home</a>
+        <a href="about-us.html">About Us</a>
+        <a href="locate-us.html">Locate Us</a>
+        
+      </div>
+
+      <div class="footer-col">
+        <h4>Medical Network</h4>
+        <a href="our-partners.html">Our Partners</a>
+        <a href="for-doctors.html">Doctors</a>
+        <a href="service.html">Our Services</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="refund-policy.html">Refund Policy</a>
+        <a href="disclaimer.html">Disclaimer</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom -->
+  <div class="footer-bottom">
+    <p>
+      © 2025 Niva Health Kare Pvt. Ltd. All rights reserved.  
+      <span>An initiative by Vinayaka Hospital.</span>
+    </p>
+
+    <div class="footer-links">
+      <a href="terms.html">Terms</a>
+      <a href="privacy-policy.html">Privacy</a>
+    </div>
+  </div>
+</footer>
+  <script src="javascript/booking.controller.js"></script>
+</body>
+</html>

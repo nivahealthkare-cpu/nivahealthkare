@@ -1,0 +1,1560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Niva Health Care Bangalore | Online Blood Tests, MRI, CT, X-Ray & PET Scans</title>
+
+<meta name="description" content="Niva Health Care Bangalore offers accurate online blood tests and diagnostic scans — MRI, CT, X-Ray, PET, DEXA, CBC, CRP, RFT, LFT, Lipid Profile, and Thyroid tests. Book online for home sample collection and fast 6-hour reports."/>
+<meta name="keywords" content="Niva Health Care, Niva Health, online blood test Bangalore, online MRI Bangalore, online CT scan Bangalore, online X-ray Bangalore, online PET scan, online DEXA scan, CBC test online, CRP test online, RBS test online, RFT test online, LFT test online, Lipid Profile test online, Thyroid test online, full body checkup Bangalore, home blood test Bangalore, best diagnostic lab Bangalore, NABL certified lab, book lab test online, health checkup packages, diagnostic center near me, Niva Health Care Bangalore, Niva Health Care Chandra Layout"/>
+
+<link rel="stylesheet" href="css/style.css"/>
+<link rel="stylesheet" href="css/Surgeries.css"/>
+<link rel="stylesheet" href="css/booking.routes.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<link rel="icon" href="https://nivahealthcare.in/images/favicon.ico" type="image/x-icon"/>
+
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://nivahealthkare.com/"/>
+
+<!-- Open Graph -->
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://nivahealthkare.com/"/>
+<meta property="og:title" content="Niva Health Care Bangalore | Online Blood Tests, MRI, CT, X-Ray & PET Scans"/>
+<meta property="og:description" content="Book online blood tests and diagnostic scans with Niva Health Care Bangalore. Fast home collection, 6-hour reports, and NABL-certified accuracy."/>
+<meta property="og:image" content="https://nivahealthcare.in/assets/images/og-image.jpg"/>
+<meta property="og:image:alt" content="Niva Health Care Bangalore - Online Blood Tests and Diagnostic Scans"/>
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:url" content="https://nivahealthkare.com/"/>
+<meta name="twitter:title" content="Niva Health Care Bangalore | Online Blood Tests, MRI, CT, X-Ray & PET Scans"/>
+<meta name="twitter:description" content="Niva Health Care Bangalore offers online blood tests, MRI, CT, and X-Ray scans with doorstep collection and fast results."/>
+<meta name="twitter:image" content="https://nivahealthkare.com/assets/images/og-image.jpg"/>
+<meta name="twitter:image:alt" content="Niva Health Care Bangalore - Online Blood Tests and Diagnostic Scans"/>
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalBusiness",
+  "name": "Niva Health Care",
+  "url": "https://nivahealthkare.in",
+  "logo": "https://nivahealthkare.in/assets/images/logo.png",
+  "sameAs": [
+    "https://www.instagram.com/nivahealthkare/",
+    "https://www.facebook.com/nivahealthkare/",
+    "https://youtube.com/@nivahealthkare"
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Chandra Layout",
+    "addressLocality": "Bangalore",
+    "postalCode": "560040",
+    "addressCountry": "IN"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 12.955,
+    "longitude": 77.539
+  },
+  "openingHours": ["Mo-Su 06:00-22:00"],
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "+91-7892287102",
+      "contactType": "customer service"
+    }
+  ]
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+</head>
+
+<body>
+
+
+<header>
+
+  <!-- ================= DESKTOP HEADER ================= -->
+  <div class="desktop-header">
+
+    <!-- LEFT: LOGO + LOCATION -->
+    <div class="logo-location">
+
+      <div class="logo-section">
+        <div class="lab-name">
+          <span class="niva">Niva</span>
+          <span class="healthcare">Health Kare</span>
+        </div>
+      </div>
+
+      <!-- LOCATION TRIGGER -->
+      <div class="location-trigger" id="openLocation">
+        <span class="label">Location</span>
+        <span class="city">
+          <i class="fa-solid fa-location-dot location-icon"></i>
+          <span id="selectedCity">Select city</span>
+          <i class="fa-solid fa-chevron-down chevron"></i>
+        </span>
+      </div>
+
+
+    </div>
+
+    <!-- RIGHT: MENU ICONS -->
+    <div class="header-actions">
+      <a href="index.html" class="header-item">
+        <i class="fas fa-home header-icon"></i>
+        <span class="header-text">Home</span>
+      </a>
+
+      <a href="surgeries.html" class="header-item">
+        <i class="fas fa-procedures header-icon"></i>
+        <span class="header-text">Surgeries</span>
+      </a>
+
+      <a href="test.html" class="header-item">
+        <i class="fas fa-vials header-icon"></i>
+        <span class="header-text">Lab Tests</span>
+      </a>
+
+      <div class="header-item" onclick="openModal()">
+        <i class="fas fa-heartbeat header-icon"></i>
+        <span class="header-text">Checkup</span>
+      </div>
+
+      <div class="header-item" onclick="toggleDrawer()">
+        <i class="fas fa-shopping-cart header-icon">
+          <span id="cart-count" class="cart-count">0</span>
+        </i>
+        <span class="header-text">Cart</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================= MOBILE HEADER ================= -->
+  <div class="mobile-header">
+    <div class="logo-section">
+      <div class="lab-name">
+        <span class="niva">Niva</span>
+        <span class="healthcare">Health Kare</span>
+      </div>
+    </div>
+
+    <div class="location-section" id="mobileLocation">
+      <i class="fas fa-map-marker-alt location-icon"></i>
+
+      <div class="location-info">
+        <span class="label">Your Location</span>
+        <span class="city">
+          <span id="mobileSelectedCity">Bangalore</span>
+          <i class="fas fa-chevron-down chevron"></i>
+        </span>
+
+
+      </div>
+    </div>
+
+  </div>
+
+</header>
+
+
+<!-- LOCATION POPUP -->
+<div class="location-popup" id="locationPopup">
+  <div class="popup-card">
+
+    <!-- HEADER -->
+    <div class="popup-header">
+      <h3>Select your city</h3>
+      <button class="close-btn" id="closePopup">×</button>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="search-wrapper">
+      <span class="search-icon">🔍</span>
+
+      <input
+        type="text"
+        id="citySearch"
+        class="city-search"
+        placeholder="Search city (e.g. Mysuru)"
+        autocomplete="off"
+      />
+
+      <!-- Suggestions dropdown -->
+      <ul class="suggestions" id="citySuggestions"></ul>
+    </div>
+
+
+    <!-- POPULAR CITIES -->
+    <p class="section-label" id="popularLabel">Popular cities</p>
+    <div class="city-list popular" id="popularCities"></div>
+
+    <!-- ALL / SEARCH RESULTS -->
+    <div class="city-list" id="cityList"></div>
+
+    <p class="coverage">
+      Services available across major cities in Karnataka
+    </p>
+
+  </div>
+</div>
+
+
+<!-- Minimal Consultation Modal -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+  <div class="modal-box" onclick="event.stopPropagation()">
+
+    <!-- Header -->
+    <div class="modal-header">
+      <h3>Get a call from our medical team</h3>
+      <button class="close-btn" onclick="closeModal()">×</button>
+    </div>
+
+    <!-- Subtext -->
+    <p class="modal-subtext">
+      Enter your mobile number and we’ll call you shortly.
+    </p>
+
+    <form id="consultationForm" onsubmit="return false;">
+
+      <!-- Service (readonly / auto-filled) -->
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Your name"
+        />
+
+      <!-- Mobile -->
+      <input
+        type="tel"
+        id="mobile"
+        name="mobile"
+        placeholder="Mobile number *"
+        required
+      />
+
+      <!-- Optional message -->
+      <textarea
+        id="message"
+        name="message"
+        placeholder="Message (optional)"
+        rows="3"
+      ></textarea>
+
+        <button type="button" onclick="showConfirmation()">
+          Request Call Back
+        </button>
+
+
+      <p class="trust-text">
+        📞 Usually calls within 5 minutes
+      </p>
+
+    </form>
+
+    <div id="checkupConfirmationMessage" class="confirmation-message" style="display:none;">
+      ✅ Thank you! Our expert will call you shortly.
+    </div>
+
+  </div>
+</div>
+
+
+
+  
+  <!-- Cart Drawer (Right Side) -->
+ 
+<!-- Background Blur Overlay -->
+<div id="cartOverlay" class="cart-overlay" onclick="closeDrawer()"></div>
+
+
+<!-- Cart Drawer -->
+<div class="drawer mobile-drawer" id="drawer">
+  <div class="drawer-header">
+    <h3>Your Cart</h3>
+    <button onclick="closeDrawer()">✕</button>
+
+  </div>
+
+  <div class="drawer-body" id="cartItemsContainer"></div>
+
+  <div class="cart-summary">
+    <div class="summary-left">
+      <span class="total-tests">
+        checkout test: <strong id="totalTests">0</strong>
+      </span>
+      <span class="total-price">
+        Total Price: <strong id="totalPrice">₹0</strong>
+      </span>
+    </div>
+    <a href="checkout.html" class="proceed-btn">Proceed</a>
+  </div>
+</div>
+
+
+
+<!-- Mobile Bottom Bar -->
+<div class="mobile-bottom">
+
+  <!-- Home -->
+  <a href="index.html">
+    <i class="fas fa-home"></i>
+  </a>
+
+  <!-- Surgeries -->
+  <a href="surgeries.html">
+    <i class="fas fa-procedures"></i>
+  </a>
+
+  <!-- Lab Tests -->
+  <a href="test.html">
+    <i class="fas fa-vials"></i>
+  </a>
+
+  <!-- Checkups -->
+  <a href="#" onclick="openModal()">
+    <i class="fas fa-heartbeat"></i>
+  </a>
+
+  <!-- Cart -->
+  <a href="#" onclick="toggleDrawer()">
+    <i class="fas fa-shopping-cart"></i>
+  </a>
+
+</div>
+
+
+
+<section class="surg-hero">
+  <div class="surg-hero-wrap">
+
+    <!-- BLOOM BACKGROUND -->
+    <div class="surg-bloom"></div>
+
+    <!-- CONTENT -->
+    <div class="surg-hero-content">
+
+      <span class="surg-pill">Trusted Surgical Care in Bangalore</span>
+
+      <h1 class="surg-title">
+        Advanced Surgery Care<br>
+        With Expert Doctors
+      </h1>
+
+      <p class="surg-desc">
+        Safe, affordable and high-quality surgical treatment with
+        experienced surgeons, modern operation theatres and
+        complete insurance support.
+      </p>
+
+      <div class="surg-actions">
+        <a href="tel:+917892287102" class="surg-btn-outline">
+          Talk to Care Team
+        </a>
+      </div>
+
+      <div class="surg-highlights">
+        <span>✔ Senior Surgeons</span>
+        <span>✔ Modern Operation Theatres</span>
+        <span>✔ Insurance Assistance</span>
+        <span>✔ Post-Surgery Care</span>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+
+
+
+<section class="surgery-specialties">
+  <h2>Our Surgery Specialties</h2>
+  <p>Expert care with certified excellence across multiple specialties.</p>
+
+  <div class="specialty-cards">
+
+    <div class="specialty-card">
+<img
+  src="images/orthopedic-fracture-surgery.webp"
+  alt="Orthopedic and fracture diagnosis, imaging and surgical services"
+  width="600"
+  height="400"
+  loading="lazy">
+
+      <h3>Orthopedic & Fracture Surgery</h3>
+      <span>Advanced Trauma & Joint Care</span>
+    </div>
+
+    <div class="specialty-card">
+<img
+  src="images/oncology-cancer-surgery.webp"
+  alt="Oncology cancer diagnosis, imaging and surgical services"
+  width="600"
+  height="400"
+  loading="lazy">
+
+      <h3>Onco (Cancer) Surgeries</h3>
+      <span>Comprehensive Cancer Treatment</span>
+    </div>
+
+    <div class="specialty-card">
+<img
+  src="images/obstetrics-gynecology-surgery.webp"
+  alt="Obstetrics and gynecology diagnosis, imaging and surgical care services"
+  width="600"
+  height="400"
+  loading="lazy">
+
+      <h3>Obstetrics & Gynecology</h3>
+      <span>Safe Maternity & Women’s Health</span>
+    </div>
+
+    <div class="specialty-card">
+<img
+  src="images/general-laparoscopic-surgery.webp"
+  alt="General and laparoscopic surgery diagnosis, imaging and surgical services"
+  width="600"
+  height="400"
+  loading="lazy">
+
+      <h3>General & Laparoscopic Surgery</h3>
+      <span>Minimally Invasive Expertise</span>
+    </div>
+
+    <div class="specialty-card">
+<img
+  src="images/Diagnostic Procedures.webp"
+  alt="Diagnostic and minor surgical procedures, imaging and consultation services"
+  width="600"
+  height="400"
+  loading="lazy">
+
+      <h3>Diagnostic & Minor Procedures</h3>
+      <span>Precision Imaging & Testing</span>
+    </div>
+
+  </div>
+</section>
+
+
+<section id="common-fractures" class="surgery-section">
+
+  <h2>Common Fractures Requiring Surgery</h2>
+  <p class="section-subtitle">
+    Book surgeries with trusted orthopedic specialists
+  </p>
+
+  <div class="surgery-grid">
+
+    <div class="surgery-card">
+<img
+  src="images/f1.webp"
+  alt="Distal radius fracture treatment and surgical care"
+  class="surgery-image"
+  width="600"
+  height="400"
+  loading="lazy">
+
+      <h3>Distal Radius Fracture</h3>
+      <p>Wrist fracture requiring surgical fixation.</p>
+      <button class="book-now-btn"
+              onclick="openBooking('Distal Radius Fracture')">
+        Book Now
+      </button>
+    </div>
+
+    <div class="surgery-card">
+<img
+  src="images/Femur Fracture.webp"
+  alt="Femur fracture diagnosis, treatment, and surgical care"
+  class="surgery-image"
+  width="600"
+  height="400"
+  loading="lazy">
+
+      <h3>Femur Fracture</h3>
+      <p>Neck, shaft or intertrochanteric fixation.</p>
+      <button class="book-now-btn"
+              onclick="openBooking('Femur Fracture')">
+        Book Now
+      </button>
+    </div>
+
+    <div class="surgery-card">
+<img
+  src="images/tibia.webp"
+  alt="Tibial fracture diagnosis, treatment, and surgical care"
+  class="surgery-image"
+  width="600"
+  height="400"
+  loading="lazy">
+
+      <h3>Tibial Fracture</h3>
+      <p>Shaft or plateau fracture surgery.</p>
+      <button class="book-now-btn"
+              onclick="openBooking('Tibial Fracture')">
+        Book Now
+      </button>
+    </div>
+
+    <div class="surgery-card">
+<img
+  src="images/Humerus Fracture.webp"
+  alt="Humerus fracture diagnosis, treatment, and surgical care"
+  class="surgery-image"
+  width="600"
+  height="400"
+  loading="lazy">
+
+      <h3>Humerus Fracture</h3>
+      <p>Upper arm fracture requiring fixation.</p>
+      <button class="book-now-btn"
+              onclick="openBooking('Humerus Fracture')">
+        Book Now
+      </button>
+    </div>
+
+    <a href="viewallsurgries.html#common-fractures" class="surgery-card view-all-box no-underline">
+      <h3>View All Surgeries</h3>
+      <p>Explore complete fracture care</p>
+    </a>
+
+  </div>
+</section>
+
+
+
+<section class="surgery-section" id="common-orthopedic">
+
+  <h2>Common Orthopedic Surgeries</h2>
+  <p class="section-subtitle">
+    Book surgeries with trusted orthopedic specialists
+  </p>
+
+  <div class="surgery-grid">
+
+    <!-- Card 1 -->
+    <div class="surgery-card">
+<img
+  src="images/Knee_Replacement.webp"
+  alt="Knee replacement surgery, treatment, and rehabilitation care"
+  class="surgery-image"
+  width="600"
+  height="400"
+  loading="lazy">
+
+      <h3>Knee Replacement</h3>
+      <p>Replaces a worn-out knee joint with an artificial one.</p>
+      <button class="book-now-btn"
+              onclick="openBooking('Knee Replacement')">
+        Book Now
+      </button>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="surgery-card">
+<img
+  src="images/Spinal_Surgery.webp"
+  alt="Spinal surgery diagnosis, treatment, and surgical care"
+  class="surgery-image"
+  width="600"
+  height="400"
+  loading="lazy">
+
+      <h3>Spinal Surgery</h3>
+      <p>Includes spinal fusion, discectomy, or laminectomy procedures.</p>
+      <button class="book-now-btn"
+              onclick="openBooking('Spinal Surgery')">
+        Book Now
+      </button>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="surgery-card">
+<img
+  src="images/ankle_repair.webp"
+  alt="Ankle repair surgery, treatment, and rehabilitation care"
+  class="surgery-image"
+  width="600"
+  height="400"
+  loading="lazy">
+
+      <h3>Ankle Repair</h3>
+      <p>Realignment of bones after fracture to restore joint stability.</p>
+      <button class="book-now-btn"
+              onclick="openBooking('Ankle Repair')">
+        Book Now
+      </button>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="surgery-card">
+<img
+  src="images/acl_reconstruction.webp"
+  alt="ACL reconstruction surgery, treatment, and rehabilitation care"
+  class="surgery-image"
+  width="600"
+  height="400"
+  loading="lazy">
+
+      <h3>ACL Reconstruction</h3>
+      <p>Repairs torn ACL to restore knee stability and movement.</p>
+      <button class="book-now-btn"
+              onclick="openBooking('ACL Reconstruction')">
+        Book Now
+      </button>
+    </div>
+
+    <!-- View All -->
+
+        <a href="viewallsurgries.html#common-orthopedic" class="surgery-card view-all-box no-underline">
+        <h3>View All Surgeries</h3>
+        <p>Explore complete fracture care</p>
+        </a>
+  </div>
+</section>
+
+
+<section class="surgery-section" id="common-onco">
+
+  <h2>Onco Surgeries (Cancer Care)</h2>
+  <p class="section-subtitle">
+    Advanced cancer surgeries performed by experienced oncologists
+  </p>
+
+  <div class="surgery-grid">
+
+    <!-- Card 1 -->
+    <div class="surgery-card">
+<img
+  src="images/breast_cancer.webp"
+  alt="Breast cancer surgery, treatment, and reconstruction care"
+  class="surgery-image"
+  width="600"
+  height="400"
+  loading="lazy">
+
+      <h3>Breast Cancer Surgery</h3>
+      <p>Mastectomy or lumpectomy to remove cancerous breast tissue.</p>
+      <button class="book-now-btn"
+              onclick="openBooking('Breast Cancer Surgery')">
+        Book Now
+      </button>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="surgery-card">
+<img
+  src="images/Uterus Cancer Surgery.webp"
+  alt="Uterus cancer surgery, treatment, and post-operative care"
+  class="surgery-image"
+  width="600"
+  height="400"
+  loading="lazy">
+
+      <h3>Uterus Cancer Surgery</h3>
+      <p>Hysterectomy to remove uterus affected by cancer.</p>
+      <button class="book-now-btn"
+              onclick="openBooking('Uterus Cancer Surgery')">
+        Book Now
+      </button>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="surgery-card">
+<img
+  src="images/ovarian_cancer.webp"
+  alt="Ovarian cancer surgery, treatment, and post-operative care"
+  class="surgery-image"
+  width="600"
+  height="400"
+  loading="lazy">
+
+      <h3>Ovarian Cancer Surgery</h3>
+      <p>Removal of ovaries and affected surrounding tissues.</p>
+      <button class="book-now-btn"
+              onclick="openBooking('Ovarian Cancer Surgery')">
+        Book Now
+      </button>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="surgery-card">
+ <img
+  src="images/abdominal-tumor.webp"
+  alt="Abdominal tumor surgery, diagnosis, and treatment care"
+  class="surgery-image"
+  width="600"
+  height="400"
+  loading="lazy">
+
+      <h3>Abdominal Tumor Surgery</h3>
+      <p>Removal of tumors from stomach, intestines, liver, or abdomen.</p>
+      <button class="book-now-btn"
+              onclick="openBooking('Abdominal Tumor Surgery')">
+        Book Now
+      </button>
+    </div>
+
+    <!-- View All -->
+        <a href="viewallsurgries.html#common-onco" class="surgery-card view-all-box no-underline">
+        <h3>View All Surgeries</h3>
+        <p>Explore complete fracture care</p>
+        </a>
+  </div>
+</section>
+
+
+
+
+
+
+
+<section class="surgery-section" id="common-surgical">
+
+  <h2>Common Surgical & Diagnostic Procedures</h2>
+  <p class="section-subtitle">
+    Safe, minimally invasive procedures with expert doctors and modern facilities
+  </p>
+
+  <div class="surgery-grid">
+
+    <!-- Card 1 -->
+    <div class="surgery-card">
+<img
+  src="images/piles.webp"
+  alt="Piles (hemorrhoids) surgery, treatment, and post-operative care"
+  class="surgery-image"
+  width="600"
+  height="400"
+  loading="lazy">
+
+      <h3>Piles Surgery</h3>
+      <p>Minimally invasive and painless treatment for hemorrhoids.</p>
+      <button class="book-now-btn"
+              onclick="openBooking('Piles Surgery')">
+        Book Now
+      </button>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="surgery-card">
+<img
+  src="images/fistula.webp"
+  alt="Fistula surgery, treatment, and post-operative care"
+  class="surgery-image"
+  width="600"
+  height="400"
+  loading="lazy">
+
+      <h3>Fistula Surgery</h3>
+      <p>Advanced surgical treatment for anal fistula with faster recovery.</p>
+      <button class="book-now-btn"
+              onclick="openBooking('Fistula Surgery')">
+        Book Now
+      </button>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="surgery-card">
+<img
+  src="images/endoscopy.webp"
+  alt="Endoscopy diagnostic procedure and treatment services"
+  class="surgery-image"
+  width="600"
+  height="400"
+  loading="lazy">
+
+      <h3>Endoscopy & Colonoscopy</h3>
+      <p>Camera-based diagnostic tests to detect ulcers, bleeding, and infections.</p>
+      <button class="book-now-btn"
+              onclick="openBooking('Endoscopy & Colonoscopy')">
+        Book Now
+      </button>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="surgery-card">
+<img
+  src="images/Hernia_Surgery.webp"
+  alt="Hernia surgery, treatment, and post-operative care"
+  class="surgery-image"
+  width="600"
+  height="400"
+  loading="lazy">
+
+      <h3>Hernia Surgery</h3>
+      <p>Surgical repair of inguinal, umbilical, and other hernias.</p>
+      <button class="book-now-btn"
+              onclick="openBooking('Hernia Surgery')">
+        Book Now
+      </button>
+    </div>
+
+    <!-- View All -->
+
+        <a href="viewallsurgries.html#common-surgical" class="surgery-card view-all-box no-underline">
+        <h3>View All Surgeries</h3>
+        <p>Explore complete fracture care</p>
+        </a>
+  </div>
+</section>
+
+
+<section class="surgery-section" id="laparoscopic-surgeries">
+
+  <h2>Laparoscopic Surgeries</h2>
+  <p class="section-subtitle">
+    Minimally invasive procedures with faster recovery and less pain
+  </p>
+
+  <div class="surgery-grid">
+
+    <!-- Card 1 -->
+    <div class="surgery-card">
+ <img
+  src="images/lap_cholecystectomy.webp"
+  alt="Laparoscopic gallbladder surgery, treatment, and recovery care"
+  class="surgery-image"
+  width="600"
+  height="400"
+  loading="lazy">
+
+      <h3>Gallbladder Surgery</h3>
+      <p>Keyhole removal of gallbladder stones with minimal scars and quick recovery.</p>
+      <button class="book-now-btn"
+              onclick="openBooking('Gallbladder Surgery')">
+        Book Now
+      </button>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="surgery-card">
+ <img
+  src="images/lap_appendectomy.webp"
+  alt="Laparoscopic appendectomy surgery, treatment, and recovery care"
+  class="surgery-image"
+  width="600"
+  height="400"
+  loading="lazy">
+
+      <h3>Appendix Surgery</h3>
+      <p>Safe removal of infected appendix using minimally invasive technique.</p>
+      <button class="book-now-btn"
+              onclick="openBooking('Appendix Surgery')">
+        Book Now
+      </button>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="surgery-card">
+<img
+  src="images/lap_hernia.webp"
+  alt="Laparoscopic hernia surgery, treatment, and post-operative care"
+  class="surgery-image"
+  width="600"
+  height="400"
+  loading="lazy">
+
+      <h3>Hernia Repair</h3>
+      <p>Mesh-based hernia repair with less pain and faster return to work.</p>
+      <button class="book-now-btn"
+              onclick="openBooking('Hernia Repair')">
+        Book Now
+      </button>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="surgery-card">
+<img
+  src="images/lap_hysterectomy.webp"
+  alt="Laparoscopic hysterectomy surgery, treatment, and recovery care"
+  class="surgery-image"
+  width="600"
+  height="400"
+  loading="lazy">
+
+      <h3>Hysterectomy</h3>
+      <p>Minimally invasive uterus removal with shorter hospital stay.</p>
+      <button class="book-now-btn"
+              onclick="openBooking('Hysterectomy')">
+        Book Now
+      </button>
+    </div>
+
+    <!-- View All -->
+        <a href="viewallsurgries.html#laparoscopic-surgeries" class="surgery-card view-all-box no-underline">
+        <h3>View All Surgeries</h3>
+        <p>Explore complete fracture care</p>
+        </a>
+  </div>
+</section>
+
+
+
+
+<section class="surgery-section" id="common-obg">
+
+  <h2>Obstetrics & Gynecology Procedures</h2>
+  <p class="section-subtitle">
+    Safe, compassionate care for women at every stage of life
+  </p>
+
+  <div class="surgery-grid">
+
+    <!-- Card 1 -->
+    <div class="surgery-card">
+<img
+  src="images/DNC.webp"
+  alt="Dilation and curettage (DNC) procedure, treatment, and post-operative care"
+  class="surgery-image"
+  width="600"
+  height="400"
+  loading="lazy">
+
+      <h3>D&C Procedure</h3>
+      <p>Removal of uterine tissue for diagnosis or treatment under expert care.</p>
+      <button class="book-now-btn"
+              onclick="openBooking('D&C Procedure')">
+        Book Now
+      </button>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="surgery-card">
+<img
+  src="images/Tubectomy.webp"
+  alt="Tubectomy surgery, procedure, and post-operative care"
+  class="surgery-image"
+  width="600"
+  height="400"
+  loading="lazy">
+
+      <h3>Tubectomy</h3>
+      <p>Permanent family planning procedure performed safely by specialists.</p>
+      <button class="book-now-btn"
+              onclick="openBooking('Tubectomy')">
+        Book Now
+      </button>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="surgery-card">
+<img
+  src="images/Cervical_Cerclage.webp"
+  alt="Cervical cerclage procedure, treatment, and post-operative care"
+  class="surgery-image"
+  width="600"
+  height="400"
+  loading="lazy">
+
+      <h3>Cervical Stitch</h3>
+      <p>Supports pregnancy by preventing premature opening of the cervix.</p>
+      <button class="book-now-btn"
+              onclick="openBooking('Cervical Stitch')">
+        Book Now
+      </button>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="surgery-card">
+<img
+  src="images/normal_delivery.webp"
+  alt="Normal delivery care, childbirth assistance, and postnatal support"
+  class="surgery-image"
+  width="600"
+  height="400"
+  loading="lazy">
+
+      <h3>Normal Delivery</h3>
+      <p>Safe and natural childbirth with complete mother and baby care.</p>
+      <button class="book-now-btn"
+              onclick="openBooking('Normal Delivery')">
+        Book Now
+      </button>
+    </div>
+
+    <!-- View All -->
+        <a href="viewallsurgries.html#common-obg" class="surgery-card view-all-box no-underline">
+        <h3>View All Surgeries</h3>
+        <p>Explore complete fracture care</p>
+        </a>
+  </div>
+</section>
+
+
+
+
+
+
+
+<section class="surgery-journey">
+  <h2>Your Step-by-Step Surgery Journey</h2>
+
+  <div class="journey-track">
+
+    <!-- STEP 1 -->
+    <div class="journey-step">
+      <div class="step-circle">
+        <svg viewBox="0 0 24 24" class="step-icon">
+          <circle cx="12" cy="7" r="4"/>
+          <path d="M4 20v-1a8 8 0 0 1 16 0v1"/>
+        </svg>
+      </div>
+      <p>Consult Specialists</p>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="journey-step">
+      <div class="step-circle">
+        <svg viewBox="0 0 24 24" class="step-icon">
+          <circle cx="8" cy="7" r="3"/>
+          <circle cx="16" cy="7" r="3"/>
+          <path d="M2 20v-1a6 6 0 0 1 12 0v1"/>
+          <path d="M10 20v-1a6 6 0 0 1 12 0v1"/>
+        </svg>
+      </div>
+      <p>Personal Care Coordinator</p>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="journey-step">
+      <div class="step-circle">
+        <svg viewBox="0 0 24 24" class="step-icon">
+          <path d="M6 2h8l4 4v16H6z"/>
+          <path d="M14 2v4h4"/>
+          <path d="M9 13h6"/>
+          <path d="M9 17h6"/>
+        </svg>
+      </div>
+      <p>Insurance Made Easy</p>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="journey-step">
+      <div class="step-circle">
+        <svg viewBox="0 0 24 24" class="step-icon">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <path d="M12 7v10"/>
+          <path d="M7 12h10"/>
+        </svg>
+      </div>
+      <p>Safe & Timely Surgery</p>
+    </div>
+
+    <!-- STEP 5 -->
+    <div class="journey-step">
+      <div class="step-circle">
+        <svg viewBox="0 0 24 24" class="step-icon">
+          <rect x="3" y="11" width="18" height="6" rx="2"/>
+          <circle cx="7" cy="18" r="2"/>
+          <circle cx="17" cy="18" r="2"/>
+        </svg>
+      </div>
+      <p>Free Pickup & Drop</p>
+    </div>
+
+    <!-- STEP 6 -->
+    <div class="journey-step">
+      <div class="step-circle">
+        <svg viewBox="0 0 24 24" class="step-icon">
+          <path d="M12 21s-7-4.5-9-8.5C1 7.5 4.5 4 8.5 6.5 10.5 7.7 12 10 12 10s1.5-2.3 3.5-3.5C19.5 4 23 7.5 21 12.5 19 16.5 12 21 12 21z"/>
+        </svg>
+      </div>
+      <p>Recovery Support</p>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+
+<section id="book-consult" class="consult-section">
+  <div class="container">
+    <div class="consult-content">
+
+      <div class="consult-info">
+        <h2>Get a Call Back in Minutes</h2>
+        <p>
+          Our medical experts will help you with treatment guidance,
+          cost estimates, hospital options, doctor availability and insurance support.
+        </p>
+
+        <ul class="consult-points">
+          <li><i class="fas fa-check-circle"></i> Free expert consultation</li>
+          <li><i class="fas fa-check-circle"></i> Cashless Insurance & EMI Available</li>
+          <li><i class="fas fa-check-circle"></i> Fast admission & discharge support</li>
+        </ul>
+
+                <!-- PRIMARY ACTIONS FIRST -->
+        <div class="alt-contact">
+          <a href="tel:+919876543210" class="call-link">
+            <i class="fas fa-phone-alt"></i> Call Now
+          </a>
+
+          <a href="https://wa.me/919876543210" class="whatsapp-link">
+            <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+          </a>
+        </div>
+
+        
+      </div>
+      
+      <div class="consult-form-box">
+        <h3>Get a Call Back</h3>
+
+
+        <form class="consult-form" onsubmit="return false;">
+
+          <div class="form-group">
+          <input
+            type="text"
+            id="consultName"
+            placeholder="Full Name *"
+            required
+          >
+
+          </div>
+
+          <div class="form-group">
+            <input
+              type="tel"
+              id="consultMobile"
+              placeholder="Mobile Number *"
+              maxlength="10"
+              pattern="[0-9]{10}"
+              required
+            >
+
+          </div>
+
+          <button type="button" class="submit-btn" onclick="submitConsultForm()">
+            Get a Call Back
+          </button>
+
+
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SIMPLE CONFIRMATION POPUP -->
+<div id="simplePopup" class="simple-popup">
+  <div class="popup-box">
+    <p>✅ Thank you! Our medical expert will contact you shortly.</p>
+    <button onclick="closePopup()">OK</button>
+  </div>
+</div>
+
+
+
+<section class="reviews-banner">
+
+  <div class="reviews-container">
+
+    <!-- LEFT: AUTO SLIDING REVIEWS -->
+    <div class="reviews-slider">
+      <div class="reviews-track">
+
+        <div class="review-item">
+          <p>“Fast reports & polite support. Highly recommended.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=15" alt="">
+            <div>
+              <strong>Shashank N.</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+        <div class="review-item">
+          <p>“Home sample collection was on time and very hygienic.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=22" alt="">
+            <div>
+              <strong>Ananya R.</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+        <div class="review-item">
+          <p>“Booked a full body checkup. Got reports within hours.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=5" alt="">
+            <div>
+              <strong>Rohit Kumar</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+        <div class="review-item">
+          <p>“Very smooth experience. Support team was helpful.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=9" alt="">
+            <div>
+              <strong>Divya M.</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT: TRUST CONTENT (DESKTOP ONLY) -->
+    <div class="reviews-info">
+      <h2>What Patients Say<br>On Google</h2>
+
+      <p>
+        Trusted by thousands for accurate reports and convenient home
+        sample collection. Rated <strong>4.3★ on Google</strong>.
+      </p>
+
+      <div class="trust-stats">
+        <div>
+          ⭐<br><strong>4.3</strong><br>Rating
+        </div>
+        <div>
+          👥<br><strong>10k+</strong><br>Users
+        </div>
+        <div>
+          🏥<br><strong>NABL</strong><br>Labs
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+ 
+</section>
+
+
+<!-- WHO ARE WE BANNER -->
+<section class="about-booking-container">
+  <h3>Frequently Asked Questions</h3>
+
+<div class="faq-section">
+  <div class="faq-item">
+    <div class="faq-question">1. Who will collect my sample? <span>+</span></div>
+    <div class="faq-answer">
+      A certified phlebotomist from NivaHealthKare will visit your home at the scheduled time to collect samples safely and professionally.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">2. Can I reschedule my appointment? <span>+</span></div>
+    <div class="faq-answer">
+      Yes, appointments can be rescheduled up to 2 hours before your selected slot through your booking details on our website.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">3. Do I need to fast before certain tests? <span>+</span></div>
+    <div class="faq-answer">
+      Some tests, such as Fasting Blood Sugar and Lipid Profile, require fasting. Specific instructions are shared during booking and via reminders.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">4. How soon will I receive my reports? <span>+</span></div>
+    <div class="faq-answer">
+      Most reports are delivered within 6 to 24 hours via SMS, email, and WhatsApp for your convenience.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">5. Are your labs certified? <span>+</span></div>
+    <div class="faq-answer">
+      Yes. NivaHealthKare partners only with NABL-certified and ISO-standard labs to ensure accuracy, safety, and reliability.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">6. Is home sample collection safe? <span>+</span></div>
+    <div class="faq-answer">
+      Yes. Our phlebotomists follow strict hygiene protocols. All equipment is sterilized and replaced after every use for your safety.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">7. Can I consult a doctor after receiving my reports? <span>+</span></div>
+    <div class="faq-answer">
+      Yes. NivaHealthKare provides affordable or complimentary doctor consultations for most tests after your reports are available.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">8. What if I miss my appointment? <span>+</span></div>
+    <div class="faq-answer">
+      If you miss your slot, you can reschedule at no extra cost. Kindly inform us in advance to avoid repeat-visit charges.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">9. How can I pay for my tests? <span>+</span></div>
+    <div class="faq-answer">
+      NivaHealthKare supports secure payment options including UPI, credit/debit cards, net banking, and cash during sample collection.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">10. Is my personal data safe? <span>+</span></div>
+    <div class="faq-answer">
+      Yes. Your personal and health data is encrypted, securely stored, and handled in compliance with healthcare data protection standards.
+    </div>
+  </div>
+</div>
+
+</section>
+<footer class="footer-section">
+  <div class="footer-container">
+
+    <!-- Brand / Trust -->
+    <div class="footer-left">
+      <h2 class="footer-brand">
+        <span class="footer-niva">Niva</span>
+        <span class="footer-healthcare">Health Kare</span>
+      </h2>
+
+      <p class="footer-tagline">
+        Trusted healthcare services delivering quality, care, and compassion.
+      </p>
+
+      <div class="social-icons">
+        <a href="https://www.instagram.com/nivahealthkare/" aria-label="Instagram">
+      <img
+        src="images/instagram.webp"
+        alt="Follow Niva Health Kare on Instagram"
+        width="24"
+        height="24"
+        loading="lazy">
+      </a>
+        <a href="https://www.facebook.com/profile.php?id=61583126009241" aria-label="Facebook">
+        <img
+          src="images/facebook.webp"
+          alt="Follow Niva Health Kare on Facebook"
+          width="24"
+          height="24"
+          loading="lazy">
+
+        </a>
+        <a href="https://www.youtube.com/@nivahealthkare" aria-label="YouTube">
+        <img
+          src="images/youtube.webp"
+          alt="Subscribe to Niva Health Kare on YouTube"
+          width="24"
+          height="24"
+          loading="lazy">
+
+        </a>
+      </div>
+    </div>
+
+    <!-- Links -->
+    <div class="footer-right">
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="index.html">Home</a>
+        <a href="about-us.html">About Us</a>
+        <a href="locate-us.html">Locate Us</a>
+        
+      </div>
+
+      <div class="footer-col">
+        <h4>Medical Network</h4>
+        <a href="our-partners.html">Our Partners</a>
+        <a href="for-doctors.html">Doctors</a>
+        <a href="service.html">Our Services</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="refund-policy.html">Refund Policy</a>
+        <a href="disclaimer.html">Disclaimer</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom -->
+  <div class="footer-bottom">
+    <p>
+      © 2025 Niva Health Kare Pvt. Ltd. All rights reserved.  
+      <span>An initiative by Vinayaka Hospital.</span>
+    </p>
+
+    <div class="footer-links">
+      <a href="terms.html">Terms</a>
+      <a href="privacy-policy.html">Privacy</a>
+    </div>
+  </div>
+</footer>
+<section class="simple-seo-footer">
+  <div class="simple-seo-container">
+
+    <div class="seo-item">
+      <h4>Common Surgeries We Help With</h4>
+      <p>
+        We assist patients with common surgeries such as hernia surgery,
+        gallbladder surgery, piles surgery, fissure treatment, fistula surgery,
+        appendix removal, kidney stone surgery, varicose veins treatment,
+        knee surgery, eye surgery, and other general surgical procedures.
+      </p>
+    </div>
+
+    <div class="seo-item">
+      <h4>Safe & Trusted Surgical Care</h4>
+      <p>
+        All surgeries are performed at certified hospitals by experienced surgeons
+        using modern operation theatres, advanced equipment, and standard safety protocols
+        to ensure reliable treatment and faster recovery.
+      </p>
+    </div>
+
+    <div class="seo-item">
+      <h4>Surgery Services in Your City</h4>
+      <p>
+        Find nearby hospitals and doctors for surgery consultation, operation planning,
+        hospital admission, and post-surgery follow-up care with easy appointment booking
+        and support available in major cities across India.
+      </p>
+    </div>
+
+    <div class="seo-item">
+      <h4>Why Patients Choose Us for Surgery</h4>
+      <p>
+        Patients trust us for transparent surgery costs, insurance assistance,
+        cashless hospital support, personal care coordination, timely surgeries,
+        and continuous guidance from consultation to recovery.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ===== BOOKING MODAL ===== -->
+<div id="bookingModal" class="booking-modal">
+
+  <div class="booking-box">
+
+    <!-- Close -->
+    <button type="button" class="booking-close" onclick="closeBooking()">×</button>
+
+    <!-- STEP INDICATOR -->
+    <div class="step-indicator">
+      <div class="step active" id="stepIndicator1">1</div>
+      <div class="step-line"></div>
+      <div class="step" id="stepIndicator2">2</div>
+      <div class="step-line"></div>
+      <div class="step" id="stepIndicator3">3</div>
+    </div>
+
+    <!-- ===== STEP 1 ===== -->
+    <div class="booking-step active" id="step1">
+      <h3>Verify Mobile Number</h3>
+
+      <label>Mobile Number</label>
+      <input
+        type="tel"
+        id="bookingMobile"
+        placeholder="10-digit mobile number"
+        maxlength="10"
+      >
+
+      <div class="otp-wrapper">
+        <input type="text" maxlength="1" class="otp-input" inputmode="numeric">
+        <input type="text" maxlength="1" class="otp-input" inputmode="numeric">
+        <input type="text" maxlength="1" class="otp-input" inputmode="numeric">
+        <input type="text" maxlength="1" class="otp-input" inputmode="numeric">
+      </div>
+
+      <button
+        type="button"
+        class="primary-btn"
+        onclick="goToStep2()"
+      >
+        Verify & Continue
+      </button>
+
+      <p class="resend">Didn’t receive OTP? <span>Resend</span></p>
+    </div>
+
+    <!-- ===== STEP 2 ===== -->
+    <div class="booking-step" id="step2">
+      <h3>Complete Booking</h3>
+
+      <label>Your Name</label>
+      <input type="text" id="custName" placeholder="Enter your name">
+
+      <label>Email (optional)</label>
+      <input type="email" id="custEmail" placeholder="Enter your email">
+
+      <label>Service</label>
+      <input
+        type="text"
+        id="serviceType"
+        value="Health Checkup"
+        readonly
+      >
+
+      <!-- 🔥 IMPORTANT: type="button" -->
+      <button
+        type="button"
+        class="primary-btn"
+        onclick="confirmBooking()"
+      >
+        Confirm Booking
+      </button>
+    </div>
+
+    <!-- ===== STEP 3 ===== -->
+    <div class="booking-step" id="step3">
+      <h3>Booking Confirmed 🎉</h3>
+
+      <p class="confirmation-text" id="confirmationMessage"></p>
+
+      <button
+        type="button"
+        class="primary-btn"
+        onclick="closeBooking()"
+      >
+        Done
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ✅ Toast Notification -->
+<div id="toast" class="toast">Added to Cart</div>
+
+
+  <script src="javascript/lab-carousel.js"></script>
+  <script src="javascript/script.js"></script>
+  <script src="javascript/testscript.js"></script>
+  <script src="javascript/location.js"></script>
+  <script src="javascript/booking.controller.js"></script>
+
+
+
+
+</body>
+</html>

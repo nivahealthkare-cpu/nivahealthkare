@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- Primary SEO -->
+  <title>All Surgical Treatments & Procedures | Niva Health kare Bangalore</title>
+  <meta name="description" content="Explore all surgical treatments at Niva Health Care Bangalore. We assist with general surgery, laparoscopic surgery, orthopedic, ENT, gynecology, urology, eye and cosmetic procedures." />
+  <meta name="keywords" content="surgeries Bangalore, surgical treatments, laparoscopic surgery, general surgery, orthopedic surgery, ENT surgery, gynecology surgery, Niva Health Care">
+  <meta name="robots" content="index, follow">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://www.nivahealthkare.com/surgeries" />
+
+  <!-- Open Graph (Facebook / WhatsApp) -->
+  <meta property="og:title" content="All Surgical Treatments & Procedures | Niva Health Care">
+  <meta property="og:description" content="Find expert-assisted surgical procedures including general, laparoscopic, ortho, ENT, gynecology and more in Bangalore.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.nivahealthkare.com/surgeries">
+  <meta property="og:image" content="https://www.nivahealthkare.com/images/surgeries-og.webp">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/viewsur.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Font Awesome (optimized) -->
+  <link rel="preload"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        as="style"
+        onload="this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  </noscript>
+
+</head>
+<body>
+
+
+  
+
+<header>
+
+  <!-- ================= DESKTOP HEADER ================= -->
+  <div class="desktop-header">
+
+    <!-- LEFT: LOGO + LOCATION -->
+    <div class="logo-location">
+
+      <div class="logo-section">
+        <div class="lab-name">
+          <span class="niva">Niva</span>
+          <span class="healthcare">Health Kare</span>
+        </div>
+      </div>
+
+      <!-- LOCATION TRIGGER -->
+      <div class="location-trigger" id="openLocation">
+        <span class="label">Location</span>
+        <span class="city">
+          <i class="fa-solid fa-location-dot location-icon"></i>
+          <span id="selectedCity">Select city</span>
+          <i class="fa-solid fa-chevron-down chevron"></i>
+        </span>
+      </div>
+
+
+    </div>
+
+    <!-- RIGHT: MENU ICONS -->
+    <div class="header-actions">
+      <a href="index.html" class="header-item">
+        <i class="fas fa-home header-icon"></i>
+        <span class="header-text">Home</span>
+      </a>
+
+      <a href="surgeries.html" class="header-item">
+        <i class="fas fa-procedures header-icon"></i>
+        <span class="header-text">Surgeries</span>
+      </a>
+
+      <a href="test.html" class="header-item">
+        <i class="fas fa-vials header-icon"></i>
+        <span class="header-text">Lab Tests</span>
+      </a>
+
+      <div class="header-item" onclick="openModal()">
+        <i class="fas fa-heartbeat header-icon"></i>
+        <span class="header-text">Checkup</span>
+      </div>
+
+      <div class="header-item" onclick="toggleDrawer()">
+        <i class="fas fa-shopping-cart header-icon">
+          <span id="cart-count" class="cart-count">0</span>
+        </i>
+        <span class="header-text">Cart</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================= MOBILE HEADER ================= -->
+  <div class="mobile-header">
+    <div class="logo-section">
+      <div class="lab-name">
+        <span class="niva">Niva</span>
+        <span class="healthcare">Health Kare</span>
+      </div>
+    </div>
+
+    <div class="location-section" id="mobileLocation">
+      <i class="fas fa-map-marker-alt location-icon"></i>
+
+      <div class="location-info">
+        <span class="label">Your Location</span>
+        <span class="city">
+          <span id="mobileSelectedCity">Bangalore</span>
+          <i class="fas fa-chevron-down chevron"></i>
+        </span>
+
+
+      </div>
+    </div>
+
+  </div>
+
+</header>
+
+
+<!-- LOCATION POPUP -->
+<div class="location-popup" id="locationPopup">
+  <div class="popup-card">
+
+    <!-- HEADER -->
+    <div class="popup-header">
+      <h3>Select your city</h3>
+      <button class="close-btn" id="closePopup">×</button>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="search-wrapper">
+      <span class="search-icon">🔍</span>
+
+      <input
+        type="text"
+        id="citySearch"
+        class="city-search"
+        placeholder="Search city (e.g. Mysuru)"
+        autocomplete="off"
+      />
+
+      <!-- Suggestions dropdown -->
+      <ul class="suggestions" id="citySuggestions"></ul>
+    </div>
+
+
+    <!-- POPULAR CITIES -->
+    <p class="section-label" id="popularLabel">Popular cities</p>
+    <div class="city-list popular" id="popularCities"></div>
+
+    <!-- ALL / SEARCH RESULTS -->
+    <div class="city-list" id="cityList"></div>
+
+    <p class="coverage">
+      Services available across major cities in Karnataka
+    </p>
+
+  </div>
+</div>
+
+
+<!-- Minimal Consultation Modal -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+  <div class="modal-box" onclick="event.stopPropagation()">
+
+    <!-- Header -->
+    <div class="modal-header">
+      <h3>Get a call from our medical team</h3>
+      <button class="close-btn" onclick="closeModal()">×</button>
+    </div>
+
+    <!-- Subtext -->
+    <p class="modal-subtext">
+      Enter your mobile number and we’ll call you shortly.
+    </p>
+
+    <form id="consultationForm" onsubmit="return false;">
+
+      <!-- Service (readonly / auto-filled) -->
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Your name"
+        />
+
+      <!-- Mobile -->
+      <input
+        type="tel"
+        id="mobile"
+        name="mobile"
+        placeholder="Mobile number *"
+        required
+      />
+
+      <!-- Optional message -->
+      <textarea
+        id="message"
+        name="message"
+        placeholder="Message (optional)"
+        rows="3"
+      ></textarea>
+
+        <button type="button" onclick="showConfirmation()">
+          Request Call Back
+        </button>
+
+
+      <p class="trust-text">
+        📞 Usually calls within 5 minutes
+      </p>
+
+    </form>
+
+    <div id="checkupConfirmationMessage" class="confirmation-message" style="display:none;">
+      ✅ Thank you! Our expert will call you shortly.
+    </div>
+
+  </div>
+</div>
+
+
+
+  
+  <!-- Cart Drawer (Right Side) -->
+ 
+<!-- Background Blur Overlay -->
+<div id="cartOverlay" class="cart-overlay" onclick="closeDrawer()"></div>
+
+
+<!-- Cart Drawer -->
+<div class="drawer mobile-drawer" id="drawer">
+  <div class="drawer-header">
+    <h3>Your Cart</h3>
+    <button onclick="closeDrawer()">✕</button>
+
+  </div>
+
+  <div class="drawer-body" id="cartItemsContainer"></div>
+
+  <div class="cart-summary">
+    <div class="summary-left">
+      <span class="total-tests">
+        checkout test: <strong id="totalTests">0</strong>
+      </span>
+      <span class="total-price">
+        Total Price: <strong id="totalPrice">₹0</strong>
+      </span>
+    </div>
+    <a href="checkout.html" class="proceed-btn">Proceed</a>
+  </div>
+</div>
+
+
+
+<!-- Mobile Bottom Bar -->
+<div class="mobile-bottom">
+
+  <!-- Home -->
+  <a href="index.html">
+    <i class="fas fa-home"></i>
+  </a>
+
+  <!-- Surgeries -->
+  <a href="surgeries.html">
+    <i class="fas fa-procedures"></i>
+  </a>
+
+  <!-- Lab Tests -->
+  <a href="test.html">
+    <i class="fas fa-vials"></i>
+  </a>
+
+  <!-- Checkups -->
+  <a href="#" onclick="openModal()">
+    <i class="fas fa-heartbeat"></i>
+  </a>
+
+  <!-- Cart -->
+  <a href="#" onclick="toggleDrawer()">
+    <i class="fas fa-shopping-cart"></i>
+  </a>
+
+</div>
+
+
+<section class="surgery-hero-v2">
+  <div class="bg-blur pink"></div>
+  <div class="bg-blur blue"></div>
+
+  <div class="hero-card">
+    <span class="hero-tag">Surgery Care Made Simple</span>
+
+    <h1>
+      Advanced Surgical Care<br>
+      <span>Without Hospital Hassles</span>
+    </h1>
+
+    <p>
+      From doctor consultation to surgery & recovery —
+      Niva Health Kare manages everything with trusted surgeons
+      and partner hospitals.
+    </p>
+
+    <div class="hero-actions">
+      <a href="tel:+917892287102" class="cta primary">
+        Talk to a Care Expert
+      </a>
+    </div>
+
+    <div class="hero-trust">
+      <span>✔ NABL Partner Labs</span>
+      <span>✔ Verified Surgeons</span>
+      <span>✔ Transparent Pricing</span>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section id="common-fractures" class="fracture-section">
+  <h2>Common Fractures Requiring Surgery</h2>
+
+  <p class="fracture-intro">
+    Explore some of the most frequently encountered fractures that may need surgical intervention.
+    Each section provides a concise, reader-friendly overview — causes, treatment options,
+    recovery time, and rehabilitation tips — helping you understand what to expect during recovery.
+  </p>
+
+  <!-- ✅ Single Image at Top -->
+  <div class="fracture-hero">
+<img
+  src="images/fracture.png"
+  alt="Illustration of common fractures, bone injuries, and orthopedic care"
+  class="fracture-hero-image"
+  width="600"
+  height="400"
+  loading="lazy">
+
+  </div>
+
+  <div class="fracture-container">
+
+    <div class="fracture-card" id="distal-radius">
+      <h3>Distal Radius Fracture</h3>
+      <p>
+        A fracture near the wrist joint caused commonly by a fall on an outstretched hand. It’s one of the most
+        frequent upper-limb injuries, especially among elderly patients. Treatment options range from simple
+        casting to open reduction and internal fixation (ORIF) using plates and screws. Early wrist physiotherapy
+        is crucial to regain flexibility and strength within 6–8 weeks.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="femur-fracture">
+      <h3>Femur Fracture</h3>
+      <p>
+        The femur, or thigh bone, is the body’s longest and strongest bone. Femur fractures typically occur
+        due to high-energy trauma such as road accidents. Surgical fixation using intramedullary nails or
+        plates is often required. Recovery usually takes 3–6 months, with structured physiotherapy to
+        restore balance, walking stability, and muscle strength.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="tibial-fracture">
+      <h3>Tibial Fracture</h3>
+      <p>
+        The tibia (shin bone) often breaks due to direct impact or sports injuries. Depending on the type,
+        doctors may recommend casting, intramedullary nailing, or plate fixation. Weight-bearing is gradually
+        resumed under supervision, and full recovery generally occurs in 10–12 weeks.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="humerus-fracture">
+      <h3>Humerus Fracture</h3>
+      <p>
+        The upper-arm bone may fracture near the shoulder, mid-shaft, or elbow. Mild fractures may heal with a brace,
+        while displaced ones require ORIF surgery. Gentle, early physiotherapy prevents stiffness and ensures
+        complete shoulder mobility in 8–10 weeks.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="ankle-fracture">
+      <h3>Ankle Fracture (Bimalleolar / Trimalleolar)</h3>
+      <p>
+        Twisting or impact injuries often cause complex ankle fractures. Surgical fixation restores alignment and
+        stability. Early ankle exercises under guidance help restore flexibility. Most patients return to
+        full mobility within 10–12 weeks.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="clavicle-fracture">
+      <h3>Clavicle (Collarbone) Fracture</h3>
+      <p>
+        Caused by falls, sports injuries, or direct shoulder impact. While many heal with a sling, displaced fractures
+        may need surgical plating. Recovery takes 2–3 months, with most regaining full shoulder function after
+        physiotherapy.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="hip-fracture">
+      <h3>Hip Fracture (Neck / Intertrochanteric)</h3>
+      <p>
+        Common in older adults due to osteoporosis or falls. Surgery is essential, often with partial or total hip
+        replacement. Rehabilitation begins within days, focusing on walking and balance training for a 4–6 month recovery.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="patella-fracture">
+      <h3>Patella (Kneecap) Fracture</h3>
+      <p>
+        Typically results from a direct fall or impact on the knee. Treatment depends on displacement — from
+        conservative bracing to ORIF surgery. Early movement exercises help prevent stiffness, with recovery in 8–12 weeks.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="olecranon-fracture">
+      <h3>Olecranon (Elbow Tip) Fracture</h3>
+      <p>
+        Often caused by falling on a bent elbow. Surgery (using plates or tension-band wiring) is common.
+        Early movement is encouraged to avoid stiffness, with recovery usually complete within 6–8 weeks.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="pelvic-fracture">
+      <h3>Pelvic Fracture (Unstable Type)</h3>
+      <p>
+        A high-impact trauma injury requiring immediate stabilization. Surgery may involve internal or external fixators.
+        Long-term rehab helps restore walking and core stability, with recovery spanning several months.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<section id="common-orthopedic" class="fracture-section">
+  <h2>Common Orthopedic Surgeries</h2>
+
+  <p class="fracture-intro">
+    These are among the most frequently performed orthopedic procedures that help restore joint function,
+    correct deformities, and relieve pain. Each surgery aims to help patients regain mobility and improve quality of life.
+  </p>
+
+    <div class="fracture-hero">
+<img
+  src="images/orthopedic.png"
+  alt="Illustration of common orthopedic surgeries, bone and joint treatments"
+  class="fracture-hero-image"
+  width="600"
+  height="400"
+  loading="lazy">
+
+  </div>
+
+  <div class="fracture-container">
+
+    <div class="fracture-card" id="knee-replacement">
+      <h3>Knee Replacement (Total / Partial Arthroplasty)</h3>
+      <p>
+        Knee replacement surgery replaces the damaged joint surface with an artificial implant. It is highly effective
+        in relieving chronic arthritis pain and restoring movement. Patients typically begin walking with support within
+        24–48 hours and resume normal activities within 8–12 weeks.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="spinal-surgery">
+      <h3>Spinal Surgery (Discectomy, Laminectomy, Fusion, etc.)</h3>
+      <p>
+        Performed to relieve pressure on spinal nerves or stabilize the spine. Procedures include removing herniated discs,
+        decompressing nerve roots, or fusing unstable segments. Physiotherapy focuses on posture correction and back strengthening.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="ankle-orif">
+      <h3>Ankle Repair / ORIF (Open Reduction and Internal Fixation)</h3>
+      <p>
+        In complex ankle fractures, bones are surgically realigned and fixed using metal plates or screws.
+        Early physiotherapy ensures a stable, mobile joint, preventing long-term stiffness or arthritis.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="acl-reconstruction">
+      <h3>ACL Reconstruction</h3>
+      <p>
+        This procedure repairs the anterior cruciate ligament in the knee using a tendon graft. It’s common among athletes
+        and active individuals. Early movement exercises and gradual weight-bearing promote full recovery in 4–6 months.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="hip-replacement">
+      <h3>Hip Replacement (Total / Hemi Arthroplasty)</h3>
+      <p>
+        Hip replacement surgery relieves severe joint pain due to arthritis or fractures. Artificial implants
+        replicate natural joint motion, enabling patients to walk comfortably again. Full rehabilitation takes 3–6 months.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="shoulder-arthroscopy">
+      <h3>Shoulder Arthroscopy / Rotator Cuff Repair</h3>
+      <p>
+        A minimally invasive procedure to treat shoulder injuries like rotator cuff tears and impingement.
+        It involves tiny incisions and offers faster recovery with minimal scarring and improved shoulder motion.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="fracture-fixation">
+      <h3>Fracture Fixation (Plating, Nailing, External Fixator)</h3>
+      <p>
+        Surgical stabilization of fractured bones using metal implants or external fixators. These methods
+        allow early limb movement and faster bone healing with reduced deformity risks.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="meniscus-repair">
+      <h3>Meniscus Repair / Meniscectomy</h3>
+      <p>
+        Arthroscopic procedure for treating torn knee cartilage. Depending on tear type, the meniscus is repaired
+        or partially removed. Rehabilitation focuses on restoring knee motion and preventing future injuries.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="carpal-tunnel">
+      <h3>Carpal Tunnel Release</h3>
+      <p>
+        This procedure releases pressure on the median nerve in the wrist, resolving tingling and numbness.
+        Patients regain hand strength within a few weeks and return to work soon after recovery.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="arthroscopic-debridement">
+      <h3>Arthroscopic Debridement / Joint Cleaning</h3>
+      <p>
+        Minimally invasive surgery to remove damaged tissue or bone fragments from joints like the knee or shoulder.
+        It improves mobility, reduces inflammation, and delays joint degeneration.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<section id="common-onco" class="fracture-section onco-section">
+  <h2>Common Onco (Cancer) Surgeries</h2>
+
+  <p class="fracture-intro">
+    These are the most frequently performed oncological procedures designed to remove cancerous tissue, preserve organ
+    function, and improve survival outcomes. Each surgery is planned carefully for both medical and aesthetic recovery.
+  </p>
+
+    <div class="fracture-hero">
+<img
+  src="images/onco.webp"
+  alt="Oncology surgeries, cancer treatment and surgical care"
+  class="fracture-hero-image"
+  width="600"
+  height="400"
+  loading="lazy">
+
+  </div>
+
+
+  <div class="fracture-container">
+
+    <div class="fracture-card" id="breast-cancer">
+      <h3>Breast Cancer Surgery (Lumpectomy / Mastectomy)</h3>
+      <p>
+        Depending on the stage, the tumor alone or the entire breast may be removed. Breast-conserving surgeries and
+        reconstruction techniques now help achieve excellent cosmetic and therapeutic outcomes. Recovery time is usually
+        2–4 weeks with gradual physiotherapy.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="uterus-cancer">
+      <h3>Uterus Cancer Surgery (Hysterectomy ± Lymph Node Dissection)</h3>
+      <p>
+        Removal of the uterus, often with surrounding lymph nodes, helps treat endometrial and cervical cancers.
+        The procedure may be open, laparoscopic, or robotic. Recovery is typically within 4–6 weeks.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="ovarian-cancer">
+      <h3>Ovarian Cancer Surgery (Oophorectomy / Debulking)</h3>
+      <p>
+        Involves removing one or both ovaries and affected tissues to minimize tumor load.
+        Often combined with chemotherapy for optimal outcomes. Recovery focuses on nutrition and hormonal support.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="abdominal-tumor">
+      <h3>Abdominal Tumor Surgery (GI / Retroperitoneal Resection)</h3>
+      <p>
+        Tumors in the digestive tract or abdomen are surgically removed with precision to preserve healthy organs.
+        Postoperative care includes nutrition support and gradual resumption of digestive function.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="colorectal-cancer">
+      <h3>Colorectal Cancer Surgery (Colectomy / Rectal Resection)</h3>
+      <p>
+        Removal of cancerous parts of the colon or rectum, followed by reconnection of the bowel.
+        Minimally invasive techniques reduce pain and allow early discharge in 4–5 days.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="head-neck-cancer">
+      <h3>Head and Neck Cancer Surgery (Laryngectomy / Mandibulectomy, etc.)</h3>
+      <p>
+        Complex reconstructive surgeries restore appearance and function after tumor removal.
+        Modern microsurgical flaps and laser excision techniques enhance outcomes with shorter recovery.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="lung-cancer">
+      <h3>Lung Cancer Surgery (Lobectomy / Pneumonectomy)</h3>
+      <p>
+        Removal of one lung segment (lobectomy) or entire lung (pneumonectomy) to eliminate cancer.
+        Post-surgery breathing exercises and rehab improve lung capacity and overall recovery.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="prostate-cancer">
+      <h3>Prostate Cancer Surgery (Radical Prostatectomy)</h3>
+      <p>
+        Complete removal of the prostate gland using minimally invasive or robotic techniques.
+        Patients regain continence and sexual function with proper rehabilitation over 3–6 months.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="thyroid-cancer">
+      <h3>Thyroid Cancer Surgery (Total / Partial Thyroidectomy)</h3>
+      <p>
+        Removal of the thyroid gland or its affected part helps cure early-stage thyroid cancer.
+        Lifelong hormone therapy ensures normal metabolism and energy balance.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="bone-sarcoma">
+      <h3>Bone and Soft Tissue Sarcoma Surgery (Wide Excision / Limb Salvage)</h3>
+      <p>
+        Involves removing bone or soft tissue tumors while preserving limb function whenever possible.
+        Advanced reconstruction and prosthetic implants allow excellent long-term mobility.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<section id="common-surgical" class="fracture-section surgical-section">
+  <h2>Common Surgical and Diagnostic Procedures</h2>
+
+  <p class="fracture-intro">
+    These are essential surgical and diagnostic procedures performed routinely across medical specialties.
+    Each aims to treat common health conditions, detect diseases early, and promote faster patient recovery.
+  </p>
+
+    <div class="fracture-hero">
+<img
+  src="images/general.webp"
+  alt="Common surgical and diagnostic procedures, treatment and care services"
+  class="fracture-hero-image"
+  width="600"
+  height="400"
+  loading="lazy">
+
+  </div>
+
+  <div class="fracture-container">
+
+<!-- Piles Surgery -->
+<div class="fracture-card" id="piles">
+  <h3>Piles (Hemorrhoids Surgery)</h3>
+  <p>
+    A minimally invasive procedure to remove or shrink swollen veins in the anal region that cause pain, bleeding, and
+    discomfort. Depending on severity, treatment may involve laser surgery, stapler hemorrhoidectomy, or band ligation.
+    Most patients recover quickly, resuming normal activities within a few days.
+  </p>
+</div>
+
+<!-- Fistula Surgery -->
+<div class="fracture-card" id="fistula">
+  <h3>Fistula (Anal Fistula Surgery)</h3>
+  <p>
+    Performed to treat abnormal tunnels connecting the anal canal and skin. Surgical methods include fistulotomy,
+    laser ablation, or seton placement to prevent recurrence and promote healing. The procedure offers long-term relief
+    from discharge, pain, and infection, with minimal downtime.
+  </p>
+</div>
+
+
+    <div class="fracture-card" id="appendectomy">
+      <h3>Laparoscopic Appendectomy</h3>
+      <p>
+        Minimally invasive removal of an inflamed appendix using small keyhole incisions. It allows quicker recovery,
+        less scarring, and minimal postoperative pain—patients typically resume normal activity within 5–7 days.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="hernia-surgery">
+      <h3>Hernia Surgery (Inguinal / Umbilical / Ventral)</h3>
+      <p>
+        The weakened abdominal wall is repaired either through open or laparoscopic mesh placement. Laparoscopic methods
+        provide faster healing, reduced discomfort, and lower recurrence rates.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="cholecystectomy">
+      <h3>Cholecystectomy (Gallbladder Removal)</h3>
+      <p>
+        Surgical removal of the gallbladder to treat stones or infection. Most are performed laparoscopically,
+        allowing discharge within 24 hours and full recovery in 1–2 weeks.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="endoscopy">
+      <h3>Endoscopy (Upper GI / Colonoscopy)</h3>
+      <p>
+        A diagnostic procedure using a flexible camera to view the digestive tract. It helps detect ulcers, bleeding,
+        or tumors and can include biopsy sampling for lab analysis.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="biopsy">
+      <h3>Biopsy Procedures (Breast, Liver, Lymph Node, etc.)</h3>
+      <p>
+        Tissue sampling using needle or minor surgical methods to diagnose infections, tumors, or cancer.
+        Usually done under local anesthesia with minimal downtime.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="cataract-surgery">
+      <h3>Cataract Surgery (Phacoemulsification / IOL Implantation)</h3>
+      <p>
+        Clouded lenses are replaced with clear artificial intraocular lenses (IOLs). This painless outpatient
+        procedure restores vision within days and allows quick return to normal activities.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="tonsillectomy">
+      <h3>Tonsillectomy / Adenoidectomy</h3>
+      <p>
+        Removal of enlarged tonsils or adenoids to treat recurrent throat infections and breathing difficulties.
+        Performed under general anesthesia, with complete recovery in 7–10 days.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="cyst-excision">
+      <h3>Cyst / Abscess Excision or Drainage</h3>
+      <p>
+        A minor procedure to remove or drain infected cysts or abscesses from the skin or soft tissue.
+        Usually done under local anesthesia with rapid wound healing and minimal scarring.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<section id="laparoscopic-surgeries" class="fracture-section lap-section">
+  <h2>Common Laparoscopic Surgeries</h2>
+
+  <p class="fracture-intro">
+    Minimally invasive procedures using small cuts and a camera, ensuring faster healing,
+    less pain, and shorter hospital stay.
+  </p>
+
+  <div class="fracture-hero">
+<img
+  src="images/Laparoscopic_Surgeriesmain.webp"
+  alt="Laparoscopic surgeries, minimally invasive procedures, and patient care"
+  class="fracture-hero-image"
+  width="600"
+  height="400"
+  loading="lazy">
+
+  </div>
+
+  <div class="fracture-container">
+
+    <div class="fracture-card">
+      <h3>Laparoscopic Appendectomy</h3>
+      <p>Removal of appendix through tiny cuts; quick healing and same-day discharge.</p>
+    </div>
+
+    <div class="fracture-card">
+      <h3>Cholecystectomy (Gallbladder Removal)</h3>
+      <p>Removes gallbladder to treat stones; most patients go home in 24 hrs.</p>
+    </div>
+
+    <div class="fracture-card">
+      <h3>Diagnostic Laparoscopy</h3>
+      <p>Camera-based abdomen check to diagnose pain, infection, or infertility causes.</p>
+    </div>
+
+    <div class="fracture-card">
+      <h3>Hernia Repair (Inguinal / Umbilical)</h3>
+      <p>Mesh repair using small incisions; minimal pain and faster return to work.</p>
+    </div>
+
+    <div class="fracture-card">
+      <h3>Laparoscopic Hysterectomy</h3>
+      <p>Uterus removal using keyhole surgery; smoother recovery, less bleeding.</p>
+    </div>
+
+    <div class="fracture-card">
+      <h3>Ovarian Cyst Removal</h3>
+      <p>Removes cysts while preserving ovary; short hospital stay.</p>
+    </div>
+
+    <div class="fracture-card">
+      <h3>Laparoscopic Myomectomy</h3>
+      <p>Fibroid removal with fertility preservation and quick healing.</p>
+    </div>
+
+    <div class="fracture-card">
+      <h3>Endometriosis Surgery</h3>
+      <p>Removes endometriosis deposits to reduce pain and improve fertility.</p>
+    </div>
+
+    <div class="fracture-card">
+      <h3>Laparoscopic Adhesiolysis</h3>
+      <p>Releases abdominal scar tissue to relieve pain and bowel obstruction.</p>
+    </div>
+
+    <div class="fracture-card">
+      <h3>Diagnostic & Therapeutic Endoscopy</h3>
+      <p>Flexible camera to detect ulcers, bleeding; biopsy if needed.</p>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+
+<section id="common-obg" class="fracture-section obg-section">
+  <h2>Common Obstetrics and Gynecology (OBG) Procedures</h2>
+
+  <p class="fracture-intro">
+    These gynecological and obstetric procedures support women’s reproductive health, fertility, and safe delivery.
+    Each treatment is performed with precision and care to ensure the best outcomes for every woman.
+  </p>
+
+    <div class="fracture-hero">
+<img
+  src="images/obg.webp"
+  alt="OBG procedures, gynecology and obstetric care services"
+  class="fracture-hero-image"
+  width="600"
+  height="400"
+  loading="lazy">
+
+  </div>
+
+
+  <div class="fracture-container">
+
+    <div class="fracture-card" id="dnc">
+      <h3>D&amp;C (Dilation and Curettage)</h3>
+      <p>
+        A short procedure to remove tissue from the uterus, usually performed after miscarriage or to diagnose uterine conditions.
+        It’s quick, safe, and recovery happens within a few hours.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="tubectomy">
+      <h3>Tubectomy (Female Sterilization)</h3>
+      <p>
+        A permanent method of birth control involving blocking or sealing the fallopian tubes.
+        Usually performed laparoscopically, with same-day discharge and minimal discomfort.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="cervical-stitch">
+      <h3>Cervical Stitch (Cervical Cerclage)</h3>
+      <p>
+        A preventive surgery for pregnant women at risk of preterm birth. The cervix is reinforced with a stitch
+        to help maintain pregnancy safely until term.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="recanalization">
+      <h3>Recanalization (Tubal Reversal)</h3>
+      <p>
+        A microsurgical procedure to reopen blocked fallopian tubes after tubectomy, restoring fertility potential.
+        Success depends on the tube’s condition and length.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="hysterectomy">
+      <h3>Hysterectomy (Abdominal / Vaginal / Laparoscopic)</h3>
+      <p>
+        Surgical removal of the uterus for fibroids, heavy bleeding, or cancer prevention.
+        Minimally invasive laparoscopic methods ensure faster healing and reduced hospital stay.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="cesarean-section">
+      <h3>Cesarean Section (LSCS)</h3>
+      <p>
+        Performed to safely deliver a baby when vaginal delivery is not advisable.
+        Modern anesthesia and gentle techniques allow quick recovery and minimal scarring.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="ovarian-cystectomy">
+      <h3>Ovarian Cystectomy</h3>
+      <p>
+        Laparoscopic removal of cysts from the ovary while preserving healthy ovarian tissue.
+        Suitable for treating benign cysts, endometriomas, or dermoid cysts.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="hysteroscopy">
+      <h3>Hysteroscopy (Diagnostic / Operative)</h3>
+      <p>
+        A thin telescope-like camera is used to examine and treat the inside of the uterus.
+        It helps remove small fibroids, polyps, or adhesions with minimal pain and downtime.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="myomectomy">
+      <h3>Myomectomy (Fibroid Removal)</h3>
+      <p>
+        Surgery to remove uterine fibroids while preserving fertility. Can be done via open, laparoscopic,
+        or hysteroscopic approach depending on fibroid size and number.
+      </p>
+    </div>
+
+    <div class="fracture-card" id="pap-smear">
+      <h3>Pap Smear / Colposcopy</h3>
+      <p>
+        A screening test for cervical cancer where cells are gently collected for analysis.
+        Colposcopy provides a magnified view of the cervix for early detection and management.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+
+
+
+<section class="reviews-banner">
+
+  <div class="reviews-container">
+
+    <!-- LEFT: AUTO SLIDING REVIEWS -->
+    <div class="reviews-slider">
+      <div class="reviews-track">
+
+        <div class="review-item">
+          <p>“Fast reports & polite support. Highly recommended.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=15" alt="">
+            <div>
+              <strong>Shashank N.</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+        <div class="review-item">
+          <p>“Home sample collection was on time and very hygienic.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=22" alt="">
+            <div>
+              <strong>Ananya R.</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+        <div class="review-item">
+          <p>“Booked a full body checkup. Got reports within hours.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=5" alt="">
+            <div>
+              <strong>Rohit Kumar</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+        <div class="review-item">
+          <p>“Very smooth experience. Support team was helpful.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=9" alt="">
+            <div>
+              <strong>Divya M.</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT: TRUST CONTENT (DESKTOP ONLY) -->
+    <div class="reviews-info">
+      <h2>What Patients Say<br>On Google</h2>
+
+      <p>
+        Trusted by thousands for accurate reports and convenient home
+        sample collection. Rated <strong>4.3★ on Google</strong>.
+      </p>
+
+      <div class="trust-stats">
+        <div>
+          ⭐<br><strong>4.3</strong><br>Rating
+        </div>
+        <div>
+          👥<br><strong>10k+</strong><br>Users
+        </div>
+        <div>
+          🏥<br><strong>NABL</strong><br>Labs
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+
+<div id="sticky-icon-popup">
+
+  <a href="https://wa.me/+917892287102" target="_blank" class="icon-btn whatsapp" aria-label="Chat on WhatsApp" rel="noopener">
+    <i class="fab fa-whatsapp"></i>
+    <span class="tooltip">WhatsApp</span>
+  </a>
+
+  <a href="tel:+917892287102" class="icon-btn call" aria-label="Call Support" rel="noopener">
+    <i class="fas fa-phone-alt"></i>
+    <span class="tooltip">Call Support</span>
+  </a>
+
+</div>
+
+
+
+
+<footer class="footer-section">
+  <div class="footer-container">
+
+    <!-- Brand / Trust -->
+    <div class="footer-left">
+      <h2 class="footer-brand">
+        <span class="footer-niva">Niva</span>
+        <span class="footer-healthcare">Health Kare</span>
+      </h2>
+
+      <p class="footer-tagline">
+        Trusted healthcare services delivering quality, care, and compassion.
+      </p>
+
+      <div class="social-icons">
+        <a href="https://www.instagram.com/nivahealthkare/" aria-label="Instagram">
+      <img
+        src="images/instagram.webp"
+        alt="Follow Niva Health Kare on Instagram"
+        width="24"
+        height="24"
+        loading="lazy">
+      </a>
+        <a href="https://www.facebook.com/profile.php?id=61583126009241" aria-label="Facebook">
+        <img
+          src="images/facebook.webp"
+          alt="Follow Niva Health Kare on Facebook"
+          width="24"
+          height="24"
+          loading="lazy">
+
+        </a>
+        <a href="https://www.youtube.com/@nivahealthkare" aria-label="YouTube">
+        <img
+          src="images/youtube.webp"
+          alt="Subscribe to Niva Health Kare on YouTube"
+          width="24"
+          height="24"
+          loading="lazy">
+
+        </a>
+      </div>
+    </div>
+
+    <!-- Links -->
+    <div class="footer-right">
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="index.html">Home</a>
+        <a href="about-us.html">About Us</a>
+        <a href="locate-us.html">Locate Us</a>
+        
+      </div>
+
+      <div class="footer-col">
+        <h4>Medical Network</h4>
+        <a href="our-partners.html">Our Partners</a>
+        <a href="for-doctors.html">Doctors</a>
+        <a href="service.html">Our Services</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="refund-policy.html">Refund Policy</a>
+        <a href="disclaimer.html">Disclaimer</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom -->
+  <div class="footer-bottom">
+    <p>
+      © 2025 Niva Health Kare Pvt. Ltd. All rights reserved.  
+      <span>An initiative by Vinayaka Hospital.</span>
+    </p>
+
+    <div class="footer-links">
+      <a href="terms.html">Terms</a>
+      <a href="privacy-policy.html">Privacy</a>
+    </div>
+  </div>
+</footer>
+<section class="simple-seo-footer">
+  <div class="simple-seo-container">
+
+    <div class="seo-item">
+      <h4>Comprehensive Surgical Services</h4>
+      <p>
+        We provide expert care for fractures, orthopedic surgeries, laparoscopic procedures,
+        general surgeries, cancer surgeries, and gynecological treatments using modern techniques
+        focused on faster recovery and patient safety.
+      </p>
+    </div>
+
+    <div class="seo-item">
+      <h4>Orthopedic & Fracture Care</h4>
+      <p>
+        Treatment for wrist, femur, tibia, hip, ankle, shoulder, spine, and joint fractures,
+        including ORIF, joint replacement, arthroscopy, ACL reconstruction, and fracture fixation
+        with structured rehabilitation support.
+      </p>
+    </div>
+
+    <div class="seo-item">
+      <h4>Laparoscopic & General Surgeries</h4>
+      <p>
+        Minimally invasive laparoscopic surgeries such as appendix removal, hernia repair,
+        gallbladder surgery, hysterectomy, ovarian cyst removal, endoscopy, biopsy, piles,
+        fistula, and diagnostic procedures with shorter hospital stay.
+      </p>
+    </div>
+
+    <div class="seo-item">
+      <h4>Oncology & Women’s Health</h4>
+      <p>
+        Advanced cancer surgeries for breast, uterus, ovary, thyroid, prostate, lung,
+        colorectal and bone tumors, along with complete obstetrics and gynecology care
+        including C-section, fibroid removal, fertility procedures, and cervical screening.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+
+<!-- ✅ Toast Notification -->
+<div id="toast" class="toast">Added to Cart</div>
+
+  <script src="javascript/slider.js"></script>
+  <script src="javascript/lab-carousel.js"></script>
+  <script src="javascript/script.js"></script>
+  <script src="javascript/search.js"></script>
+  <script src="javascript/booking.js"></script>
+  <script src="javascript/testscript.js"></script>
+  <script src="javascript/location.js"></script>
+</body>
+</html>

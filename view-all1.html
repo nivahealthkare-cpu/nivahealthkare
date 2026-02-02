@@ -1,0 +1,1583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- Primary SEO -->
+  <title>View All Health Checkup Packages | Niva Health Kare Bangalore</title>
+  <meta name="description" content="View all diagnostic and health checkup packages at Niva Health Kare Bangalore. Explore full body checkups, organ-wise health packages, blood tests, scan tests, and preventive health plans." />
+  <meta name="robots" content="index, follow">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://www.nivahealthkare.com/view-all-packages" />
+
+  <!-- Open Graph (WhatsApp / Facebook) -->
+  <meta property="og:title" content="View All Health Packages | Niva Health Kare">
+  <meta property="og:description" content="Explore full body checkups, organ-wise health packages, blood tests and diagnostic services with trusted labs in Bangalore.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.nivahealthkare.com/view-all-packages">
+  <meta property="og:image" content="https://www.nivahealthkare.com/images/view-all-packages-og.webp">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/viewall.css">
+
+  <!-- Font Awesome (non-blocking for performance) -->
+  <link rel="preload"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        as="style"
+        onload="this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  </noscript>
+
+</head>
+<body>
+
+
+  
+
+  
+<header>
+
+  <!-- ================= DESKTOP HEADER ================= -->
+  <div class="desktop-header">
+
+    <!-- LEFT: LOGO + LOCATION -->
+    <div class="logo-location">
+
+      <div class="logo-section">
+        <div class="lab-name">
+          <span class="niva">Niva</span>
+          <span class="healthcare">Health Kare</span>
+        </div>
+      </div>
+
+      <!-- LOCATION TRIGGER -->
+      <div class="location-trigger" id="openLocation">
+        <span class="label">Location</span>
+        <span class="city">
+          <i class="fa-solid fa-location-dot location-icon"></i>
+          <span id="selectedCity">Select city</span>
+          <i class="fa-solid fa-chevron-down chevron"></i>
+        </span>
+      </div>
+
+
+    </div>
+
+    <!-- RIGHT: MENU ICONS -->
+    <div class="header-actions">
+      <a href="index.html" class="header-item">
+        <i class="fas fa-home header-icon"></i>
+        <span class="header-text">Home</span>
+      </a>
+
+      <a href="surgeries.html" class="header-item">
+        <i class="fas fa-procedures header-icon"></i>
+        <span class="header-text">Surgeries</span>
+      </a>
+
+      <a href="test.html" class="header-item">
+        <i class="fas fa-vials header-icon"></i>
+        <span class="header-text">Lab Tests</span>
+      </a>
+
+      <div class="header-item" onclick="openModal()">
+        <i class="fas fa-heartbeat header-icon"></i>
+        <span class="header-text">Checkup</span>
+      </div>
+
+      <div class="header-item" onclick="toggleDrawer()">
+        <i class="fas fa-shopping-cart header-icon">
+          <span id="cart-count" class="cart-count">0</span>
+        </i>
+        <span class="header-text">Cart</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================= MOBILE HEADER ================= -->
+  <div class="mobile-header">
+    <div class="logo-section">
+      <div class="lab-name">
+        <span class="niva">Niva</span>
+        <span class="healthcare">Health Kare</span>
+      </div>
+    </div>
+
+    <div class="location-section" id="mobileLocation">
+      <i class="fas fa-map-marker-alt location-icon"></i>
+
+      <div class="location-info">
+        <span class="label">Your Location</span>
+        <span class="city">
+          <span id="mobileSelectedCity">Bangalore</span>
+          <i class="fas fa-chevron-down chevron"></i>
+        </span>
+
+
+      </div>
+    </div>
+
+  </div>
+
+</header>
+
+
+<!-- LOCATION POPUP -->
+<div class="location-popup" id="locationPopup">
+  <div class="popup-card">
+
+    <!-- HEADER -->
+    <div class="popup-header">
+      <h3>Select your city</h3>
+      <button class="close-btn" id="closePopup">×</button>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="search-wrapper">
+      <span class="search-icon">🔍</span>
+
+      <input
+        type="text"
+        id="citySearch"
+        class="city-search"
+        placeholder="Search city (e.g. Mysuru)"
+        autocomplete="off"
+      />
+
+      <!-- Suggestions dropdown -->
+      <ul class="suggestions" id="citySuggestions"></ul>
+    </div>
+
+
+    <!-- POPULAR CITIES -->
+    <p class="section-label" id="popularLabel">Popular cities</p>
+    <div class="city-list popular" id="popularCities"></div>
+
+    <!-- ALL / SEARCH RESULTS -->
+    <div class="city-list" id="cityList"></div>
+
+    <p class="coverage">
+      Services available across major cities in Karnataka
+    </p>
+
+  </div>
+</div>
+
+
+<!-- Minimal Consultation Modal -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+  <div class="modal-box" onclick="event.stopPropagation()">
+
+    <!-- Header -->
+    <div class="modal-header">
+      <h3>Get a call from our medical team</h3>
+      <button class="close-btn" onclick="closeModal()">×</button>
+    </div>
+
+    <!-- Subtext -->
+    <p class="modal-subtext">
+      Enter your mobile number and we’ll call you shortly.
+    </p>
+
+    <form id="consultationForm" onsubmit="return false;">
+
+      <!-- Service (readonly / auto-filled) -->
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Your name"
+        />
+
+      <!-- Mobile -->
+      <input
+        type="tel"
+        id="mobile"
+        name="mobile"
+        placeholder="Mobile number *"
+        required
+      />
+
+      <!-- Optional message -->
+      <textarea
+        id="message"
+        name="message"
+        placeholder="Message (optional)"
+        rows="3"
+      ></textarea>
+
+        <button type="button" onclick="showConfirmation()">
+          Request Call Back
+        </button>
+
+
+      <p class="trust-text">
+        📞 Usually calls within 5 minutes
+      </p>
+
+    </form>
+
+    <div id="checkupConfirmationMessage" class="confirmation-message" style="display:none;">
+      ✅ Thank you! Our expert will call you shortly.
+    </div>
+
+  </div>
+</div>
+
+
+
+  
+  <!-- Cart Drawer (Right Side) -->
+ 
+<!-- Background Blur Overlay -->
+<div id="cartOverlay" class="cart-overlay" onclick="closeDrawer()"></div>
+
+
+<!-- Cart Drawer -->
+<div class="drawer mobile-drawer" id="drawer">
+  <div class="drawer-header">
+    <h3>Your Cart</h3>
+    <button onclick="closeDrawer()">✕</button>
+
+  </div>
+
+  <div class="drawer-body" id="cartItemsContainer"></div>
+
+  <div class="cart-summary">
+    <div class="summary-left">
+      <span class="total-tests">
+        checkout test: <strong id="totalTests">0</strong>
+      </span>
+      <span class="total-price">
+        Total Price: <strong id="totalPrice">₹0</strong>
+      </span>
+    </div>
+    <a href="checkout.html" class="proceed-btn">Proceed</a>
+  </div>
+</div>
+
+
+
+<!-- Mobile Bottom Bar -->
+<div class="mobile-bottom">
+
+  <!-- Home -->
+  <a href="index.html">
+    <i class="fas fa-home"></i>
+  </a>
+
+  <!-- Surgeries -->
+  <a href="surgeries.html">
+    <i class="fas fa-procedures"></i>
+  </a>
+
+  <!-- Lab Tests -->
+  <a href="test.html">
+    <i class="fas fa-vials"></i>
+  </a>
+
+  <!-- Checkups -->
+  <a href="#" onclick="openModal()">
+    <i class="fas fa-heartbeat"></i>
+  </a>
+
+  <!-- Cart -->
+  <a href="#" onclick="toggleDrawer()">
+    <i class="fas fa-shopping-cart"></i>
+  </a>
+
+</div>
+
+
+
+<section class="hero">
+  <div class="hero-container">
+
+    <div class="hero-content">
+      <span class="hero-tag">Diagnostic Scans • Bangalore</span>
+
+      <h1>
+        Advanced Diagnostic Scans<br />
+        <span>Accurate • Safe • Reliable</span>
+      </h1>
+
+      <p class="hero-subtext">
+        Book MRI, CT Scan, X-Ray, Ultrasound, and DEXA scans at trusted
+        diagnostic centers in Bangalore with expert radiology reporting.
+      </p>
+
+      <ul class="hero-points">
+        <li>✔ MRI, CT, X-Ray, Ultrasound & DEXA</li>
+        <li>✔ Modern Equipment & Expert Radiologists</li>
+        <li>✔ Reports Within 24–48 Hours</li>
+        <li>✔ Transparent Pricing – Scan-wise Costs</li>
+      </ul>
+
+      <div class="hero-actions">
+        <a href="tel:+917892287102" class="btn-primary">Call to Book</a>
+        <span class="price-note">Final cost depends on scan type & body part</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+  <nav class="top-nav">
+    
+    <a href="#package1">Mri Scan</a>
+    <a href="#package2">CT Scan</a>
+    <a href="#package3">Ultrasound (USG) Scans</a>
+    <a href="#package4">PET Scan</a>
+    <a href="#package5">Mammogram</a>
+    <a href="#package6">DEXA Scan</a>
+  </nav>
+
+  <!-- Packages -->
+  <div class="packages">
+
+<section class="package" id="package1" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 30px;">
+  <h2 class="package-title" style="margin-bottom: 20px;">MRI Scan</h2>
+
+  <div class="package-sections" style="max-width: 800px; width: 100%;">
+
+    <!-- About -->
+    <div class="section about-test">
+      <h2>What is MRI Scan?</h2>
+      <p style="text-align: center;">
+        MRI (Magnetic Resonance Imaging) is a non-invasive diagnostic imaging technique that uses powerful magnets and radio waves to produce detailed images of the body's internal structures. 
+        It is commonly used to evaluate the brain, spinal cord, joints, and other soft tissues to help detect abnormalities, injuries, or diseases.
+      </p>
+    </div>
+
+    <!-- Parameters -->
+    <div class="section">
+      <h3>Types of MRI Scans</h3>
+
+      <div class="param-list">
+
+        <div class="param-item">
+          <div class="param-header">
+            Brain MRI
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Detects brain tumors, strokes, infections</li>
+              <li>Evaluates causes of headaches and seizures</li>
+              <li>Checks multiple sclerosis or brain injuries</li>
+              <li>Monitors brain structure and blood flow</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-header">
+            Spine MRI
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Detects slipped discs or spinal cord compression</li>
+              <li>Evaluates spinal tumors or infections</li>
+              <li>Identifies causes of back pain or weakness</li>
+              <li>Assesses congenital spine abnormalities</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-header">
+            Joint & Musculoskeletal MRI
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Evaluates ligament and tendon injuries</li>
+              <li>Detects cartilage damage and arthritis</li>
+              <li>Diagnoses muscle tears</li>
+              <li>Assesses sports injuries</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-header">
+            Cardiac MRI
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Examines heart structure and function</li>
+              <li>Detects heart muscle damage</li>
+              <li>Assesses congenital heart disease</li>
+              <li>Evaluates blood flow and valve function</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-header">
+            Abdominal & Pelvic MRI
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Detects liver and kidney disorders</li>
+              <li>Evaluates tumors and infections</li>
+              <li>Diagnoses uterine and prostate conditions</li>
+              <li>Stages abdominal cancers</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-header">
+            Fetal MRI
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Provides detailed fetal imaging</li>
+              <li>Detects congenital abnormalities</li>
+              <li>Complements ultrasound findings</li>
+              <li>Helps plan neonatal care</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Why Choose -->
+    <div class="section about-test">
+      <h2>Why Choose MRI Scan</h2>
+      <p>
+        MRI scans provide high-resolution images without using harmful radiation.
+        They are ideal for identifying soft tissue conditions and neurological disorders,
+        making them essential for accurate diagnosis.
+      </p>
+    </div>
+
+    <!-- Why This Test -->
+    <div class="section about-test">
+      <h2>Why This Test</h2>
+      <p>
+        MRI helps detect internal conditions that may not be visible on X-rays or ultrasound,
+        supporting early diagnosis and effective treatment planning.
+      </p>
+    </div>
+
+
+
+  </div>
+</section>
+
+
+<section class="package" id="package2">
+  <h2 class="package-title">CT Scan</h2>
+
+  <div class="package-sections">
+
+    <!-- About -->
+    <div class="section about-test">
+      <h2>What is CT Scan?</h2>
+      <p>
+        CT (Computed Tomography) scan is an advanced imaging technique that combines multiple X-ray images to create detailed cross-sectional pictures of the body. 
+        It is commonly used to evaluate bones, organs, blood vessels, and soft tissues for injuries, infections, or diseases.
+      </p>
+    </div>
+
+    <!-- Types -->
+    <div class="section">
+      <h3>Types of CT Scans</h3>
+
+      <div class="param-list">
+
+        <!-- Head -->
+        <div class="param-item">
+          <div class="param-header">
+            Head CT
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Detects brain injuries, bleeding, and swelling</li>
+              <li>Evaluates strokes and head trauma</li>
+              <li>Identifies brain tumors or structural abnormalities</li>
+              <li>Checks sinus and skull bone conditions</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Chest -->
+        <div class="param-item">
+          <div class="param-header">
+            Chest CT Scan
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Detects lung infections, pneumonia, and tuberculosis</li>
+              <li>Identifies lung cancer and pulmonary nodules</li>
+              <li>Evaluates heart, lungs, and major blood vessels</li>
+              <li>Assesses chest injuries or congenital abnormalities</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Abdomen -->
+        <div class="param-item">
+          <div class="param-header">
+            Abdominal & Pelvic CT Scan
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Detects tumors, cysts, and infections in abdominal organs</li>
+              <li>Evaluates liver, kidney, pancreas, and spleen disorders</li>
+              <li>Helps diagnose appendicitis, gallstones, or intestinal issues</li>
+              <li>Assesses uterus, ovaries, and prostate abnormalities</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Angio -->
+        <div class="param-item">
+          <div class="param-header">
+            CT Angiography
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Examines arteries and veins in detail</li>
+              <li>Detects aneurysms, clots, and vascular blockages</li>
+              <li>Evaluates blood flow in brain, chest, abdomen, and legs</li>
+              <li>Helps plan vascular surgeries or stent placement</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Whole body -->
+        <div class="param-item">
+          <div class="param-header">
+            Whole Body CT Scan
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Used for cancer screening and early detection</li>
+              <li>Detects injuries after major trauma</li>
+              <li>Evaluates spread of cancer</li>
+              <li>Used for preventive imaging</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Spine -->
+        <div class="param-item">
+          <div class="param-header">
+            Spine CT Scan
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Detects spinal fractures</li>
+              <li>Evaluates herniated discs</li>
+              <li>Identifies tumors or infections</li>
+              <li>Assists surgical planning</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Sinus -->
+        <div class="param-item">
+          <div class="param-header">
+            Sinus CT Scan
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Detects sinus infections</li>
+              <li>Evaluates nasal blockages</li>
+              <li>Helps plan surgery</li>
+              <li>Assesses chronic sinusitis</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Why Choose -->
+    <div class="section about-test">
+      <h2>Why Choose CT Scan</h2>
+      <p>
+        CT scans provide precise and detailed images, making them highly effective for diagnosing internal conditions quickly. 
+        They are essential for trauma evaluation, detecting tumors, planning surgeries, and guiding treatment decisions.
+      </p>
+    </div>
+
+    <!-- Why Test -->
+    <div class="section about-test">
+      <h2>Why This Test</h2>
+      <p>
+        CT imaging helps detect and monitor medical conditions not visible on standard X-rays, supporting accurate diagnosis and treatment planning.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="package" id="package3">
+  <h2 class="package-title">Ultrasound Scan</h2>
+
+  <div class="package-sections">
+
+    <!-- About -->
+    <div class="section about-test">
+      <h2>What is Ultrasound Scan?</h2>
+      <p>
+        Ultrasound scan is a non-invasive imaging technique that uses high-frequency sound waves to create images of organs and tissues inside the body. 
+        It is widely used to monitor pregnancy, assess abdominal organs, detect cysts, and evaluate blood flow and soft tissue structures.
+      </p>
+    </div>
+
+    <!-- Types -->
+    <div class="section">
+      <h3>Types of Ultrasound Scans</h3>
+
+      <div class="param-list">
+
+        <div class="param-item">
+          <div class="param-header">
+            Abdominal Ultrasound
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Evaluates liver, gallbladder, pancreas, kidneys, and spleen</li>
+              <li>Detects gallstones, liver disease, and kidney stones</li>
+              <li>Identifies cysts, tumors, or fluid collections</li>
+              <li>Helps diagnose abdominal pain</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-header">
+            Pelvic Ultrasound
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Examines uterus, ovaries, bladder</li>
+              <li>Detects fibroids and ovarian cysts</li>
+              <li>Evaluates pelvic pain or abnormal bleeding</li>
+              <li>Helps assess infertility issues</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-header">
+            Obstetric (Pregnancy) Ultrasound
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Monitors fetal growth and development</li>
+              <li>Detects congenital abnormalities</li>
+              <li>Checks placenta and amniotic fluid</li>
+              <li>Determines due date and multiple pregnancies</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-header">
+            Breast Ultrasound
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Detects breast lumps and cysts</li>
+              <li>Differentiates solid vs fluid-filled masses</li>
+              <li>Guides biopsy procedures</li>
+              <li>Used along with mammography</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-header">
+            Thyroid Ultrasound
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Evaluates thyroid size and structure</li>
+              <li>Detects nodules or enlargement</li>
+              <li>Guides FNAC biopsy</li>
+              <li>Monitors thyroid disorders</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-header">
+            Doppler (Vascular) Ultrasound
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Measures blood flow in arteries and veins</li>
+              <li>Detects clots and blockages</li>
+              <li>Diagnoses varicose veins and DVT</li>
+              <li>Evaluates carotid and limb circulation</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-header">
+            Renal (Kidney) Ultrasound
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Examines kidneys and urinary bladder</li>
+              <li>Detects stones, cysts, infections</li>
+              <li>Evaluates urinary obstruction</li>
+              <li>Monitors chronic kidney disease</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-header">
+            Prostate Ultrasound (TRUS)
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Evaluates prostate size and structure</li>
+              <li>Detects enlargement or tumors</li>
+              <li>Guides prostate biopsy</li>
+              <li>Used in male infertility evaluation</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Why Choose -->
+    <div class="section about-test">
+      <h2>Why Choose Ultrasound Scan</h2>
+      <p>
+        Ultrasound scans are safe, painless, and radiation-free. They provide real-time imaging and are ideal for evaluating organs, guiding procedures, and monitoring health conditions.
+      </p>
+    </div>
+
+    <!-- Why Test -->
+    <div class="section about-test">
+      <h2>Why This Test</h2>
+      <p>
+        Ultrasound helps in early detection of abnormalities and supports accurate diagnosis and treatment planning, especially for pregnancy and abdominal organs.
+      </p>
+    </div>
+
+</div>
+</section>
+
+
+
+
+
+<section class="package" id="package4">
+  <h2 class="package-title">PET Scan</h2>
+
+  <div class="package-sections">
+
+    <!-- About -->
+    <div class="section about-test">
+      <h2>What is PET Scan?</h2>
+      <p>
+        PET (Positron Emission Tomography) Scan is an advanced imaging technique that helps detect changes in cellular function and metabolism in the body. 
+        It is commonly used to identify cancer, monitor treatment progress, and evaluate brain and heart conditions.
+      </p>
+    </div>
+
+    <!-- Types -->
+    <div class="section">
+      <h3>Types of PET Scans</h3>
+
+      <div class="param-list">
+
+        <div class="param-item">
+          <div class="param-header">
+            Oncology PET Scan
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Detects cancers and tumors at an early stage</li>
+              <li>Determines if tumors are benign or malignant</li>
+              <li>Helps in cancer staging</li>
+              <li>Monitors chemotherapy or radiation response</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-header">
+            Cardiology PET Scan
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Evaluates blood flow to heart muscles</li>
+              <li>Detects reduced oxygen supply</li>
+              <li>Identifies coronary artery disease</li>
+              <li>Guides cardiac treatment planning</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-header">
+            Neurology PET Scan
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Evaluates brain metabolism and activity</li>
+              <li>Detects Alzheimer’s and dementia</li>
+              <li>Helps diagnose epilepsy and Parkinson’s</li>
+              <li>Assesses brain tumors and strokes</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-header">
+            Whole Body PET Scan
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Provides complete metabolic assessment</li>
+              <li>Detects cancer spread across organs</li>
+              <li>Used for early cancer detection</li>
+              <li>Supports preventive health evaluation</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-header">
+            PET-MRI Scan
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Combines PET metabolic data with MRI detail</li>
+              <li>Ideal for neurological and oncological cases</li>
+              <li>Provides superior soft tissue contrast</li>
+              <li>Lower radiation than PET-CT</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-header">
+            PET-CT Scan
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Combines PET functional imaging with CT anatomy</li>
+              <li>Highly accurate cancer diagnosis</li>
+              <li>Used for radiation therapy planning</li>
+              <li>Detects small and early lesions</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Why Choose -->
+    <div class="section about-test">
+      <h2>Why Choose PET Scan</h2>
+      <p>
+        PET scans detect metabolic changes before structural damage occurs, enabling early diagnosis, accurate staging, and effective treatment monitoring.
+      </p>
+    </div>
+
+    <!-- Why Test -->
+    <div class="section about-test">
+      <h2>Why This Test</h2>
+      <p>
+        PET scans help detect cancer, neurological disorders, and cardiac conditions early, guiding precise medical decision-making and therapy evaluation.
+      </p>
+    </div>
+  
+  </div>
+</section>
+
+ <section class="package" id="package5" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 30px;">
+  <h2 class="package-title" style="margin-bottom: 20px;">X-Ray</h2>
+  <div class="package-sections" style="max-width: 800px; width: 100%;">
+
+    <!-- About -->
+    <div class="section about-test">
+      <h2>What is X-Ray?</h2>
+      <p style="text-align: center;">
+        X-Ray is a quick and non-invasive imaging technique used to view the structure of bones and certain internal organs. 
+        It helps in detecting fractures, infections, or abnormalities in the skeletal system and chest area.
+      </p>
+    </div>
+
+    <!-- Types -->
+    <div class="section">
+      <h3>Types of X-Rays</h3>
+      <div class="param-list">
+
+        <div class="param-item">
+          <div class="param-header">
+            Chest X-Ray
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Detects lung infections such as pneumonia or tuberculosis</li>
+              <li>Evaluates heart size and chest wall structures</li>
+              <li>Identifies fractures of ribs or chest bones</li>
+              <li>Helps monitor chronic lung conditions like asthma or COPD</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-header">
+            Dental X-Ray
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Detects cavities and tooth decay not visible in routine exams</li>
+              <li>Evaluates jawbone and root health</li>
+              <li>Helps in planning dental implants and braces</li>
+              <li>Identifies cysts, abscesses, and impacted teeth</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-header">
+            Bone X-Ray
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Detects bone fractures and dislocations</li>
+              <li>Evaluates arthritis and joint degeneration</li>
+              <li>Checks for bone infections and tumors</li>
+              <li>Monitors bone healing after treatment</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-header">
+            Abdominal X-Ray
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Detects intestinal blockages and perforations</li>
+              <li>Identifies swallowed foreign objects</li>
+              <li>Helps diagnose kidney stones and gallstones</li>
+              <li>Evaluates stomach and bowel conditions in emergencies</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-header">
+            Mammography (Breast X-Ray)
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Used for early detection of breast cancer</li>
+              <li>Identifies lumps, tumors, and calcifications</li>
+              <li>Distinguishes between benign and suspicious growths</li>
+              <li>Guides further imaging tests and biopsies</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+<!-- Why Choose -->
+    <div class="section about-test">
+      <h2>Why Choose X-Ray</h2>
+      <p>
+        X-Ray scans are a fundamental diagnostic tool for evaluating bone health, lung conditions, and other internal structures. 
+        They are fast, safe, and provide valuable insights for early detection and monitoring of medical conditions.
+      </p>
+    </div>
+
+    <!-- Why This Test -->
+    <div class="section about-test">
+      <h2>Why This Test</h2>
+      <p>
+        X-Ray allows doctors to quickly identify fractures, dislocations, infections, or abnormalities. 
+        It is particularly useful for assessing chest infections, bone injuries, and joint issues.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<section class="package" id="package11" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 30px;">
+  <h2 class="package-title" style="margin-bottom: 20px;">DEXA Scan (Bone Densitometry)</h2>
+  <div class="package-sections" style="max-width: 800px; width: 100%;">
+
+    <!-- About -->
+    <div class="section about-test">
+      <h2>What is a DEXA Scan?</h2>
+      <p style="text-align: center;">
+        A DEXA Scan (Dual-Energy X-ray Absorptiometry) is a specialized imaging test that measures bone mineral density (BMD). 
+        It is used to diagnose osteoporosis, assess fracture risk, and monitor changes in bone health over time.
+      </p>
+    </div>
+
+    <!-- Types -->
+    <div class="section">
+      <h3>Types of DEXA Scans</h3>
+      <div class="param-list">
+
+        <div class="param-item">
+          <div class="param-header">
+            Central DEXA Scan
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Measures bone density in the spine and hip (most common method)</li>
+              <li>Used for diagnosing osteoporosis and predicting fracture risk</li>
+              <li>Provides detailed and highly accurate results</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-header">
+            Peripheral DEXA Scan
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Measures bone density in smaller bones such as wrist, heel, or finger</li>
+              <li>Often used for quick screenings</li>
+              <li>Less detailed compared to central DEXA scan</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Why Choose -->
+    <div class="section about-test">
+      <h2>Why Choose a DEXA Scan</h2>
+      <p>
+        DEXA scans are highly accurate and considered the gold standard for measuring bone density. 
+        Early detection of bone loss allows timely interventions, reducing the risk of fractures and improving overall bone health.
+      </p>
+    </div>
+
+    <!-- Why This Test -->
+    <div class="section about-test">
+      <h2>Why This Test</h2>
+      <p>
+        The DEXA Scan helps identify low bone density before symptoms appear. 
+
+
+
+  </div>
+</section>
+
+
+
+
+
+<section class="core-organs-section">
+  <div class="core-organs-container">
+    <div class="organs-text">
+      <h2>Complete Health Screening for Your<strong> Vital Organs</strong></h2>
+      <p> 
+        At Niva Health Kare, we provide a wide range of diagnostic tests to monitor
+        the health and function of your vital organs.
+      </p>
+
+      <a href="Core-Body-Organs.html" class="view-all-button">
+        View All Checkups
+      </a>
+    </div>
+
+    <div class="organs-grid">
+
+      <a href="Core-Body-Organs.html#heart" class="organ-card">
+<div class="icon-circle">
+  <img
+    src="images/Heart.webp"
+    alt="Heart health icon, cardiology services"
+    width="100"
+    height="100"
+    loading="lazy">
+</div>
+
+        <p>Heart</p>
+      </a>
+
+      <a href="Core-Body-Organs.html#kidney" class="organ-card">
+<div class="icon-circle">
+  <img
+    src="images/Kidney.webp"
+    alt="Kidney health icon, nephrology services"
+    width="100"
+    height="100"
+    loading="lazy">
+</div>
+
+        <p>Kidney</p>
+      </a>
+
+      <a href="Core-Body-Organs.html#liver" class="organ-card">
+<div class="icon-circle">
+  <img
+    src="images/Liver.webp"
+    alt="Liver health icon, hepatology services"
+    width="100"
+    height="100"
+    loading="lazy">
+</div>
+
+        <p>Liver</p>
+      </a>
+
+      <a href="Core-Body-Organs.html#bone" class="organ-card">
+<div class="icon-circle">
+  <img
+    src="images/Bone.webp"
+    alt="Bone health icon, orthopedics services"
+    width="100"
+    height="100"
+    loading="lazy">
+</div>
+
+        <p>Bone</p>
+      </a>
+
+      <a href="Core-Body-Organs.html#vitamin" class="organ-card">
+<div class="icon-circle">
+  <img
+    src="images/Vitamin.webp"
+    alt="Vitamin and nutrition icon, dietary and wellness services"
+    width="100"
+    height="100"
+    loading="lazy">
+</div>
+
+        <p>Vitamin</p>
+      </a>
+
+      <a href="Core-Body-Organs.html#hormone" class="organ-card">
+<div class="icon-circle">
+  <img
+    src="images/Hormones.webp"
+    alt="Hormones and endocrine health icon, endocrinology services"
+    width="100"
+    height="100"
+    loading="lazy">
+</div>
+
+        <p>Hormones</p>
+      </a>
+
+      <a href="Core-Body-Organs.html#gut" class="organ-card">
+<div class="icon-circle">
+  <img
+    src="images/Gut Health.webp"
+    alt="Gut health icon, gastroenterology and digestive services"
+    width="100"
+    height="100"
+    loading="lazy">
+</div>
+
+        <p>Gut Health</p>
+      </a>
+
+      <a href="Core-Body-Organs.html#blood" class="organ-card">
+<div class="icon-circle">
+  <img
+    src="images/Blood.webp"
+    alt="Blood health icon, hematology and lab services"
+    width="100"
+    height="100"
+    loading="lazy">
+</div>
+
+        <p>Blood</p>
+      </a>
+
+      <a href="Core-Body-Organs.html#reproductive" class="organ-card">
+<div class="icon-circle">
+  <img
+    src="images/Reproductive.webp"
+    alt="Reproductive health icon, gynecology and fertility services"
+    width="100"
+    height="100"
+    loading="lazy">
+</div>
+
+        <p>Reproductive</p>
+      </a>
+
+      <a href="Core-Body-Organs.html#thyroid" class="organ-card">
+<div class="icon-circle">
+  <img
+    src="images/thyroid.webp"
+    alt="Thyroid health icon, endocrinology services"
+    width="100"
+    height="100"
+    loading="lazy">
+</div>
+
+        <p>Thyroid</p>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+
+<section class="reviews-banner">
+
+  <div class="reviews-container">
+
+    <!-- LEFT: AUTO SLIDING REVIEWS -->
+    <div class="reviews-slider">
+      <div class="reviews-track">
+
+        <div class="review-item">
+          <p>“Fast reports & polite support. Highly recommended.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=15" alt="">
+            <div>
+              <strong>Shashank N.</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+        <div class="review-item">
+          <p>“Home sample collection was on time and very hygienic.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=22" alt="">
+            <div>
+              <strong>Ananya R.</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+        <div class="review-item">
+          <p>“Booked a full body checkup. Got reports within hours.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=5" alt="">
+            <div>
+              <strong>Rohit Kumar</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+        <div class="review-item">
+          <p>“Very smooth experience. Support team was helpful.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=9" alt="">
+            <div>
+              <strong>Divya M.</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT: TRUST CONTENT (DESKTOP ONLY) -->
+    <div class="reviews-info">
+      <h2>What Patients Say<br>On Google</h2>
+
+      <p>
+        Trusted by thousands for accurate reports and convenient home
+        sample collection. Rated <strong>4.3★ on Google</strong>.
+      </p>
+
+      <div class="trust-stats">
+        <div>
+          ⭐<br><strong>4.3</strong><br>Rating
+        </div>
+        <div>
+          👥<br><strong>10k+</strong><br>Users
+        </div>
+        <div>
+          🏥<br><strong>NABL</strong><br>Labs
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+
+<div id="sticky-icon-popup">
+
+  <a href="https://wa.me/+917892287102" target="_blank" class="icon-btn whatsapp" aria-label="Chat on WhatsApp" rel="noopener">
+    <i class="fab fa-whatsapp"></i>
+    <span class="tooltip">WhatsApp</span>
+  </a>
+
+  <a href="tel:+917892287102" class="icon-btn call" aria-label="Call Support" rel="noopener">
+    <i class="fas fa-phone-alt"></i>
+    <span class="tooltip">Call Support</span>
+  </a>
+
+</div>
+
+<section class="faq-section">
+  <div class="container">
+    <h2>Frequently Asked Questions</h2>
+
+    <details class="faq-item">
+      <summary>How do I book a diagnostic scan with Niva Health Kare?</summary>
+      <p>
+        You can book a scan online through our website or by calling our support team. 
+        Select the required scan and choose a convenient date and center.
+      </p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Do you provide home scan services?</summary>
+      <p>
+        Most diagnostic scans such as X-Ray, MRI, CT, DEXA, and Ultrasound are performed at our partner diagnostic centers. 
+        Home services may be available only for select portable tests.
+      </p>
+    </details>
+
+    <details class="faq-item">
+      <summary>How long does it take to receive scan reports?</summary>
+      <p>
+        Report delivery time depends on the scan type. 
+        Most scan reports are available within <strong>24–48 hours</strong>, while some advanced scans may take longer.
+      </p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Can I book a scan online?</summary>
+      <p>
+        Yes, scans can be booked online anytime. 
+        Our team will assist with appointment confirmation and scan center details.
+      </p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Is any preparation required before a scan?</summary>
+      <p>
+        Preparation depends on the scan type. 
+        Some scans may require fasting, avoiding metal objects, or special instructions, which will be shared before your appointment.
+      </p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Where are your scan centers located?</summary>
+      <p>
+        We work with certified diagnostic centers across Bangalore, making it easy to access scans near your location.
+      </p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Why choose Niva Health Kare for diagnostic scans?</summary>
+      <p>
+        We partner with certified imaging centers, ensure transparent pricing, timely reports, and smooth appointment coordination.
+      </p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Can I book scans for multiple family members?</summary>
+      <p>
+        Yes, you can book scans for multiple family members. 
+        Our team will help schedule appointments accordingly.
+      </p>
+    </details>
+
+  </div>
+</section>
+
+
+<footer class="footer-section">
+  <div class="footer-container">
+
+    <!-- Brand / Trust -->
+    <div class="footer-left">
+      <h2 class="footer-brand">
+        <span class="footer-niva">Niva</span>
+        <span class="footer-healthcare">Health Kare</span>
+      </h2>
+
+      <p class="footer-tagline">
+        Trusted healthcare services delivering quality, care, and compassion.
+      </p>
+
+      <div class="social-icons">
+        <a href="https://www.instagram.com/nivahealthkare/" aria-label="Instagram">
+      <img
+        src="images/instagram.webp"
+        alt="Follow Niva Health Kare on Instagram"
+        width="24"
+        height="24"
+        loading="lazy">
+      </a>
+        <a href="https://www.facebook.com/profile.php?id=61583126009241" aria-label="Facebook">
+        <img
+          src="images/facebook.webp"
+          alt="Follow Niva Health Kare on Facebook"
+          width="24"
+          height="24"
+          loading="lazy">
+
+        </a>
+        <a href="https://www.youtube.com/@nivahealthkare" aria-label="YouTube">
+        <img
+          src="images/youtube.webp"
+          alt="Subscribe to Niva Health Kare on YouTube"
+          width="24"
+          height="24"
+          loading="lazy">
+
+        </a>
+      </div>
+    </div>
+
+    <!-- Links -->
+    <div class="footer-right">
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="index.html">Home</a>
+        <a href="about-us.html">About Us</a>
+        <a href="locate-us.html">Locate Us</a>
+        
+      </div>
+
+      <div class="footer-col">
+        <h4>Medical Network</h4>
+        <a href="our-partners.html">Our Partners</a>
+        <a href="for-doctors.html">Doctors</a>
+        <a href="service.html">Our Services</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="refund-policy.html">Refund Policy</a>
+        <a href="disclaimer.html">Disclaimer</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom -->
+  <div class="footer-bottom">
+    <p>
+      © 2025 Niva Health Kare Pvt. Ltd. All rights reserved.  
+      <span>An initiative by Vinayaka Hospital.</span>
+    </p>
+
+    <div class="footer-links">
+      <a href="terms.html">Terms</a>
+      <a href="privacy-policy.html">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+<section class="simple-seo-footer">
+  <div class="simple-seo-container">
+
+    <div class="seo-item">
+      <h4>Diagnostic Scan Packages</h4>
+      <p>
+        Affordable diagnostic scan services including MRI scans, CT scans,
+        X-Ray imaging, DEXA bone density scans, and Ultrasound scans
+        performed at certified diagnostic centers in Bangalore.
+      </p>
+    </div>
+
+    <div class="seo-item">
+      <h4>Advanced Imaging & Scan Services</h4>
+      <p>
+        Trusted imaging services for MRI Brain, MRI Spine, CT Abdomen,
+        digital X-Ray, Doppler studies, and high-resolution Ultrasound scans
+        with accurate reporting and modern equipment.
+      </p>
+    </div>
+
+    <div class="seo-item">
+      <h4>Scan Centers Across Bangalore</h4>
+      <p>
+        Easy access to diagnostic scan centers across Bangalore with
+        flexible appointment slots, experienced radiologists, and
+        timely report delivery within 24–48 hours.
+      </p>
+    </div>
+
+    <div class="seo-item">
+      <h4>Why Choose Our Diagnostic Scans</h4>
+      <p>
+        Transparent pricing, certified imaging partners, advanced scanning
+        technology, expert interpretation, and patient-friendly support
+        for reliable and stress-free diagnostic imaging.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+<!-- ✅ Toast Notification -->
+<div id="toast" class="toast">Added to Cart</div>
+
+  <script src="javascript/slider.js"></script>
+  <script src="javascript/lab-carousel.js"></script>
+  <script src="javascript/script.js"></script>
+  <script src="javascript/search.js"></script>
+  <script src="javascript/booking.js"></script>
+  <script src="javascript/testscript.js"></script>
+  <script src="javascript/location.js"></script>
+
+
+</body>
+</html>

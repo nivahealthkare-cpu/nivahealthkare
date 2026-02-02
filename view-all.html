@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- Primary SEO -->
+  <title>View All Health Checkup Packages by Body Organs | Niva Health Kare Bangalore</title>
+  <meta name="description" content="Explore all health checkup packages by body organs at Niva Health Kare Bangalore. Book heart, liver, kidney, thyroid, lungs, diabetes and full body health packages with trusted labs." />
+  <meta name="keywords" content="health packages Bangalore, body organ health checkup, full body checkup Bangalore, diagnostic packages, lab tests Bangalore, Niva Health Kare">
+  <meta name="robots" content="index, follow">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://www.nivahealthkare.com/view-all-packages" />
+
+  <!-- Open Graph (Facebook / WhatsApp) -->
+  <meta property="og:title" content="View All Health Packages by Body Organs | Niva Health Kare">
+  <meta property="og:description" content="Browse organ-wise health checkup packages including heart, kidney, liver, thyroid and full body tests. Trusted diagnostics in Bangalore.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.nivahealthkare.com/view-all-packages">
+  <meta property="og:image" content="https://www.nivahealthkare.com/images/view-all-packages-og.webp">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/viewall.css">
+
+  <!-- Font Awesome (performance optimized) -->
+  <link rel="preload"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        as="style"
+        onload="this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  </noscript>
+
+</head>
+<body>
+
+
+
+<header>
+
+  <!-- ================= DESKTOP HEADER ================= -->
+  <div class="desktop-header">
+
+    <!-- LEFT: LOGO + LOCATION -->
+    <div class="logo-location">
+
+      <div class="logo-section">
+        <div class="lab-name">
+          <span class="niva">Niva</span>
+          <span class="healthcare">Health Kare</span>
+        </div>
+      </div>
+
+      <!-- LOCATION TRIGGER -->
+      <div class="location-trigger" id="openLocation">
+        <span class="label">Location</span>
+        <span class="city">
+          <i class="fa-solid fa-location-dot location-icon"></i>
+          <span id="selectedCity">Select city</span>
+          <i class="fa-solid fa-chevron-down chevron"></i>
+        </span>
+      </div>
+
+
+    </div>
+
+    <!-- RIGHT: MENU ICONS -->
+    <div class="header-actions">
+      <a href="index.html" class="header-item">
+        <i class="fas fa-home header-icon"></i>
+        <span class="header-text">Home</span>
+      </a>
+
+      <a href="surgeries.html" class="header-item">
+        <i class="fas fa-procedures header-icon"></i>
+        <span class="header-text">Surgeries</span>
+      </a>
+
+      <a href="test.html" class="header-item">
+        <i class="fas fa-vials header-icon"></i>
+        <span class="header-text">Lab Tests</span>
+      </a>
+
+      <div class="header-item" onclick="openModal()">
+        <i class="fas fa-heartbeat header-icon"></i>
+        <span class="header-text">Checkup</span>
+      </div>
+
+      <div class="header-item" onclick="toggleDrawer()">
+        <i class="fas fa-shopping-cart header-icon">
+          <span id="cart-count" class="cart-count">0</span>
+        </i>
+        <span class="header-text">Cart</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================= MOBILE HEADER ================= -->
+  <div class="mobile-header">
+    <div class="logo-section">
+      <div class="lab-name">
+        <span class="niva">Niva</span>
+        <span class="healthcare">Health Kare</span>
+      </div>
+    </div>
+
+    <div class="location-section" id="mobileLocation">
+      <i class="fas fa-map-marker-alt location-icon"></i>
+
+      <div class="location-info">
+        <span class="label">Your Location</span>
+        <span class="city">
+          <span id="mobileSelectedCity">Bangalore</span>
+          <i class="fas fa-chevron-down chevron"></i>
+        </span>
+
+
+      </div>
+    </div>
+
+  </div>
+
+</header>
+
+
+<!-- LOCATION POPUP -->
+<div class="location-popup" id="locationPopup">
+  <div class="popup-card">
+
+    <!-- HEADER -->
+    <div class="popup-header">
+      <h3>Select your city</h3>
+      <button class="close-btn" id="closePopup">×</button>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="search-wrapper">
+      <span class="search-icon">🔍</span>
+
+      <input
+        type="text"
+        id="citySearch"
+        class="city-search"
+        placeholder="Search city (e.g. Mysuru)"
+        autocomplete="off"
+      />
+
+      <!-- Suggestions dropdown -->
+      <ul class="suggestions" id="citySuggestions"></ul>
+    </div>
+
+
+    <!-- POPULAR CITIES -->
+    <p class="section-label" id="popularLabel">Popular cities</p>
+    <div class="city-list popular" id="popularCities"></div>
+
+    <!-- ALL / SEARCH RESULTS -->
+    <div class="city-list" id="cityList"></div>
+
+    <p class="coverage">
+      Services available across major cities in Karnataka
+    </p>
+
+  </div>
+</div>
+
+
+<!-- Minimal Consultation Modal -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+  <div class="modal-box" onclick="event.stopPropagation()">
+
+    <!-- Header -->
+    <div class="modal-header">
+      <h3>Get a call from our medical team</h3>
+      <button class="close-btn" onclick="closeModal()">×</button>
+    </div>
+
+    <!-- Subtext -->
+    <p class="modal-subtext">
+      Enter your mobile number and we’ll call you shortly.
+    </p>
+
+    <form id="consultationForm" onsubmit="return false;">
+
+      <!-- Service (readonly / auto-filled) -->
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Your name"
+        />
+
+      <!-- Mobile -->
+      <input
+        type="tel"
+        id="mobile"
+        name="mobile"
+        placeholder="Mobile number *"
+        required
+      />
+
+      <!-- Optional message -->
+      <textarea
+        id="message"
+        name="message"
+        placeholder="Message (optional)"
+        rows="3"
+      ></textarea>
+
+        <button type="button" onclick="showConfirmation()">
+          Request Call Back
+        </button>
+
+
+      <p class="trust-text">
+        📞 Usually calls within 5 minutes
+      </p>
+
+    </form>
+
+    <div id="checkupConfirmationMessage" class="confirmation-message" style="display:none;">
+      ✅ Thank you! Our expert will call you shortly.
+    </div>
+
+  </div>
+</div>
+
+
+
+  
+  <!-- Cart Drawer (Right Side) -->
+ 
+<!-- Background Blur Overlay -->
+<div id="cartOverlay" class="cart-overlay" onclick="closeDrawer()"></div>
+
+
+<!-- Cart Drawer -->
+<div class="drawer mobile-drawer" id="drawer">
+  <div class="drawer-header">
+    <h3>Your Cart</h3>
+    <button onclick="closeDrawer()">✕</button>
+
+  </div>
+
+  <div class="drawer-body" id="cartItemsContainer"></div>
+
+  <div class="cart-summary">
+    <div class="summary-left">
+      <span class="total-tests">
+        checkout test: <strong id="totalTests">0</strong>
+      </span>
+      <span class="total-price">
+        Total Price: <strong id="totalPrice">₹0</strong>
+      </span>
+    </div>
+    <a href="checkout.html" class="proceed-btn">Proceed</a>
+  </div>
+</div>
+
+
+
+<!-- Mobile Bottom Bar -->
+<div class="mobile-bottom">
+
+  <!-- Home -->
+  <a href="index.html">
+    <i class="fas fa-home"></i>
+  </a>
+
+  <!-- Surgeries -->
+  <a href="surgeries.html">
+    <i class="fas fa-procedures"></i>
+  </a>
+
+  <!-- Lab Tests -->
+  <a href="test.html">
+    <i class="fas fa-vials"></i>
+  </a>
+
+  <!-- Checkups -->
+  <a href="#" onclick="openModal()">
+    <i class="fas fa-heartbeat"></i>
+  </a>
+
+  <!-- Cart -->
+  <a href="#" onclick="toggleDrawer()">
+    <i class="fas fa-shopping-cart"></i>
+  </a>
+
+</div>
+
+
+
+<section class="hero">
+  <div class="hero-container">
+
+    <div class="hero-content">
+      <span class="hero-tag">Home Sample Collection • Bangalore</span>
+
+      <h1>
+        Complete Health Checkup Packages<br />
+        <span>Accurate • Affordable • At Home</span>
+      </h1>
+
+      <p class="hero-subtext">
+        Book comprehensive blood test and health checkup packages from trusted,
+        NABL-certified laboratories. Free home sample collection across Bangalore
+        with fast and reliable reports.
+      </p>
+
+      <ul class="hero-points">
+        <li>✔ Full Body, Diabetes, Thyroid & Heart Packages</li>
+        <li>✔ Same-Day & Next-Day Digital Reports</li>
+        <li>✔ CMC Vellore–Standard Partner Labs</li>
+        <li>✔ Transparent Pricing – No Hidden Charges</li>
+      </ul>
+
+      <div class="hero-actions">
+       <a href="tel:+917892287102" class="btn-primary">Call to Book</a>
+        <span class="price-note">Save up to 30% on selected packages</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="lab-summary">
+
+  <!-- Package Overview -->
+  <div class="section package-overview">
+    <h3 class="section-title">About This Health Package</h3>
+    <p class="package-desc">
+      A comprehensive preventive health package designed to assess vital organ function,
+      nutritional status, and lifestyle-related risk factors. Ideal for routine health monitoring
+      and early detection of common medical conditions.
+    </p>
+  </div>
+
+  <!-- Ideal For -->
+  <div class="section ideal-for">
+    <h3 class="section-title">Who Should Take This Package?</h3>
+    <div class="pill-group">
+      <span class="pill">Adults (18+)</span>
+      <span class="pill">Working Professionals</span>
+      <span class="pill">Preventive Health Check</span>
+      <span class="pill">Family Health Monitoring</span>
+    </div>
+  </div>
+
+  <!-- What It Covers -->
+  <div class="section two-box">
+    <div class="fancy-card">
+      <h4>Health Areas Covered</h4>
+      <p>
+        Evaluates liver, kidney, heart health, blood sugar levels, cholesterol,
+        thyroid balance, and overall metabolic health.
+      </p>
+    </div>
+
+    <div class="fancy-card">
+      <h4>Purpose of the Package</h4>
+      <p>
+        Helps identify early signs of diabetes, cholesterol imbalance, thyroid disorders,
+        anemia, and lifestyle-related health risks.
+      </p>
+    </div>
+  </div>
+
+  <!-- Key Benefits -->
+  <div class="section highlights">
+    <div class="highlight-box">
+      <div class="highlight-value">Preventive</div>
+      <div class="highlight-desc">Early Risk Detection</div>
+    </div>
+
+    <div class="highlight-box">
+      <div class="highlight-value">At Home</div>
+      <div class="highlight-desc">Sample Collection</div>
+    </div>
+
+    <div class="highlight-box">
+      <div class="highlight-value">Accurate</div>
+      <div class="highlight-desc">Certified Labs</div>
+    </div>
+
+    <div class="highlight-box">
+      <div class="highlight-value">Fast</div>
+      <div class="highlight-desc">Digital Reports</div>
+    </div>
+  </div>
+
+</section>
+
+
+
+  <!-- Navigation -->
+  <nav class="top-nav">
+    
+    <a href="#package1">Basic Health Check Up</a>
+    <a href="#package2">Master Health Check Up</a>
+    <a href="#package3">Heart Check up</a>
+    <a href="#package4">Well Women Check up</a>
+    <a href="#package5">Children's Checkup - Essential for Kids</a>
+    <a href="#package6">Full Body Checkup - Basic</a>
+  </nav>
+
+  <!-- Packages -->
+  <div class="packages">
+
+    <!-- Repeat this block for each package -->
+<section class="package" id="package1" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 30px;">
+  <h2 class="package-title" style="margin-bottom: 20px;">Basic Health Check Up</h2>
+  <div class="package-sections" style="max-width: 800px; width: 100%;">
+
+    <!-- About -->
+<div class="section about-test">
+  <h2>What is the Basic Health Check Up?</h2>
+  <p style="text-align: center;">
+    The Basic Health Check Up is a quick and effective assessment designed to evaluate your overall health. 
+    It typically includes tests for blood sugar, cholesterol, liver and kidney function, and other essential health markers. 
+    This checkup helps detect early signs of common health issues, allowing you to take timely action, 
+    make informed lifestyle choices, and maintain long-term well-being. 
+    It is suitable for healthy individuals as a preventive measure, as well as for those with minor health concerns seeking a general overview of their health status.
+  </p>
+</div>
+
+
+    <!-- Parameters -->
+    <div class="section">
+      <h3>List of Parameters</h3>
+      <div class="param-list">
+
+        <div class="param-item">
+          <div class="param-header">
+            Liver Function Tests (LFTs)
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Total Bilirubin</li>
+              <li>Direct Bilirubin</li>
+              <li>SGOT (AST)</li>
+              <li>SGPT (ALT)</li>
+              <li>Alkaline Phosphatase (ALP)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-header">
+            Kidney Function Tests (KFTs)
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Blood Urea Nitrogen (BUN)</li>
+              <li>Serum Creatinine</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-header">
+            Blood Sugar Tests
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Fasting Blood Sugar (FBS)</li>
+              <li>Postprandial Blood Sugar (PPBS)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-header">
+            Lipid Profile
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Cholesterol</li>
+              <li>Triglycerides</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-header">
+            Complete Blood Count (CBC)
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Hemoglobin</li>
+              <li>P.C.V.</li>
+              <li>MCHC,MCV,MCH</li>
+              <li>Defferential count</li>
+              <li>ESR</li>
+              <li>RBC Count</li>
+              <li>Total WBC</li>
+              <li>Peripheral Smear</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-header">
+            Urine Routine
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Color</li>
+              <li>Appearance</li>
+              <li>Specific Gravity</li>
+              <li>pH</li>
+              <li>Albumin (Protein)</li>
+              <li>Sugar (Glucose)</li>
+              <li>Ketones</li>
+              <li>Bilirubin</li>
+              <li>Urobilinogen</li>
+              <li>Blood</li>
+              <li>Pus Cells (WBC)</li>
+              <li>Red Blood Cells (RBC)</li>
+              <li>Epithelial Cells</li>
+              <li>Casts</li>
+              <li>Crystals</li>
+              <li>Bacteria</li>
+            </ul>
+          </div>
+        </div>
+
+
+<!-- Why Choose -->
+<div class="section about-test">
+  <h2>Why Choose the Basic Health Check Up</h2>
+  <p>
+    The Basic Health Check Up is ideal for those looking for a quick and effective way to gauge their general health. 
+    It helps in identifying common health issues such as high blood sugar, liver or kidney problems, and cholesterol imbalances, 
+    all of which can lead to more serious conditions if not managed properly. 
+    Regular screenings through this package are an important step in preventive healthcare, 
+    especially for those without any obvious symptoms but who may be at risk due to lifestyle or family history.
+  </p>
+</div>
+
+<!-- Why This Test -->
+  <div class="section about-test">
+    <h2>Why This Test</h2>
+    <p>
+      The Basic Health Check Up is designed to provide early detection of health issues that might not be immediately noticeable 
+      but can have long-term consequences. 
+      By evaluating essential parameters such as blood sugar levels, cholesterol, and organ functions, 
+      this checkup gives a comprehensive overview of your current health status. 
+      It’s an effective way to detect and address any potential risks before they develop into serious health conditions.
+    </p>
+  </div>
+
+
+
+    </div>
+
+  </div>
+</section>
+
+
+   
+<section class="package" id="package2" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 30px;">
+  <h2 class="package-title" style="margin-bottom: 20px;">Master Health Check Up</h2>
+  <div class="package-sections" style="max-width: 800px; width: 100%;">
+
+    <!-- About -->
+    <div class="section about-test">
+      <h2>What is the Master Health Check Up?</h2>
+      <p style="text-align: center;">
+        The Master Health Check Up is a comprehensive screening designed to give a complete understanding of your overall health. 
+        It includes advanced tests for heart, liver, kidney, thyroid, and other vital organ functions. 
+        This package helps in early detection of potential health issues, allowing proactive management, lifestyle optimization, and peace of mind.
+      </p>
+    </div>
+
+        <!-- Parameters -->
+        <div class="section">
+          <h3>List of Parameters</h3>
+          <div class="param-list">
+            <div class="param-item">
+              <div class="param-header">
+                Liver Function Tests (LFTs)
+                <button class="toggle">Know more +</button>
+              </div>
+              <div class="param-details">
+                <ul>
+                  <li>Total Bilirubin</li>
+                  <li>Direct Bilirubin</li>
+                  <li>Indirect Bilirubin</li>
+                  <li>ALT/SGPT</li>
+                  <li>AST/SGOT</li>
+                  <li>Alkaline Phosphatase (ALP)</li>
+                  <li>Total Protein</li>
+                  <li>Albumin</li>
+                  <li>Blood Group</li>
+                  <li>Aspartate Aminotransferase</li>
+                  <li>Alanine Aminotransferase</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="param-item">
+              <div class="param-header">
+                Kidney Function Tests (KFTs)
+                <button class="toggle">Know more +</button>
+              </div>
+              <div class="param-details">
+                <ul>
+                  <li>Blood Urea Nitrogen (BUN)</li>
+                  <li>Serum Creatinine</li>
+                  <li>Uric Acid</li>
+                  <li>Calcium</li>
+                  <li>Electrolytes (Sodium, Potassium, Chloride)</li>
+                </ul>
+              </div>
+            </div>
+             <div class="param-item">
+              <div class="param-header">
+                 Complete Blood Count (CBC)
+                <button class="toggle">Know more +</button>
+              </div>
+              <div class="param-details">
+                <ul>
+                  <li>Hemoglobin</li>
+                  <li>Total Leukocyte Count (TLC)</li>
+                  <li>Differential Leukocyte Count (DLC)</li>
+                  <li>Red Blood Cell Count (RBC)</li>
+                  <li>Packed Cell Volume (PCV)</li>
+                  <li>Mean Corpuscular Volume (MCV)</li>
+                  <li>Mean Corpuscular Hemoglobin (MCH)</li>
+                  <li>Mean Corpuscular Hemoglobin Concentration (MCHC)</li>
+                  <li>Platelet Count</li>
+                  <li>Erythrocyte Sedimentation Rate (ESR)</li>
+                </ul>
+
+              </div>
+            </div>
+
+            <div class="param-item">
+              <div class="param-header">
+                Blood Sugar Tests
+                <button class="toggle">Know more +</button>
+              </div>
+              <div class="param-details">
+                <ul>
+                  <li>Fasting Blood Sugar (FBS)</li>
+                  <li>Postprandial Blood Sugar (PPBS) </li>
+                </ul>
+              </div>
+            </div>
+
+
+            <div class="param-item">
+              <div class="param-header">
+                 Thyroid Profile
+                <button class="toggle">Know more +</button>
+              </div>
+              <div class="param-details">
+                <ul>
+                  <li>T3 – Triiodothyronine</li>
+                  <li>T4 – Thyroxine</li>
+                  <li>TSH – Thyroid Stimulating Hormone</li>
+                </ul>
+              </div>
+            </div>
+
+            
+            <div class="param-item">
+              <div class="param-header">
+                 Lipid Profile
+                <button class="toggle">Know more +</button>
+              </div>
+              <div class="param-details">
+                <ul>
+                  <li>Total Cholesterol</li>
+                  <li>HDL (Good Cholesterol)</li>
+                  <li>LDL (Bad Cholesterol)</li>
+                  <li>LDL/HDL Ratio</li>
+                  <li>Chol/HDL Ratio</li>
+                  <li>Triglycerides</li>
+                </ul>
+              </div>
+            </div>
+
+              <div class="param-item">
+          <div class="param-header">
+            Urine Routine
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Color</li>
+              <li>Appearance</li>
+              <li>Specific Gravity</li>
+              <li>pH</li>
+              <li>Albumin (Protein)</li>
+              <li>Sugar (Glucose)</li>
+              <li>Ketones</li>
+              <li>Bilirubin</li>
+              <li>Urobilinogen</li>
+              <li>Blood</li>
+              <li>Pus Cells (WBC)</li>
+              <li>Red Blood Cells (RBC)</li>
+              <li>Epithelial Cells</li>
+              <li>Casts</li>
+              <li>Crystals</li>
+              <li>Bacteria</li>
+            </ul>
+          </div>
+        </div>
+
+          </div>
+        </div>
+
+
+<div class="section about-test">
+  <h2>Why This Test</h2>
+  <p>
+    The Master Health Check Up is designed to provide a complete picture of your health by assessing multiple vital parameters. 
+    It helps in early detection of potential issues such as diabetes, heart conditions, liver or kidney problems, 
+    and other underlying health risks. 
+    By identifying these risks early, you can take timely action, make informed lifestyle changes, 
+    and manage existing health conditions effectively. 
+    This test is ideal for anyone looking to maintain optimal health and prevent future complications.
+  </p>
+</div>
+</div>
+</section>
+
+
+
+
+   <section class="package" id="package3" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 30px;">
+  <h2 class="package-title" style="margin-bottom: 20px;">Heart Check Up</h2>
+  <div class="package-sections" style="max-width: 800px; width: 100%;">
+
+    <!-- About -->
+    <div class="section about-test">
+      <h2>What is the Heart Check Up?</h2>
+      <p style="text-align: center;">
+        The Heart Check Up is a specialized health screening aimed at evaluating cardiovascular health. 
+        It includes tests such as ECG, lipid profile, blood pressure monitoring, and advanced heart function assessments. 
+        This package helps detect early signs of heart disease, monitor existing conditions, and guide preventive care for a healthier heart.
+      </p>
+    </div>
+    <!-- Parameters -->
+    <div class="section">
+      <h3>List of Parameters</h3>
+      <div class="param-list">
+        <!-- Cholesterol Profile -->
+        <div class="param-item">
+          <div class="param-header">Lipid Profile
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Total Cholesterol</li>
+              <li>HDL (Good Cholesterol)</li>
+              <li>LDL (Bad Cholesterol)</li>
+              <li>Triglycerides</li>
+              <li>LDL/HDL Ratio</li>
+              <li>Chol/HDL Ratio</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ECG -->
+        <div class="param-item">
+          <div class="param-header">ECG (Electrocardiogram)
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Resting ECG</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Blood Pressure -->
+        <div class="param-item">
+          <div class="param-header">Blood Pressure Check
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Blood Pressure Measurement</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Blood Sugar -->
+        <div class="param-item">
+          <div class="param-header">Blood Sugar Test
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Fasting Blood Sugar</li>
+              <li>Postprandial Blood Sugar</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Echocardiography -->
+        <div class="param-item">
+          <div class="param-header">Echocardiography
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Ultrasound Heart Test</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+        <div class="param-item">
+              <div class="param-header">Complete Blood Count (CBC)
+                <button class="toggle">Know more +</button>
+              </div>
+              <div class="param-details">
+                <ul>
+                  <li>Hemoglobin</li>
+                  <li>Packed Cell Volume (PCV)</li>
+                  <li>Mean Corpuscular Volume (MCV)</li>
+                  <li>Mean Corpuscular Hemoglobin (MCH)</li>
+                  <li>Mean Corpuscular Hemoglobin Concentration (MCHC)</li>
+                  <li>Total WBC</li>
+                  <li>Differential Count</li>
+                  <li>Peripheral Smear</li>
+                  <li>Erythrocyte Sedimentation Rate (ESR)</li>
+                </ul>
+
+              </div>
+            </div>
+
+        <div class="param-item">
+          <div class="param-header">Biochemical Parameters
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>F.B.S & P.P.B.S</li>
+              <li>Urea</li>
+              <li>Creatinine</li>
+              <li>Uric Acid</li>
+            </ul>
+          </div>
+        </div>
+
+    <!-- Why Choose -->
+    <div class="section about-test">
+      <h2>Why Choose the Heart Check Up</h2>
+      <p>
+        The Heart Check Up is essential for early detection of cardiovascular risks and diseases. 
+        It helps you monitor heart health, manage risk factors, and take preventive measures to maintain optimal heart function.
+      </p>
+    </div>
+
+    <!-- Why This Test -->
+    <div class="section about-test">
+      <h2>Why This Test</h2>
+      <p>
+        Cardiovascular disease is a leading cause of health complications. 
+        This test evaluates the key markers of heart health, enabling timely intervention and better management of existing conditions.
+      </p>
+    </div>
+    </div>
+    </section>
+
+<section class="package" id="package4" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 30px;">
+  <h2 class="package-title" style="margin-bottom: 20px;">Well Women Check Up</h2>
+  <div class="package-sections" style="max-width: 800px; width: 100%;">
+
+    <!-- About -->
+    <div class="section about-test">
+      <h2>What is the Well Women Check Up?</h2>
+      <p style="text-align: center;">
+        The Well Women Check Up is a comprehensive health screening specifically designed for women. 
+        It includes tests to evaluate hormonal balance, reproductive health, metabolic markers, 
+        and overall wellness. This checkup helps detect early signs of common conditions, 
+        enabling proactive health management and promoting long-term well-being. 
+        It is suitable for women of all ages looking for preventive care as well as those managing ongoing health concerns.
+      </p>
+    </div>
+
+    <!-- Parameters -->
+    <div class="section">
+      <h3>List of Parameters</h3>
+      <div class="param-list">
+        <!-- Breast Cancer Screening -->
+        <div class="param-item">
+          <div class="param-header">Breast Cancer Screening (Ultrasound)
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Breast Ultrasound</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Pap Smear Test -->
+        <div class="param-item">
+          <div class="param-header">Pap Smear Test (Cervical Cancer Screening)
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Cervical Smear Test</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Thyroid Profile -->
+        <div class="param-item">
+          <div class="param-header">Thyroid Profile
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>T3</li>
+              <li>T4</li>
+              <li>TSH (Thyroid Stimulating Hormone)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-header">
+            Complete Blood Count (CBC)
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Hemoglobin</li>
+              <li>P.C.V.</li>
+              <li>MCHC,MCV,MCH</li>
+              <li>Defferential count</li>
+              <li>ESR</li>
+              <li>RBC Count</li>
+              <li>Total WBC</li>
+              <li>Peripheral Smear</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Blood Sugar Test -->
+        <div class="param-item">
+          <div class="param-header">Blood Sugar Test
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Fasting Blood Sugar (FBS)</li>
+              <li>Postprandial Blood Sugar (PPBS)</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Lipid Profile -->
+        <div class="param-item">
+          <div class="param-header">Lipid Profile
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Total Cholesterol</li>
+              <li>HDL (Good Cholesterol)</li>
+              <li>LDL (Bad Cholesterol)</li>
+              <li>VLDL</li>
+              <li>Triglycerides</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- Why Choose -->
+    <div class="section about-test">
+      <h2>Why Choose the Well Women Check Up</h2>
+      <p>
+        This checkup is tailored to address women’s unique health needs, helping detect conditions early 
+        such as hormonal imbalances, thyroid issues, metabolic disorders, and reproductive health concerns. 
+        Regular screenings can empower women to maintain optimal health, prevent complications, 
+        and make informed lifestyle choices.
+      </p>
+    </div>
+
+    <!-- Why This Test -->
+    <div class="section about-test">
+      <h2>Why This Test</h2>
+      <p>
+        The Well Women Check Up offers a holistic overview of a woman’s health by evaluating key physiological and biochemical parameters. 
+        Early detection of potential issues allows timely intervention, effective management, 
+        and peace of mind for long-term wellness.
+      </p>
+    </div>
+
+</div>
+</section>
+
+
+<section class="package" id="package5" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 30px;">
+  <h2 class="package-title" style="margin-bottom: 20px;">Diabetic Profile</h2>
+
+  <div class="package-sections" style="max-width: 800px; width: 100%;">
+
+    <!-- About -->
+    <div class="section about-test">
+      <h2>What is the Diabetic Profile?</h2>
+      <p style="text-align: center;">
+        The Diabetic Profile is a comprehensive health screening designed to monitor blood sugar levels
+        and assess metabolic health. It helps detect early signs of diabetes, prediabetes,
+        and related complications affecting the heart, kidneys, liver, and overall metabolism.
+        This profile is ideal for individuals at risk of diabetes or those already managing the condition.
+      </p>
+    </div>
+
+    <!-- Parameters -->
+    <div class="section">
+      <h3>List of Parameters</h3>
+      <div class="param-list">
+
+        <!-- Blood Sugar Tests -->
+        <div class="param-item">
+          <div class="param-header">
+            Blood Sugar Tests
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Fasting Blood Sugar (FBS)</li>
+              <li>Postprandial Blood Sugar (PPBS)</li>
+              <li>HbA1c (Glycated Hemoglobin)</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Complete Blood Count -->
+        <div class="param-item">
+          <div class="param-header">
+            Complete Blood Count (CBC)
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Hemoglobin</li>
+              <li>P.C.V.</li>
+              <li>MCH, MCV, MCHC</li>
+              <li>Differential Count</li>
+              <li>ESR</li>
+              <li>RBC Count</li>
+              <li>Total WBC Count</li>
+              <li>Peripheral Smear</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Lipid Profile -->
+        <div class="param-item">
+          <div class="param-header">
+            Lipid Profile
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Total Cholesterol</li>
+              <li>HDL (Good Cholesterol)</li>
+              <li>LDL (Bad Cholesterol)</li>
+              <li>VLDL</li>
+              <li>Triglycerides</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Kidney Function -->
+        <div class="param-item">
+          <div class="param-header">
+            Kidney Function Tests
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Serum Creatinine</li>
+              <li>Blood Urea</li>
+              <li>Urine Routine Analysis</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Why Choose -->
+    <div class="section about-test">
+      <h2>Why Choose the Diabetic Profile</h2>
+      <p>
+        This profile is tailored to help monitor blood sugar control and detect diabetes-related
+        complications at an early stage. Regular testing supports better treatment planning,
+        lifestyle adjustments, and long-term prevention of heart, kidney, and nerve damage.
+      </p>
+    </div>
+
+    <!-- Why This Test -->
+    <div class="section about-test">
+      <h2>Why This Test</h2>
+      <p>
+        The Diabetic Profile provides a complete overview of glucose metabolism and associated
+        health markers. Early detection enables timely medical intervention, improved disease
+        management, and long-term health stability.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<section class="package" id="package6" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 30px;">
+  <h2 class="package-title" style="margin-bottom: 20px;">Executive Health Check Up</h2>
+  <div class="package-sections" style="max-width: 800px; width: 100%;">
+
+    <!-- About -->
+    <div class="section about-test">
+      <h2>What is the Executive Health Check Up?</h2>
+      <p style="text-align: center;">
+        The Executive Health Check Up is a comprehensive package designed for professionals and individuals who want a complete overview of their health. 
+        It includes advanced tests to assess heart, liver, kidney, metabolic, and overall organ function. 
+        This package helps detect early signs of chronic diseases and allows for proactive health management, ensuring optimal long-term well-being.
+      </p>
+    </div>
+
+    <!-- Parameters -->
+    <div class="section">
+      <h3>List of Parameters</h3>
+      <div class="param-list">
+
+        <div class="param-item">
+          <div class="param-header">
+            Blood Sugar Tests
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Fasting Blood Sugar (FBS)</li>
+              <li>Postprandial Blood Sugar (PPBS)</li>
+              <li>HbA1c</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-header">
+            Lipid Profile
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Cholesterol</li>
+              <li>Triglycerides</li>
+              <li>HDL</li>
+              <li>LDL</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-header">
+            Liver Function Tests (LFTs)
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>SGOT (AST), SGPT (ALT)</li>
+              <li>Alkaline Phosphatase (ALP)</li>
+              <li>Total & Direct Bilirubin</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-header">
+            Kidney Function Tests (KFTs)
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Blood Urea Nitrogen (BUN)</li>
+              <li>Serum Creatinine</li>
+              <li>Uric Acid</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-header">
+            Complete Blood Count (CBC)
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Hemoglobin</li>
+              <li>P.C.V.</li>
+              <li>MCHC, MCV, MCH</li>
+              <li>WBC & Differential Count</li>
+              <li>ESR</li>
+              <li>RBC Count</li>
+              <li>Peripheral Smear</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-header">
+            Urine Routine
+            <button class="toggle">Know more +</button>
+          </div>
+          <div class="param-details">
+            <ul>
+              <li>Color</li>
+              <li>Appearance</li>
+              <li>Specific Gravity</li>
+              <li>pH</li>
+              <li>Protein</li>
+              <li>Glucose</li>
+              <li>Ketones</li>
+              <li>RBC & WBC Count</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Why Choose -->
+    <div class="section about-test">
+      <h2>Why Choose the Executive Health Check Up</h2>
+      <p>
+        This check-up is ideal for professionals and busy individuals who want a complete health evaluation. 
+        It helps identify early signs of heart disease, diabetes, liver and kidney issues, and other chronic conditions, allowing timely interventions. 
+        Regular screenings through this package ensure proactive healthcare management and long-term wellness.
+      </p>
+    </div>
+
+    <!-- Why This Test -->
+    <div class="section about-test">
+      <h2>Why This Test</h2>
+      <p>
+        The Executive Health Check Up offers a thorough assessment of key health parameters, giving you a comprehensive overview of your body’s current condition. 
+        It helps detect hidden risks and enables informed decisions about lifestyle, diet, and preventive measures for optimal health.
+      </p>
+    </div>
+    </div>
+    </section>
+
+
+<!-- whatsapp and call -->
+ <div id="sticky-icon-popup">
+
+  <a href="https://wa.me/+917892287102" target="_blank" class="icon-btn whatsapp" aria-label="Chat on WhatsApp" rel="noopener">
+    <i class="fab fa-whatsapp"></i>
+    <span class="tooltip">WhatsApp</span>
+  </a>
+
+  <a href="tel:+917892287102" class="icon-btn call" aria-label="Call Support" rel="noopener">
+    <i class="fas fa-phone-alt"></i>
+    <span class="tooltip">Call Support</span>
+  </a>
+
+</div>
+</div>
+</section>
+
+
+<footer class="footer-section">
+  <div class="footer-container">
+
+    <!-- Brand / Trust -->
+    <div class="footer-left">
+      <h2 class="footer-brand">
+        <span class="footer-niva">Niva</span>
+        <span class="footer-healthcare">Health Kare</span>
+      </h2>
+
+      <p class="footer-tagline">
+        Trusted healthcare services delivering quality, care, and compassion.
+      </p>
+
+      <div class="social-icons">
+        <a href="https://www.instagram.com/nivahealthkare/" aria-label="Instagram">
+      <img
+        src="images/instagram.webp"
+        alt="Follow Niva Health Kare on Instagram"
+        width="24"
+        height="24"
+        loading="lazy">
+      </a>
+        <a href="https://www.facebook.com/profile.php?id=61583126009241" aria-label="Facebook">
+        <img
+          src="images/facebook.webp"
+          alt="Follow Niva Health Kare on Facebook"
+          width="24"
+          height="24"
+          loading="lazy">
+
+        </a>
+        <a href="https://www.youtube.com/@nivahealthkare" aria-label="YouTube">
+        <img
+          src="images/youtube.webp"
+          alt="Subscribe to Niva Health Kare on YouTube"
+          width="24"
+          height="24"
+          loading="lazy">
+
+        </a>
+      </div>
+    </div>
+
+    <!-- Links -->
+    <div class="footer-right">
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="index.html">Home</a>
+        <a href="about-us.html">About Us</a>
+        <a href="locate-us.html">Locate Us</a>
+        
+      </div>
+
+      <div class="footer-col">
+        <h4>Medical Network</h4>
+        <a href="our-partners.html">Our Partners</a>
+        <a href="for-doctors.html">Doctors</a>
+        <a href="service.html">Our Services</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="refund-policy.html">Refund Policy</a>
+        <a href="disclaimer.html">Disclaimer</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom -->
+  <div class="footer-bottom">
+    <p>
+      © 2025 Niva Health Kare Pvt. Ltd. All rights reserved.  
+      <span>An initiative by Vinayaka Hospital.</span>
+    </p>
+
+    <div class="footer-links">
+      <a href="terms.html">Terms</a>
+      <a href="privacy-policy.html">Privacy</a>
+    </div>
+  </div>
+</footer>
+<section class="simple-seo-footer">
+  <div class="simple-seo-container">
+
+    <div class="seo-item">
+      <h4>Basic Health Check Up Tests</h4>
+      <p>
+        The Basic Health Check Up includes essential medical tests such as blood sugar tests,
+        lipid profile, liver function tests, kidney function tests, complete blood count (CBC),
+        and urine routine examination to assess overall health.
+      </p>
+    </div>
+
+    <div class="seo-item">
+      <h4>Preventive Health Screening</h4>
+      <p>
+        A Basic Health Check Up helps in early detection of common health conditions like
+        diabetes, cholesterol imbalance, liver or kidney disorders, and other metabolic issues
+        before symptoms appear.
+      </p>
+    </div>
+
+    <div class="seo-item">
+      <h4>Health Check Up in Bangalore</h4>
+      <p>
+        Book a Basic Health Check Up in Bangalore with trusted diagnostic centers offering
+        accurate lab reports, home sample collection, affordable pricing, and quick results.
+      </p>
+    </div>
+
+    <div class="seo-item">
+      <h4>Why Choose Basic Health Check Up</h4>
+      <p>
+        Ideal for preventive healthcare, the Basic Health Check Up provides a clear overview
+        of your current health status and helps you take timely action to maintain long-term
+        wellness through early diagnosis.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+<!-- ✅ Toast Notification -->
+<div id="toast" class="toast">Added to Cart</div>
+
+  <script src="javascript/slider.js"></script>
+  <script src="javascript/lab-carousel.js"></script>
+  <script src="javascript/script.js"></script>
+  <script src="javascript/search.js"></script>
+  <script src="javascript/booking.js"></script>
+  <script src="javascript/testscript.js"></script>
+  <script src="javascript/location.js"></script>
+
+
+
+<script>
+function animateValue(id, start, end, duration) {
+  let obj = document.getElementById(id);
+  let startTime = null;
+  function step(currentTime) {
+    if (!startTime) startTime = currentTime;
+    let progress = Math.min((currentTime - startTime) / duration, 1);
+    obj.textContent = Math.floor(progress * (end - start) + start);
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+// Run animations when page loads
+document.addEventListener("DOMContentLoaded", () => {
+  animateValue("packagesCount", 0, 50, 1500);
+  animateValue("reportTime", 0, 6, 1500);
+  animateValue("accuracy", 0, 100, 1500);
+});
+
+function openModal() {
+  document.getElementById("modalOverlay").style.display = "flex";
+}
+
+// Close consultation modal
+function closeModal() {
+  document.getElementById("modalOverlay").style.display = "none";
+}
+
+// Toggle custom checkup popup
+function toggleCustomCheckupPopup() {
+  const popup = document.getElementById("customCheckupPopup");
+  if (popup.classList.contains("hidden")) {
+    popup.classList.remove("hidden");
+  } else {
+    popup.classList.add("hidden");
+  }
+}
+
+
+
+
+document.getElementById("consultationForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const payload = {
+        type: "manual",
+        name: document.getElementById("name").value,
+        phone: document.getElementById("mobile").value,
+        email: document.getElementById("email").value,
+        location: document.getElementById("location").value,
+        selected_test: document.getElementById("testName").value,
+        message: "",   // optional
+    };
+
+    try {
+        const res = await fetch("http://127.0.0.1:5000/api/book", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (data.success) {
+            document.getElementById("confirmationMessage").style.display = "block";
+            this.reset();
+        } else {
+            alert("Something went wrong. Please try again.");
+        }
+    } catch (err) {
+        console.error("Booking error:", err);
+        alert("Error connecting to server.");
+    }
+});
+
+//auto popup
+
+
+    // Auto open modal after 20 seconds
+  setTimeout(() => {
+    openModal(); // this will trigger your existing booking modal
+  }, 15000);
+// ======= Robust "Know more" toggle (paste at the end of your <script> block) =======
+(function () {
+  window.addEventListener('load', function () {
+    // find all items
+    const items = document.querySelectorAll('.param-item');
+    if (!items.length) {
+      console.warn('[KnowMore] No .param-item elements found.');
+      return;
+    }
+
+    items.forEach(item => {
+      const header = item.querySelector('.param-header') || item.firstElementChild;
+      if (!header) return;
+
+      // find existing toggle candidate (many possible names used in your markup)
+      let toggle = header.querySelector('button.toggle, button, .toggle, .know-more, [data-toggle]');
+      if (!toggle) {
+        // try to find a span inside header containing the text "know" (fallback)
+        toggle = Array.from(header.children).find(ch => ch.tagName && ch.textContent && /know/i.test(ch.textContent));
+      }
+
+      // If still none, create one (safe fallback)
+      if (!toggle) {
+        toggle = document.createElement('button');
+        toggle.type = 'button';
+        toggle.className = 'toggle';
+        toggle.textContent = 'Know more +';
+        header.appendChild(toggle);
+      }
+
+      const details = item.querySelector('.param-details');
+      if (!details) {
+        console.warn('[KnowMore] .param-details not found for:', item);
+        return;
+      }
+
+      // Ensure details are visible for measurement but collapsed visually.
+      // Some CSS may set display:none — we force display:block so maxHeight will work.
+      details.style.display = 'block';
+      details.style.overflow = 'hidden';
+      details.style.transition = 'max-height 300ms ease';
+      // start collapsed
+      details.style.maxHeight = '0px';
+      item.classList.remove('open');
+
+      // accessibility
+      toggle.setAttribute('aria-expanded', 'false');
+      details.setAttribute('aria-hidden', 'true');
+
+      // click handler
+      toggle.addEventListener('click', function (e) {
+        const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+
+        if (isOpen) {
+          // close
+          toggle.setAttribute('aria-expanded', 'false');
+          details.setAttribute('aria-hidden', 'true');
+
+          // collapse animation: set maxHeight back to 0
+          // (set explicit pixel value so transition animates)
+          details.style.maxHeight = details.scrollHeight + 'px'; // ensure it has a starting value
+          // trigger reflow then set to 0
+          /* eslint-disable no-unused-expressions */
+          details.offsetHeight;
+          details.style.maxHeight = '0px';
+          item.classList.remove('open');
+          if (toggle.tagName.toLowerCase() === 'button' || toggle.tagName.toLowerCase() === 'input') {
+            toggle.textContent = 'Know more +';
+          } else {
+            toggle.textContent = 'Know more +';
+          }
+        } else {
+          // open
+          toggle.setAttribute('aria-expanded', 'true');
+          details.setAttribute('aria-hidden', 'false');
+
+          // set to scrollHeight to animate open
+          details.style.maxHeight = details.scrollHeight + 'px';
+          item.classList.add('open');
+          if (toggle.tagName.toLowerCase() === 'button' || toggle.tagName.toLowerCase() === 'input') {
+            toggle.textContent = 'Know less -';
+          } else {
+            toggle.textContent = 'Know less -';
+          }
+
+          // after transition end, remove max-height so content can resize naturally
+          const onTransitionEnd = function () {
+            // if still open, allow dynamic height
+            if (item.classList.contains('open')) {
+              details.style.maxHeight = 'none';
+            }
+            details.removeEventListener('transitionend', onTransitionEnd);
+          };
+          details.addEventListener('transitionend', onTransitionEnd);
+        }
+      });
+    });
+  });
+})();
+
+
+</script>
+</body>
+</html>
