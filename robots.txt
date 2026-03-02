@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://nivahealthkare.com/sitemap.xml
+Sitemap: https://www.nivahealthkare.com/sitemap.xml
