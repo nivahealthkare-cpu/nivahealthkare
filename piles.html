@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- Primary SEO -->
+<title>Laser Piles Treatment in Bangalore | Niva Health Kare</title>
+
+<meta name="description" content="Get painless laser piles treatment in Bangalore at Niva Health Kare. Safe procedure with quick recovery.">
+  <meta name="robots" content="index, follow">
+<meta name="geo.region" content="IN-KA">
+<meta name="geo.placename" content="Bangalore">
+  <!-- Canonical -->
+  <link rel="canonical" href="https://www.nivahealthkare.com/" />
+
+  <!-- Open Graph (WhatsApp / Facebook) -->
+  <meta property="og:title" content="Niva Health Kare – Diagnostic Tests & Health Packages">
+  <meta property="og:description" content="Book lab tests, blood tests, imaging scans, and health checkup packages online with trusted diagnostic labs.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.nivahealthkare.com/">
+  <meta property="og:image" content="https://www.nivahealthkare.com/images/og-image.webp">
+
+  <!-- Stylesheets (we will merge later) -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/Surgeries.css">
+  <link rel="stylesheet" href="css/booking.routes.css">
+  <link rel="stylesheet" href="css/mainsur.css">
+
+  <!-- Font Awesome (non-blocking for speed) -->
+  <link rel="preload"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        as="style"
+        onload="this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  </noscript>
+</head>
+<body>
+
+<header>
+
+  <!-- ================= DESKTOP HEADER ================= -->
+  <div class="desktop-header">
+
+    <!-- LEFT: LOGO + LOCATION -->
+    <div class="logo-location">
+
+      <div class="logo-section">
+        <div class="lab-name">
+          <span class="niva">Niva</span>
+          <span class="healthcare">Health Kare</span>
+        </div>
+      </div>
+
+      <!-- LOCATION TRIGGER -->
+      <div class="location-trigger" id="openLocation">
+        <span class="label">Location</span>
+        <span class="city">
+          <i class="fa-solid fa-location-dot location-icon"></i>
+          <span id="selectedCity">Select city</span>
+          <i class="fa-solid fa-chevron-down chevron"></i>
+        </span>
+      </div>
+
+
+    </div>
+
+    <!-- RIGHT: MENU ICONS -->
+    <div class="header-actions">
+      <a href="index.html" class="header-item">
+        <i class="fas fa-home header-icon"></i>
+        <span class="header-text">Home</span>
+      </a>
+
+      <a href="surgeries.html" class="header-item">
+        <i class="fas fa-procedures header-icon"></i>
+        <span class="header-text">Surgeries</span>
+      </a>
+
+      <a href="test.html" class="header-item">
+        <i class="fas fa-vials header-icon"></i>
+        <span class="header-text">Lab Tests</span>
+      </a>
+
+      <div class="header-item" onclick="openCheckupModal()">
+        <i class="fas fa-heartbeat header-icon"></i>
+        <span class="header-text">Checkup</span>
+      </div>
+
+      <div class="header-item" onclick="toggleDrawer()">
+        <i class="fas fa-shopping-cart header-icon">
+          <span id="cart-count" class="cart-count">0</span>
+        </i>
+        <span class="header-text">Cart</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================= MOBILE HEADER ================= -->
+  <div class="mobile-header">
+    <div class="logo-section">
+      <div class="lab-name">
+        <span class="niva">Niva</span>
+        <span class="healthcare">Health Kare</span>
+      </div>
+    </div>
+
+    <div class="location-section" id="mobileLocation">
+      <i class="fas fa-map-marker-alt location-icon"></i>
+
+      <div class="location-info">
+        <span class="label">Your Location</span>
+        <span class="city">
+          <span id="mobileSelectedCity">Bangalore</span>
+          <i class="fas fa-chevron-down chevron"></i>
+        </span>
+
+
+      </div>
+    </div>
+
+  </div>
+
+</header>
+
+
+<!-- LOCATION POPUP -->
+<div class="location-popup" id="locationPopup">
+  <div class="popup-card">
+
+    <!-- HEADER -->
+    <div class="popup-header">
+      <h3>Select your city</h3>
+      <button class="close-btn" id="closePopup">×</button>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="search-wrapper">
+      <span class="search-icon">🔍</span>
+
+      <input
+        type="text"
+        id="citySearch"
+        class="city-search"
+        placeholder="Search city (e.g. Mysuru)"
+        autocomplete="off"
+      />
+
+      <!-- Suggestions dropdown -->
+      <ul class="suggestions" id="citySuggestions"></ul>
+    </div>
+
+
+    <!-- POPULAR CITIES -->
+    <p class="section-label" id="popularLabel">Popular cities</p>
+    <div class="city-list popular" id="popularCities"></div>
+
+    <!-- ALL / SEARCH RESULTS -->
+    <div class="city-list" id="cityList"></div>
+
+    <p class="coverage">
+      Services available across major cities in Karnataka
+    </p>
+
+  </div>
+</div>
+
+
+
+<!-- Checkup Modal -->
+<div class="modal-overlay" id="checkupModalOverlay" onclick="closeCheckupModal()" style="display:none;">
+  <div class="modal-box" onclick="event.stopPropagation()">
+
+    <!-- Header -->
+    <div class="modal-header">
+      <h3>Get a call from our medical team</h3>
+      <button class="close-btn" onclick="closeCheckupModal()">×</button>
+    </div>
+
+    <!-- Subtext -->
+    <p class="modal-subtext">
+      Enter your mobile number and we’ll call you shortly.
+    </p>
+
+    <!-- Form -->
+    <form id="checkupForm" onsubmit="return false;">
+      <!-- Name -->
+      <input
+        type="text"
+        id="checkupName"
+        name="name"
+        placeholder="Your name"
+      />
+
+      <!-- Mobile -->
+      <input
+        type="tel"
+        id="checkupMobile"
+        name="mobile_no"
+        placeholder="Mobile number *"
+        required
+      />
+
+      <!-- Optional Message -->
+      <textarea
+        id="checkupMessage"
+        name="message"
+        placeholder="Message (optional)"
+        rows="3"
+      ></textarea>
+
+      <button type="button" onclick="submitCheckupForm()">
+        Request Call Back
+      </button>
+
+      <p class="trust-text">📞 Usually calls within 5 minutes</p>
+    </form>
+
+      <!-- Popup for success -->
+      <div id="simplePopup" style="display:none;">
+        ✅ Thank you! Our expert will call you shortly.
+      </div>
+
+
+  </div>
+</div>
+
+
+  
+  <!-- Cart Drawer (Right Side) -->
+ 
+<!-- Background Blur Overlay -->
+<div id="cartOverlay" class="cart-overlay" onclick="closeDrawer()"></div>
+
+
+<!-- Cart Drawer -->
+<div class="drawer mobile-drawer" id="drawer">
+  <div class="drawer-header">
+    <h3>Your Cart</h3>
+    <button onclick="closeDrawer()">✕</button>
+
+  </div>
+
+  <div class="drawer-body" id="cartItemsContainer"></div>
+
+  <div class="cart-summary">
+    <div class="summary-left">
+      <span class="total-tests">
+        checkout test: <strong id="totalTests">0</strong>
+      </span>
+      <span class="total-price">
+        Total Price: <strong id="totalPrice">₹0</strong>
+      </span>
+    </div>
+    <a href="checkout.html" class="proceed-btn">Proceed</a>
+  </div>
+</div>
+
+
+
+<!-- Mobile Bottom Bar -->
+<div class="mobile-bottom">
+
+  <!-- Home -->
+  <a href="index.html">
+    <i class="fas fa-home"></i>
+  </a>
+
+  <!-- Surgeries -->
+  <a href="surgeries.html">
+    <i class="fas fa-procedures"></i>
+  </a>
+
+  <!-- Lab Tests -->
+  <a href="test.html">
+    <i class="fas fa-vials"></i>
+  </a>
+
+  <!-- Checkups -->
+  <a href="#" onclick="openModal()">
+    <i class="fas fa-heartbeat"></i>
+  </a>
+
+  <!-- Cart -->
+  <a href="#" onclick="toggleDrawer()">
+    <i class="fas fa-shopping-cart"></i>
+  </a>
+
+</div>
+
+
+<section class="piles-hero">
+  <div class="piles-container">
+    
+    <!-- LEFT CONTENT -->
+    <div class="piles-content">
+      <h1>Advanced Laser Piles Treatment</h1>
+      <p>
+        Safe, painless and minimally invasive piles surgery with faster recovery 
+        and same-day discharge. Trusted care with experienced surgeons.
+      </p>
+
+      <ul class="piles-features">
+        <li>✔ 30-Min Procedure</li>
+        <li>✔ No Major Cuts</li>
+        <li>✔ Quick Recovery</li>
+        <li>✔ Insurance Support</li>
+      </ul>
+
+      <div class="piles-buttons">
+       <a href="tel:+917892287102" class="btn-secondary">
+          📞 Talk to Expert
+        </a>
+      </div>
+    </div>
+
+    <!-- RIGHT IMAGE -->
+    <div class="piles-image">
+      <img src="images/piles.webp" alt="Advanced laser piles treatment surgery consultation">
+    </div>
+
+  </div>
+</section>
+
+<section class="piles-overview-section">
+  <div class="piles-overview-container">
+
+    <div class="piles-overview-header">
+      <h2>Overview of Piles (Hemorrhoids)</h2>
+      <p>
+        Piles, also known as hemorrhoids, are swollen veins in the lower rectum or around the anus. 
+        They are a common condition that can cause discomfort, bleeding, and irritation.
+      </p>
+    </div>
+
+    <div class="piles-overview-grid">
+
+      <!-- What is Piles -->
+      <div class="overview-card">
+        <h3>What Are Piles?</h3>
+        <p>
+          Piles are enlarged and inflamed blood vessels that develop inside the rectum 
+          (internal piles) or under the skin around the anus (external piles). 
+          They occur due to increased pressure during bowel movements, chronic constipation, 
+          pregnancy, or prolonged sitting.
+        </p>
+      </div>
+
+      <!-- How to Identify -->
+      <div class="overview-card">
+        <h3>How to Identify Piles?</h3>
+        <ul>
+          <li>Bright red bleeding during or after passing stool</li>
+          <li>Pain or discomfort while sitting</li>
+          <li>Swelling or lump near the anus</li>
+          <li>Persistent itching or irritation</li>
+          <li>Feeling of incomplete bowel movement</li>
+        </ul>
+      </div>
+
+      <!-- Symptoms -->
+      <div class="overview-card">
+        <h3>Common Symptoms</h3>
+        <ul>
+          <li>Painless bleeding (especially in internal piles)</li>
+          <li>Painful swelling around the anus</li>
+          <li>Mucus discharge</li>
+          <li>Anal itching and burning sensation</li>
+          <li>Lump that may protrude during straining</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section class="piles-treatment-section">
+  <div class="piles-treatment-container">
+
+    <div class="treatment-header">
+      <h2>Piles Treatment Options</h2>
+      <p>
+        Piles can be treated using modern laser technology or conventional surgical methods. 
+        The right treatment depends on the severity and grade of hemorrhoids.
+      </p>
+    </div>
+
+    <div class="treatment-comparison">
+
+      <div class="treatment-card">
+        <h3>Laser Piles Treatment</h3>
+        <ul>
+          <li>Minimally invasive procedure</li>
+          <li>Less pain and minimal bleeding</li>
+          <li>Faster recovery time</li>
+          <li>Short hospital stay (same-day discharge)</li>
+          <li>Lower risk of complications</li>
+        </ul>
+      </div>
+
+      <div class="treatment-card highlight-card">
+        <h3>Conventional Surgery</h3>
+        <ul>
+          <li>Traditional hemorrhoid removal</li>
+          <li>May involve stitches</li>
+          <li>Longer recovery period</li>
+          <li>Possible post-surgery discomfort</li>
+          <li>Recommended for advanced cases</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<section id="book-consult" class="consult-section">
+  <div class="container">
+    <div class="consult-content">
+
+      <div class="consult-info">
+        <h2>Get a Call Back in Minutes</h2>
+        <p>
+          Our medical experts will help you with treatment guidance,
+          cost estimates, hospital options, doctor availability and insurance support.
+        </p>
+
+        <ul class="consult-points">
+          <li><i class="fas fa-check-circle"></i> Free expert consultation</li>
+          <li><i class="fas fa-check-circle"></i> Cashless Insurance & EMI Available</li>
+          <li><i class="fas fa-check-circle"></i> Fast admission & discharge support</li>
+        </ul>
+
+                <!-- PRIMARY ACTIONS FIRST -->
+        <div class="alt-contact">
+          <a href="tel:+919876543210" class="call-link">
+            <i class="fas fa-phone-alt"></i> Call Now
+          </a>
+
+          <a href="https://wa.me/919876543210" class="whatsapp-link">
+            <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+          </a>
+        </div>
+
+        
+      </div>
+      
+      <div class="consult-form-box">
+        <h3>Get a Call Back</h3>
+
+
+        <form class="consult-form" onsubmit="return false;">
+
+          <div class="form-group">
+          <input
+            type="text"
+            id="consultName"
+            placeholder="Full Name *"
+            required
+          >
+
+          </div>
+
+          <div class="form-group">
+            <input
+              type="tel"
+              id="consultMobile"
+              placeholder="Mobile Number *"
+              maxlength="10"
+              pattern="[0-9]{10}"
+              required
+            >
+
+          </div>
+
+          <button type="button" class="submit-btn" onclick="submitConsultForm()">
+            Get a Call Back
+          </button>
+
+
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SIMPLE CONFIRMATION POPUP -->
+<div id="simplePopup" class="simple-popup">
+  <div class="popup-box">
+    <p>✅ Thank you! Our medical expert will contact you shortly.</p>
+    <button onclick="closePopup()">OK</button>
+  </div>
+</div>
+
+
+
+<section class="piles-faq-section">
+  <div class="piles-faq-container">
+
+    <h2>Frequently Asked Questions (FAQs)</h2>
+
+    <div class="faq-item">
+      <h3>Is piles treatment painful?</h3>
+      <p>
+        Modern laser piles treatment is minimally invasive and causes very little pain. 
+        Most patients recover quickly with minimal discomfort.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>How long does piles surgery take?</h3>
+      <p>
+        Laser piles surgery usually takes 20–30 minutes and is often done as a same-day procedure.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Can piles go away without surgery?</h3>
+      <p>
+        Mild piles may improve with medication, diet changes, and lifestyle modifications. 
+        However, advanced grades may require surgical treatment.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>When should I see a doctor for piles?</h3>
+      <p>
+        You should consult a doctor if you experience persistent bleeding, severe pain, 
+        or swelling that does not improve within a few days.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<section class="reviews-banner">
+
+  <div class="reviews-container">
+
+    <!-- LEFT: AUTO SLIDING REVIEWS -->
+    <div class="reviews-slider">
+      <div class="reviews-track">
+
+        <div class="review-item">
+          <p>“Fast reports & polite support. Highly recommended.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=15" alt="">
+            <div>
+              <strong>Shashank N.</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+        <div class="review-item">
+          <p>“Home sample collection was on time and very hygienic.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=22" alt="">
+            <div>
+              <strong>Ananya R.</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+        <div class="review-item">
+          <p>“Booked a full body checkup. Got reports within hours.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=5" alt="">
+            <div>
+              <strong>Rohit Kumar</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+        <div class="review-item">
+          <p>“Very smooth experience. Support team was helpful.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=9" alt="">
+            <div>
+              <strong>Divya M.</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT: TRUST CONTENT (DESKTOP ONLY) -->
+    <div class="reviews-info">
+      <h2>What Patients Say<br>On Google</h2>
+
+      <p>
+        Trusted by thousands for accurate reports and convenient home
+        sample collection. Rated <strong>4.3★ on Google</strong>.
+      </p>
+
+      <div class="trust-stats">
+        <div>
+          ⭐<br><strong>4.3</strong><br>Rating
+        </div>
+        <div>
+          👥<br><strong>10k+</strong><br>Users
+        </div>
+        <div>
+          🏥<br><strong>NABL</strong><br>Labs
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+
+<div id="sticky-icon-popup">
+
+  <a href="https://wa.me/+917892287102" target="_blank" class="icon-btn whatsapp" aria-label="Chat on WhatsApp" rel="noopener">
+    <i class="fab fa-whatsapp"></i>
+    <span class="tooltip">WhatsApp</span>
+  </a>
+
+  <a href="tel:+917892287102" class="icon-btn call" aria-label="Call Support" rel="noopener">
+    <i class="fas fa-phone-alt"></i>
+    <span class="tooltip">Call Support</span>
+  </a>
+
+</div>
+
+
+<footer class="footer-section">
+  <div class="footer-container">
+
+    <!-- Brand / Trust -->
+    <div class="footer-left">
+      <h2 class="footer-brand">
+        <span class="footer-niva">Niva</span>
+        <span class="footer-healthcare">Health Kare</span>
+      </h2>
+
+      <p class="footer-tagline">
+        Trusted healthcare services delivering quality, care, and compassion.
+      </p>
+
+      <div class="social-icons">
+        <a href="https://www.instagram.com/nivahealthkare/" aria-label="Instagram">
+      <img
+        src="images/instagram.webp"
+        alt="Follow Niva Health Kare on Instagram"
+        width="24"
+        height="24"
+        loading="lazy">
+      </a>
+        <a href="https://www.facebook.com/profile.php?id=61583126009241" aria-label="Facebook">
+        <img
+          src="images/facebook.webp"
+          alt="Follow Niva Health Kare on Facebook"
+          width="24"
+          height="24"
+          loading="lazy">
+
+        </a>
+        <a href="https://www.youtube.com/@nivahealthkare" aria-label="YouTube">
+        <img
+          src="images/youtube.webp"
+          alt="Subscribe to Niva Health Kare on YouTube"
+          width="24"
+          height="24"
+          loading="lazy">
+
+        </a>
+      </div>
+    </div>
+
+    <!-- Links -->
+    <div class="footer-right">
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="index.html">Home</a>
+        <a href="about-us.html">About Us</a>
+        <a href="locate-us.html">Locate Us</a>
+        
+      </div>
+
+      <div class="footer-col">
+        <h4>Medical Network</h4>
+        <a href="our-partners.html">Our Partners</a>
+        <a href="for-doctors.html">Doctors</a>
+        <a href="service.html">Our Services</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="refund-policy.html">Refund Policy</a>
+        <a href="disclaimer.html">Disclaimer</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom -->
+  <div class="footer-bottom">
+  <p>
+    © 2025 Niva Health Kare Healthcare Services. All rights reserved.
+  </p>
+
+
+    <div class="footer-links">
+      <a href="terms.html">Terms</a>
+      <a href="privacy-policy.html">Privacy</a>
+    </div>
+  </div>
+</footer>
+<section class="simple-seo-footer">
+  <div class="simple-seo-container">
+
+    <div class="seo-item">
+      <h4>Piles Treatment Services</h4>
+      <p>
+        Advanced laser piles treatment, hemorrhoids surgery, painless piles removal, 
+        and minimally invasive procedures for internal and external hemorrhoids.
+      </p>
+    </div>
+
+    <div class="seo-item">
+      <h4>Expert Hemorrhoid Care</h4>
+      <p>
+        Experienced proctologists providing safe diagnosis, medical management, 
+        and surgical treatment for bleeding piles, anal fissures, and fistula conditions.
+      </p>
+    </div>
+
+    <div class="seo-item">
+      <h4>Piles Treatment in Bangalore</h4>
+      <p>
+        Trusted piles treatment center in Bangalore offering same-day laser surgery, 
+        quick recovery options, insurance assistance, and easy appointment booking.
+      </p>
+    </div>
+
+    <div class="seo-item">
+      <h4>Why Choose Our Clinic?</h4>
+      <p>
+        Modern laser technology, expert surgeons, minimal pain procedures, 
+        hygienic facilities, affordable treatment cost, and complete patient support.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ===== BOOKING MODAL ===== -->
+<div id="bookingModal" class="booking-modal">
+
+  <div class="booking-box">
+
+    <!-- Close -->
+    <button type="button" class="booking-close" onclick="closeBooking()">×</button>
+
+    <!-- STEP INDICATOR -->
+    <div class="step-indicator">
+      <div class="step active" id="stepIndicator1">1</div>
+      <div class="step-line"></div>
+      <div class="step" id="stepIndicator2">2</div>
+      <div class="step-line"></div>
+      <div class="step" id="stepIndicator3">3</div>
+    </div>
+
+    <!-- ===== STEP 1 ===== -->
+    <div class="booking-step active" id="step1">
+      <h3>Enter Mobile Number</h3>
+
+      <label>Mobile Number</label>
+      <input
+        type="tel"
+        id="bookingMobile"
+        placeholder="10-digit mobile number"
+        maxlength="10"
+      >
+
+      <button
+        type="button"
+        class="primary-btn"
+        onclick="goToStep2()"
+      >
+        Continue
+      </button>
+    </div>
+
+    <!-- ===== STEP 2 ===== -->
+    <div class="booking-step" id="step2">
+      <h3>Complete Booking</h3>
+
+      <label>Your Name</label>
+      <input type="text" id="custName" placeholder="Enter your name">
+
+      <label>Email (optional)</label>
+      <input type="email" id="custEmail" placeholder="Enter your email">
+
+      <label>Service</label>
+      <input
+        type="text"
+        id="serviceType"
+        value="Health Checkup"
+        readonly
+      >
+
+      <button
+        type="button"
+        class="primary-btn"
+        onclick="confirmBooking()"
+      >
+        Confirm Booking
+      </button>
+    </div>
+
+    <!-- ===== STEP 3 ===== -->
+    <div class="booking-step" id="step3">
+      <h3>Booking Confirmed 🎉</h3>
+
+      <p class="confirmation-text" id="confirmationMessage">
+        Thank you! Our team will call you shortly to confirm your booking.
+      </p>
+
+      <button
+        type="button"
+        class="primary-btn"
+        onclick="closeBooking()"
+      >
+        Done
+      </button>
+    </div>
+
+  </div>
+</div>
+
+
+
+<!-- ✅ Toast Notification -->
+<div id="toast" class="toast">Added to Cart</div>
+
+
+  <script src="javascript/lab-carousel.js"></script>
+  <script src="javascript/script.js"></script>
+  <script src="javascript/testscript.js"></script>
+  <script src="javascript/location.js"></script>
+  <script src="javascript/booking.controller.js"></script>
+
+</body>
+</html>

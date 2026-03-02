@@ -176,3 +176,85 @@ function closeBookingModal() {
 
 
 
+/* ===============================
+   CART LOGIC – REQUIRED
+================================ */
+
+function getCartItems() {
+  return JSON.parse(localStorage.getItem("cartItems")) || [];
+}
+
+function saveCartItems(items) {
+  localStorage.setItem("cartItems", JSON.stringify(items));
+}
+
+function toggleCartItem(id) {
+  const card = document.querySelector(`.test-card[data-id="${id}"]`);
+  if (!card) return;
+
+  const name = card.querySelector("h3").innerText.trim();
+
+  // ✅ THIS MATCHES YOUR HTML EXACTLY
+  const priceText = card.querySelector(".final-price").innerText;
+  const price = parseInt(priceText.replace(/[^\d]/g, ""), 10);
+
+  let cart = getCartItems();
+
+  const exists = cart.find(item => item.id === id);
+
+  if (exists) {
+    cart = cart.filter(item => item.id !== id);
+  } else {
+    cart.push({
+      id,
+      name,
+      price
+    });
+  }
+
+  saveCartItems(cart);
+  updateCartUI();
+}
+
+/* ===============================
+   CART UI UPDATE
+================================ */
+
+function updateCartUI() {
+  const cart = getCartItems();
+
+  const totalTestsEl = document.getElementById("totalTests");
+  const totalPriceEl = document.getElementById("totalPrice");
+  const cartCountEl = document.getElementById("cart-count");
+  const container = document.getElementById("cartItemsContainer");
+
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  let total = 0;
+
+  cart.forEach(item => {
+    total += item.price;
+
+    const div = document.createElement("div");
+    div.className = "cart-item";
+    div.innerHTML = `
+      <div>
+        <strong>${item.name}</strong><br>
+        ₹${item.price}
+      </div>
+      <button onclick="toggleCartItem(${item.id})">🗑</button>
+    `;
+    container.appendChild(div);
+  });
+
+  totalTestsEl.innerText = cart.length;
+  totalPriceEl.innerText = "₹" + total;
+  cartCountEl.innerText = cart.length;
+}
+
+/* ===============================
+   INIT
+================================ */
+document.addEventListener("DOMContentLoaded", updateCartUI);

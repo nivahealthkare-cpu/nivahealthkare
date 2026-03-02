@@ -7,10 +7,12 @@
 
 <meta name="description" content="Niva Health Care Bangalore offers accurate online blood tests and diagnostic scans — MRI, CT, X-Ray, PET, DEXA, CBC, CRP, RFT, LFT, Lipid Profile, and Thyroid tests. Book online for home sample collection and fast 6-hour reports."/>
 <meta name="keywords" content="Niva Health Care, Niva Health, online blood test Bangalore, online MRI Bangalore, online CT scan Bangalore, online X-ray Bangalore, online PET scan, online DEXA scan, CBC test online, CRP test online, RBS test online, RFT test online, LFT test online, Lipid Profile test online, Thyroid test online, full body checkup Bangalore, home blood test Bangalore, best diagnostic lab Bangalore, NABL certified lab, book lab test online, health checkup packages, diagnostic center near me, Niva Health Care Bangalore, Niva Health Care Chandra Layout"/>
-
+<meta name="geo.region" content="IN-KA">
+<meta name="geo.placename" content="Bangalore">
 <link rel="stylesheet" href="css/style.css"/>
 <link rel="stylesheet" href="css/Surgeries.css"/>
 <link rel="stylesheet" href="css/booking.routes.css"/>
+<link rel="stylesheet" href="css/mainsur.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 <link rel="icon" href="https://nivahealthcare.in/images/favicon.ico" type="image/x-icon"/>
 
@@ -373,7 +375,80 @@
   </div>
 </section>
 
+<section class="procedure-highlights">
+  <div class="procedure-container">
+    <h2 class="procedure-title">Common Surgical Procedures</h2>
+    <p class="procedure-subtitle">Safe, Advanced & Minimally Invasive Treatments</p>
 
+    <div class="procedure-grid">
+
+      <a href="piles.html" class="procedure-card">
+        <img src="images/piles.webp" alt="Piles treatment and laser surgery services" loading="lazy">
+        <div class="procedure-content">
+          <h3>Piles Treatment</h3>
+          <span>Laser & Stapler Surgery</span>
+
+          <div class="procedure-link">
+            View Details →
+          </div>
+        </div>
+      </a>
+
+      <a href="circumcision.html" class="procedure-card">
+        <img src="images/circumsation.webp" alt="Laser circumcision surgical procedure services" loading="lazy">
+        <div class="procedure-content">
+          <h3>Circumcision</h3>
+          <span>Safe & Painless Procedure</span>
+          <div class="procedure-link">
+            View Details →
+          </div>
+        </div>
+      </a>
+
+      <a href="lipoma.html" class="procedure-card">
+        <img src="images/lipoma.webp" alt="Lipoma removal minor surgical procedure" loading="lazy">
+        <div class="procedure-content">
+          <h3>Lipoma Removal</h3>
+          <span>Quick & Scar-Minimized</span>
+          <div class="procedure-link">
+            View Details →
+          </div>         
+        </div>
+      </a>
+
+      <a href="fistula.html" class="procedure-card">
+        <img src="images/fistula.webp" alt="Fistula diagnosis and surgical treatment services" loading="lazy">
+        <div class="procedure-content">
+          <h3>Fistula Surgery</h3>
+          <span>Advanced Laser Treatment</span>
+        </div>
+      </a>
+
+      <a href="tubectomy.html" class="procedure-card">
+        <img src="images/tubectomy.webp" alt="Laparoscopic tubectomy family planning procedure" loading="lazy">
+        <div class="procedure-content">
+          <h3>Laparoscopic Tubectomy</h3>
+          <span>Permanent Family Planning</span>
+          <div class="procedure-link">
+            View Details →
+          </div>         
+        </div>
+      </a>
+
+      <a href="mtp.html" class="procedure-card">
+        <img src="images/mtpp.webp" alt="Medical termination of pregnancy MTP procedure services" loading="lazy">
+        <div class="procedure-content">
+          <h3>MTP Procedure</h3>
+          <span>Safe & Confidential Care</span>
+          <div class="procedure-link">
+            View Details →
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
 
 
 
@@ -397,7 +472,7 @@
 
     <div class="specialty-card">
 <img
-  src="images/oncology-cancer-surgery.webp"
+  src="images/Onco Surgery.webp"
   alt="Oncology cancer diagnosis, imaging and surgical services"
   width="600"
   height="400"
@@ -823,7 +898,7 @@
     <!-- Card 1 -->
     <div class="surgery-card">
  <img
-  src="images/lap_cholecystectomy.webp"
+  src="images/lap_cholecystectomy.webp.webp"
   alt="Laparoscopic gallbladder surgery, treatment, and recovery care"
   class="surgery-image"
   width="600"
@@ -1395,10 +1470,9 @@
 
   <!-- Bottom -->
   <div class="footer-bottom">
-    <p>
-      © 2025 Niva Health Kare Pvt. Ltd. All rights reserved.  
-      <span>An initiative by Vinayaka Hospital.</span>
-    </p>
+  <p>
+    © 2025 Niva Health Kare Healthcare Services. All rights reserved.
+  </p>
 
     <div class="footer-links">
       <a href="terms.html">Terms</a>
@@ -1469,7 +1543,7 @@
 
     <!-- ===== STEP 1 ===== -->
     <div class="booking-step active" id="step1">
-      <h3>Verify Mobile Number</h3>
+      <h3>Enter Mobile Number</h3>
 
       <label>Mobile Number</label>
       <input
@@ -1479,22 +1553,13 @@
         maxlength="10"
       >
 
-      <div class="otp-wrapper">
-        <input type="text" maxlength="1" class="otp-input" inputmode="numeric">
-        <input type="text" maxlength="1" class="otp-input" inputmode="numeric">
-        <input type="text" maxlength="1" class="otp-input" inputmode="numeric">
-        <input type="text" maxlength="1" class="otp-input" inputmode="numeric">
-      </div>
-
       <button
         type="button"
         class="primary-btn"
         onclick="goToStep2()"
       >
-        Verify & Continue
+        Continue
       </button>
-
-      <p class="resend">Didn’t receive OTP? <span>Resend</span></p>
     </div>
 
     <!-- ===== STEP 2 ===== -->
@@ -1515,7 +1580,6 @@
         readonly
       >
 
-      <!-- 🔥 IMPORTANT: type="button" -->
       <button
         type="button"
         class="primary-btn"
@@ -1529,7 +1593,9 @@
     <div class="booking-step" id="step3">
       <h3>Booking Confirmed 🎉</h3>
 
-      <p class="confirmation-text" id="confirmationMessage"></p>
+      <p class="confirmation-text" id="confirmationMessage">
+        Thank you! Our team will call you shortly to confirm your booking.
+      </p>
 
       <button
         type="button"
@@ -1542,6 +1608,7 @@
 
   </div>
 </div>
+
 
 <!-- ✅ Toast Notification -->
 <div id="toast" class="toast">Added to Cart</div>

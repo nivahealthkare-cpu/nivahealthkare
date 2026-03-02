@@ -7,11 +7,11 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/checkout.css">
   <link rel="stylesheet" href="css/new.css">
+  <meta name="geo.region" content="IN-KA">
+<meta name="geo.placename" content="Bangalore">
 </head>
 <body>
 
-</head>
-<body>
 
 
   <!-- Header -->
@@ -122,46 +122,53 @@
 
     
 <!-- Payment -->
+<!-- Payment -->
 <div class="banner payment-banner hidden" id="paymentBanner">
   <h2>💳 Payment Options</h2>
+
   <div class="payment-options">
-    <label><input type="radio" name="paymentMethod" value="upi"> Pay via UPI</label>
-    <label><input type="radio" name="paymentMethod" value="cod"> Payment on Visit</label>
 
-    <div id="upiSection" class="hidden">
-      <h4>Scan & Pay</h4>
-      <img src="images/qr_code.png" alt="UPI QR" class="upi-qr">
-      <p><strong>UPI ID:</strong> yourlab@upi</p>
-      <p><strong>Bank:</strong> ABC Bank</p>
-      <p><strong>IFSC:</strong> ABCD0123456</p>
-      <p><strong>Account No:</strong> 1234567890</p>
+    <label class="payment-option">
+      <input type="radio" name="paymentMethod" value="online">
+      <strong>Pay Online</strong>
+      <span style="font-size:13px;color:#555;">
+        (UPI / Card / NetBanking)
+      </span>
+    </label>
 
-      <!-- Highlighted friendly message -->
-<div style="background-color: #ffeb3b; padding: 10px; border-radius: 5px; margin-top: 10px; font-weight: bold; font-size: 14px; color: #000000; text-align: center;">
-  <p style="margin: 5px 0;">Open your payment app, scan the QR code, or use the bank details to make your payment. It's quick and easy! 😊</p>
-  <p style="margin: 5px 0;">Once we receive your payment, we’ll send you a confirmation email so you know everything’s all set. Thank you for choosing us!</p>
+    <label class="payment-option">
+      <input type="radio" name="paymentMethod" value="cod">
+      <strong>Pay on Visit</strong>
+      <span style="font-size:13px;color:#555;">
+        (Cash / Card at Hospital)
+      </span>
+    </label>
+
+  </div>
+
+  <!-- Info message -->
+  <div style="
+    background-color:#e3f2fd;
+    padding:10px;
+    border-radius:6px;
+    margin:12px 0;
+    font-size:13px;
+    color:#0d47a1;
+    text-align:center;
+  ">
+    🔒 Online payments are securely processed via Razorpay.
+  </div>
+
+  <!-- Place Order -->
+  <button
+    type="button"
+    class="btn"
+    onclick="placeOrder(event)"
+    style="margin-top:10px;"
+  >
+    Place Order
+  </button>
 </div>
-
-
-    </div>
-
-
-        <!-- ✅ Place Order button -->
-          <button type="button" class="btn" onclick="placeOrder(event)">Place Order</button>
-
-      </div>
-    </div>
-
-  </div>
-
-  <!-- Overlay for Payment modal -->
-  <div class="overlay hidden" id="overlay"></div>
-
-  <!-- Success (Confirmation) OUTSIDE the container so it never gets hidden with it) -->
-  <div id="successBanner" class="banner success-banner hidden">
-    ✅ Payment Successful! Your order is confirmed.<br>
-    We’ll contact you shortly with your booking details.
-  </div>
 
 <script>
 /* ===============================
@@ -243,10 +250,9 @@ function hidePaymentModal() {
 }
 
 /* ===============================
-   PLACE ORDER (BACKEND)
+   PLACE ORDER (FRONTEND ONLY)
 ================================ */
 
-let upiShown = false;
 const API_BASE = "http://localhost:5000";
 
 async function postJSON(path, payload) {
@@ -272,12 +278,13 @@ async function placeOrder(event) {
     return;
   }
 
-  if (selected.value === "upi" && !upiShown) {
-    document.getElementById("upiSection").classList.remove("hidden");
-    upiShown = true;
+  // 👉 ONLINE PAYMENT (Razorpay will be added later)
+  if (selected.value === "online") {
+    await startRazorpayPayment();
     return;
   }
 
+  // 👉 COD / PAY ON VISIT
   const bookingData = {
     type: "checkout",
     name: document.getElementById("name").value,
@@ -294,11 +301,12 @@ async function placeOrder(event) {
     )
   };
 
+
+  
+
   const successBanner = document.getElementById("successBanner");
   successBanner.innerHTML =
-    selected.value === "upi"
-      ? "✅ Your payment is under verification.<br>We will reach you soon.<br>Thank you!"
-      : "✅ Order placed successfully!<br>We will contact you shortly.";
+    "✅ Order placed successfully!<br>We will contact you shortly.";
 
   successBanner.classList.remove("hidden");
   successBanner.style.display = "flex";
@@ -318,6 +326,77 @@ async function placeOrder(event) {
   } catch (err) {
     console.error("Backend error:", err);
   }
+}
+
+
+async function startRazorpayPayment() {
+  const cartItems = getCartItems();
+
+  if (!cartItems.length) {
+    alert("Cart is empty");
+    return;
+  }
+
+  // 1️⃣ Call backend to create Razorpay order
+  const res = await fetch("http://localhost:5000/create-order", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ items: cartItems })
+  });
+
+  const order = await res.json();
+
+  // 2️⃣ Open Razorpay Checkout
+  const options = {
+    key: "rzp_live_SHXCzRwvqvvr49", // test key
+    amount: order.amount,      // in paise
+    currency: "INR",
+    name: "Niva Health Kare",
+    description: "Lab Test Booking",
+    order_id: order.order_id,
+
+    handler: async function (response) {
+      try {
+        const verifyRes = await fetch("http://localhost:5000/verify-payment", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_signature: response.razorpay_signature
+          })
+        });
+
+        const verifyData = await verifyRes.json();
+
+        if (!verifyData.success) {
+          alert("Payment verification failed");
+          return;
+        }
+
+        const successBanner = document.getElementById("successBanner");
+        successBanner.innerHTML =
+          "✅ Payment successful & verified!<br>We will contact you shortly.";
+        successBanner.classList.remove("hidden");
+        successBanner.style.display = "flex";
+
+        document.getElementById("paymentBanner").classList.add("hidden");
+        document.getElementById("overlay").classList.add("hidden");
+
+        localStorage.removeItem("cartItems");
+
+      } catch (err) {
+        alert("Verification error. Please contact support.");
+        console.error(err);
+      }
+    },
+
+
+    theme: { color: "#00897b" }
+  };
+
+  const rzp = new Razorpay(options);
+  rzp.open();
 }
 
 /* ===============================
@@ -422,6 +501,7 @@ window.addEventListener("scroll", () => {
 
 
 <script src="javascript/booking.js"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 
 </body>

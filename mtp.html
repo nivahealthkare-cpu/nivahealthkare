@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- Primary SEO -->
+  <title>Book Lab Tests, Diagnostic & Health Packages | Niva Health Kare</title>
+  <meta name="description" content="Niva Health Kare offers diagnostic lab tests, imaging services, and health checkup packages. Book blood tests, scan tests, and full body checkups with trusted labs and home sample collection." />
+  <meta name="robots" content="index, follow">
+<meta name="geo.region" content="IN-KA">
+<meta name="geo.placename" content="Bangalore">
+  <!-- Canonical -->
+  <link rel="canonical" href="https://www.nivahealthkare.com/" />
+
+  <!-- Open Graph (WhatsApp / Facebook) -->
+  <meta property="og:title" content="Niva Health Kare – Diagnostic Tests & Health Packages">
+  <meta property="og:description" content="Book lab tests, blood tests, imaging scans, and health checkup packages online with trusted diagnostic labs.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.nivahealthkare.com/">
+  <meta property="og:image" content="https://www.nivahealthkare.com/images/og-image.webp">
+
+  <!-- Stylesheets (we will merge later) -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/Surgeries.css">
+  <link rel="stylesheet" href="css/booking.routes.css">
+  <link rel="stylesheet" href="css/mainsur.css">
+
+  <!-- Font Awesome (non-blocking for speed) -->
+  <link rel="preload"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        as="style"
+        onload="this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  </noscript>
+</head>
+<body>
+
+<header>
+
+  <!-- ================= DESKTOP HEADER ================= -->
+  <div class="desktop-header">
+
+    <!-- LEFT: LOGO + LOCATION -->
+    <div class="logo-location">
+
+      <div class="logo-section">
+        <div class="lab-name">
+          <span class="niva">Niva</span>
+          <span class="healthcare">Health Kare</span>
+        </div>
+      </div>
+
+      <!-- LOCATION TRIGGER -->
+      <div class="location-trigger" id="openLocation">
+        <span class="label">Location</span>
+        <span class="city">
+          <i class="fa-solid fa-location-dot location-icon"></i>
+          <span id="selectedCity">Select city</span>
+          <i class="fa-solid fa-chevron-down chevron"></i>
+        </span>
+      </div>
+
+
+    </div>
+
+    <!-- RIGHT: MENU ICONS -->
+    <div class="header-actions">
+      <a href="index.html" class="header-item">
+        <i class="fas fa-home header-icon"></i>
+        <span class="header-text">Home</span>
+      </a>
+
+      <a href="surgeries.html" class="header-item">
+        <i class="fas fa-procedures header-icon"></i>
+        <span class="header-text">Surgeries</span>
+      </a>
+
+      <a href="test.html" class="header-item">
+        <i class="fas fa-vials header-icon"></i>
+        <span class="header-text">Lab Tests</span>
+      </a>
+
+      <div class="header-item" onclick="openCheckupModal()">
+        <i class="fas fa-heartbeat header-icon"></i>
+        <span class="header-text">Checkup</span>
+      </div>
+
+      <div class="header-item" onclick="toggleDrawer()">
+        <i class="fas fa-shopping-cart header-icon">
+          <span id="cart-count" class="cart-count">0</span>
+        </i>
+        <span class="header-text">Cart</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================= MOBILE HEADER ================= -->
+  <div class="mobile-header">
+    <div class="logo-section">
+      <div class="lab-name">
+        <span class="niva">Niva</span>
+        <span class="healthcare">Health Kare</span>
+      </div>
+    </div>
+
+    <div class="location-section" id="mobileLocation">
+      <i class="fas fa-map-marker-alt location-icon"></i>
+
+      <div class="location-info">
+        <span class="label">Your Location</span>
+        <span class="city">
+          <span id="mobileSelectedCity">Bangalore</span>
+          <i class="fas fa-chevron-down chevron"></i>
+        </span>
+
+
+      </div>
+    </div>
+
+  </div>
+
+</header>
+
+
+<!-- LOCATION POPUP -->
+<div class="location-popup" id="locationPopup">
+  <div class="popup-card">
+
+    <!-- HEADER -->
+    <div class="popup-header">
+      <h3>Select your city</h3>
+      <button class="close-btn" id="closePopup">×</button>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="search-wrapper">
+      <span class="search-icon">🔍</span>
+
+      <input
+        type="text"
+        id="citySearch"
+        class="city-search"
+        placeholder="Search city (e.g. Mysuru)"
+        autocomplete="off"
+      />
+
+      <!-- Suggestions dropdown -->
+      <ul class="suggestions" id="citySuggestions"></ul>
+    </div>
+
+
+    <!-- POPULAR CITIES -->
+    <p class="section-label" id="popularLabel">Popular cities</p>
+    <div class="city-list popular" id="popularCities"></div>
+
+    <!-- ALL / SEARCH RESULTS -->
+    <div class="city-list" id="cityList"></div>
+
+    <p class="coverage">
+      Services available across major cities in Karnataka
+    </p>
+
+  </div>
+</div>
+
+
+
+<!-- Checkup Modal -->
+<div class="modal-overlay" id="checkupModalOverlay" onclick="closeCheckupModal()" style="display:none;">
+  <div class="modal-box" onclick="event.stopPropagation()">
+
+    <!-- Header -->
+    <div class="modal-header">
+      <h3>Get a call from our medical team</h3>
+      <button class="close-btn" onclick="closeCheckupModal()">×</button>
+    </div>
+
+    <!-- Subtext -->
+    <p class="modal-subtext">
+      Enter your mobile number and we’ll call you shortly.
+    </p>
+
+    <!-- Form -->
+    <form id="checkupForm" onsubmit="return false;">
+      <!-- Name -->
+      <input
+        type="text"
+        id="checkupName"
+        name="name"
+        placeholder="Your name"
+      />
+
+      <!-- Mobile -->
+      <input
+        type="tel"
+        id="checkupMobile"
+        name="mobile_no"
+        placeholder="Mobile number *"
+        required
+      />
+
+      <!-- Optional Message -->
+      <textarea
+        id="checkupMessage"
+        name="message"
+        placeholder="Message (optional)"
+        rows="3"
+      ></textarea>
+
+      <button type="button" onclick="submitCheckupForm()">
+        Request Call Back
+      </button>
+
+      <p class="trust-text">📞 Usually calls within 5 minutes</p>
+    </form>
+
+      <!-- Popup for success -->
+      <div id="simplePopup" style="display:none;">
+        ✅ Thank you! Our expert will call you shortly.
+      </div>
+
+
+  </div>
+</div>
+
+
+  
+  <!-- Cart Drawer (Right Side) -->
+ 
+<!-- Background Blur Overlay -->
+<div id="cartOverlay" class="cart-overlay" onclick="closeDrawer()"></div>
+
+
+<!-- Cart Drawer -->
+<div class="drawer mobile-drawer" id="drawer">
+  <div class="drawer-header">
+    <h3>Your Cart</h3>
+    <button onclick="closeDrawer()">✕</button>
+
+  </div>
+
+  <div class="drawer-body" id="cartItemsContainer"></div>
+
+  <div class="cart-summary">
+    <div class="summary-left">
+      <span class="total-tests">
+        checkout test: <strong id="totalTests">0</strong>
+      </span>
+      <span class="total-price">
+        Total Price: <strong id="totalPrice">₹0</strong>
+      </span>
+    </div>
+    <a href="checkout.html" class="proceed-btn">Proceed</a>
+  </div>
+</div>
+
+
+
+<!-- Mobile Bottom Bar -->
+<div class="mobile-bottom">
+
+  <!-- Home -->
+  <a href="index.html">
+    <i class="fas fa-home"></i>
+  </a>
+
+  <!-- Surgeries -->
+  <a href="surgeries.html">
+    <i class="fas fa-procedures"></i>
+  </a>
+
+  <!-- Lab Tests -->
+  <a href="test.html">
+    <i class="fas fa-vials"></i>
+  </a>
+
+  <!-- Checkups -->
+  <a href="#" onclick="openModal()">
+    <i class="fas fa-heartbeat"></i>
+  </a>
+
+  <!-- Cart -->
+  <a href="#" onclick="toggleDrawer()">
+    <i class="fas fa-shopping-cart"></i>
+  </a>
+
+</div>
+
+<section class="piles-hero">
+  <div class="piles-container">
+    
+    <!-- LEFT CONTENT -->
+    <div class="piles-content">
+      <h1>Safe & Confidential Medical Termination of Pregnancy</h1>
+      <p>
+        Medical Termination of Pregnancy (MTP) is a safe and legal procedure 
+        performed by experienced gynecologists. We provide confidential care, 
+        minimal discomfort, and complete medical support throughout the process.
+      </p>
+
+      <ul class="piles-features">
+        <li>✔ Safe & Legal Procedure</li>
+        <li>✔ Experienced Gynecologists</li>
+        <li>✔ Complete Privacy & Confidential Care</li>
+        <li>✔ Insurance & Support Available</li>
+      </ul>
+
+      <div class="piles-buttons">
+        <a href="tel:+917892287102" class="btn-secondary">
+          📞 Talk to Expert
+        </a>
+      </div>
+    </div>
+
+    <!-- RIGHT IMAGE -->
+    <div class="piles-image">
+      <img src="images/mtpp.webp" alt="Safe medical termination of pregnancy consultation">
+    </div>
+
+  </div>
+</section>
+
+<section class="piles-overview-section">
+  <div class="piles-overview-container">
+
+    <div class="piles-overview-header">
+      <h2>Overview of Medical Termination of Pregnancy (MTP)</h2>
+      <p>
+        Medical Termination of Pregnancy (MTP) is a procedure to safely end an 
+        unwanted or medically complicated pregnancy under professional supervision. 
+        The method used depends on the duration of pregnancy and the patient’s health condition.
+      </p>
+    </div>
+
+    <div class="piles-overview-grid">
+
+      <!-- What is MTP -->
+      <div class="overview-card">
+        <h3>What Is Medical Termination of Pregnancy?</h3>
+        <p>
+          MTP can be performed using prescribed medications in early pregnancy 
+          or through a minor surgical procedure, depending on gestational age. 
+          It is carried out under medical guidance to ensure safety and effectiveness.
+        </p>
+      </div>
+
+      <!-- When Recommended -->
+      <div class="overview-card">
+        <h3>When Is MTP Recommended?</h3>
+        <ul>
+          <li>Unplanned or unwanted pregnancy</li>
+          <li>Contraceptive failure</li>
+          <li>Medical conditions affecting the mother’s health</li>
+          <li>Fetal abnormalities detected during pregnancy</li>
+          <li>As permitted under legal guidelines</li>
+        </ul>
+      </div>
+
+      <!-- Benefits / Care -->
+      <div class="overview-card">
+        <h3>Benefits of Safe MTP Care</h3>
+        <ul>
+          <li>Safe and legal procedure under expert supervision</li>
+          <li>Confidential and non-judgmental care</li>
+          <li>Minimal complications when done early</li>
+          <li>Proper medical guidance and follow-up support</li>
+          <li>Emotional and counseling support if required</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section class="piles-treatment-section">
+  <div class="piles-treatment-container">
+
+    <div class="treatment-header">
+      <h2>MTP Treatment Options</h2>
+      <p>
+        The type of Medical Termination of Pregnancy depends on the stage 
+        of pregnancy and medical evaluation. Both medical and minor surgical 
+        methods are available under expert supervision.
+      </p>
+    </div>
+
+    <div class="treatment-comparison">
+
+      <div class="treatment-card">
+        <h3>Medical Abortion (Medication Method)</h3>
+        <ul>
+          <li>Recommended in early pregnancy</li>
+          <li>Uses prescribed medications under doctor supervision</li>
+          <li>No surgical procedure required</li>
+          <li>Can be done with proper medical follow-up</li>
+          <li>Safe and effective when taken as advised</li>
+        </ul>
+      </div>
+
+      <div class="treatment-card highlight-card">
+        <h3>Surgical MTP Procedure</h3>
+        <ul>
+          <li>Minor surgical procedure (vacuum aspiration)</li>
+          <li>Recommended for later gestational stages</li>
+          <li>Quick and controlled procedure</li>
+          <li>Performed under anesthesia</li>
+          <li>Short hospital stay with medical supervision</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<section id="book-consult" class="consult-section">
+  <div class="container">
+    <div class="consult-content">
+
+      <div class="consult-info">
+        <h2>Get a Call Back in Minutes</h2>
+        <p>
+          Our medical experts will help you with treatment guidance,
+          cost estimates, hospital options, doctor availability and insurance support.
+        </p>
+
+        <ul class="consult-points">
+          <li><i class="fas fa-check-circle"></i> Free expert consultation</li>
+          <li><i class="fas fa-check-circle"></i> Cashless Insurance & EMI Available</li>
+          <li><i class="fas fa-check-circle"></i> Fast admission & discharge support</li>
+        </ul>
+
+                <!-- PRIMARY ACTIONS FIRST -->
+        <div class="alt-contact">
+          <a href="tel:+919876543210" class="call-link">
+            <i class="fas fa-phone-alt"></i> Call Now
+          </a>
+
+          <a href="https://wa.me/919876543210" class="whatsapp-link">
+            <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+          </a>
+        </div>
+
+        
+      </div>
+      
+      <div class="consult-form-box">
+        <h3>Get a Call Back</h3>
+
+
+        <form class="consult-form" onsubmit="return false;">
+
+          <div class="form-group">
+          <input
+            type="text"
+            id="consultName"
+            placeholder="Full Name *"
+            required
+          >
+
+          </div>
+
+          <div class="form-group">
+            <input
+              type="tel"
+              id="consultMobile"
+              placeholder="Mobile Number *"
+              maxlength="10"
+              pattern="[0-9]{10}"
+              required
+            >
+
+          </div>
+
+          <button type="button" class="submit-btn" onclick="submitConsultForm()">
+            Get a Call Back
+          </button>
+
+
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SIMPLE CONFIRMATION POPUP -->
+<div id="simplePopup" class="simple-popup">
+  <div class="popup-box">
+    <p>✅ Thank you! Our medical expert will contact you shortly.</p>
+    <button onclick="closePopup()">OK</button>
+  </div>
+</div>
+
+
+<section class="piles-faq-section">
+  <div class="piles-faq-container">
+
+    <h2>Frequently Asked Questions (FAQs)</h2>
+
+    <div class="faq-item">
+      <h3>Is Medical Termination of Pregnancy (MTP) painful?</h3>
+      <p>
+        MTP may cause mild to moderate cramping and discomfort, especially with 
+        the medication method. However, pain is manageable with prescribed medicines 
+        and medical supervision. Surgical MTP is performed under anesthesia, 
+        making the procedure itself painless.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>How long does the MTP procedure take?</h3>
+      <p>
+        Medical abortion using tablets may take a few hours to a couple of days 
+        to complete the process under guidance. Surgical MTP usually takes 
+        about 15–30 minutes and is typically a short hospital stay procedure.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>How long is the recovery period after MTP?</h3>
+      <p>
+        Most women recover within a few days after the procedure. Light bleeding 
+        may continue for a few days to weeks. Normal activities can usually 
+        be resumed within a short period as advised by the doctor.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Is MTP a safe and legal procedure?</h3>
+      <p>
+        Yes, Medical Termination of Pregnancy is safe and legal when performed 
+        by a qualified gynecologist under approved medical guidelines. 
+        Early consultation ensures better safety and fewer complications.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Will MTP affect future pregnancy?</h3>
+      <p>
+        When performed safely under medical supervision, MTP generally does not 
+        affect future fertility. Women can plan future pregnancies unless advised 
+        otherwise due to specific medical conditions.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<section class="reviews-banner">
+
+  <div class="reviews-container">
+
+    <!-- LEFT: AUTO SLIDING REVIEWS -->
+    <div class="reviews-slider">
+      <div class="reviews-track">
+
+        <div class="review-item">
+          <p>“Fast reports & polite support. Highly recommended.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=15" alt="">
+            <div>
+              <strong>Shashank N.</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+        <div class="review-item">
+          <p>“Home sample collection was on time and very hygienic.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=22" alt="">
+            <div>
+              <strong>Ananya R.</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+        <div class="review-item">
+          <p>“Booked a full body checkup. Got reports within hours.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=5" alt="">
+            <div>
+              <strong>Rohit Kumar</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+        <div class="review-item">
+          <p>“Very smooth experience. Support team was helpful.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=9" alt="">
+            <div>
+              <strong>Divya M.</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT: TRUST CONTENT (DESKTOP ONLY) -->
+    <div class="reviews-info">
+      <h2>What Patients Say<br>On Google</h2>
+
+      <p>
+        Trusted by thousands for accurate reports and convenient home
+        sample collection. Rated <strong>4.3★ on Google</strong>.
+      </p>
+
+      <div class="trust-stats">
+        <div>
+          ⭐<br><strong>4.3</strong><br>Rating
+        </div>
+        <div>
+          👥<br><strong>10k+</strong><br>Users
+        </div>
+        <div>
+          🏥<br><strong>NABL</strong><br>Labs
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+
+<div id="sticky-icon-popup">
+
+  <a href="https://wa.me/+917892287102" target="_blank" class="icon-btn whatsapp" aria-label="Chat on WhatsApp" rel="noopener">
+    <i class="fab fa-whatsapp"></i>
+    <span class="tooltip">WhatsApp</span>
+  </a>
+
+  <a href="tel:+917892287102" class="icon-btn call" aria-label="Call Support" rel="noopener">
+    <i class="fas fa-phone-alt"></i>
+    <span class="tooltip">Call Support</span>
+  </a>
+
+</div>
+
+
+<footer class="footer-section">
+  <div class="footer-container">
+
+    <!-- Brand / Trust -->
+    <div class="footer-left">
+      <h2 class="footer-brand">
+        <span class="footer-niva">Niva</span>
+        <span class="footer-healthcare">Health Kare</span>
+      </h2>
+
+      <p class="footer-tagline">
+        Trusted healthcare services delivering quality, care, and compassion.
+      </p>
+
+      <div class="social-icons">
+        <a href="https://www.instagram.com/nivahealthkare/" aria-label="Instagram">
+      <img
+        src="images/instagram.webp"
+        alt="Follow Niva Health Kare on Instagram"
+        width="24"
+        height="24"
+        loading="lazy">
+      </a>
+        <a href="https://www.facebook.com/profile.php?id=61583126009241" aria-label="Facebook">
+        <img
+          src="images/facebook.webp"
+          alt="Follow Niva Health Kare on Facebook"
+          width="24"
+          height="24"
+          loading="lazy">
+
+        </a>
+        <a href="https://www.youtube.com/@nivahealthkare" aria-label="YouTube">
+        <img
+          src="images/youtube.webp"
+          alt="Subscribe to Niva Health Kare on YouTube"
+          width="24"
+          height="24"
+          loading="lazy">
+
+        </a>
+      </div>
+    </div>
+
+    <!-- Links -->
+    <div class="footer-right">
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="index.html">Home</a>
+        <a href="about-us.html">About Us</a>
+        <a href="locate-us.html">Locate Us</a>
+        
+      </div>
+
+      <div class="footer-col">
+        <h4>Medical Network</h4>
+        <a href="our-partners.html">Our Partners</a>
+        <a href="for-doctors.html">Doctors</a>
+        <a href="service.html">Our Services</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="refund-policy.html">Refund Policy</a>
+        <a href="disclaimer.html">Disclaimer</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom -->
+  <div class="footer-bottom">
+  <p>
+    © 2025 Niva Health Kare Healthcare Services. All rights reserved.
+  </p>
+
+
+    <div class="footer-links">
+      <a href="terms.html">Terms</a>
+      <a href="privacy-policy.html">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+<section class="simple-seo-footer">
+  <div class="simple-seo-container">
+
+    <div class="seo-item">
+      <h4>Safe MTP Services in Bangalore</h4>
+      <p>
+        Confidential and safe Medical Termination of Pregnancy (MTP) services in Bangalore, 
+        including medical abortion pills and painless surgical procedures. Our experienced 
+        gynecologists ensure complete privacy, comfort, and compassionate care throughout 
+        the process.
+      </p>
+    </div>
+
+    <div class="seo-item">
+      <h4>Experienced Lady Gynecologists for MTP</h4>
+      <p>
+        Our qualified and understanding gynecologists provide proper consultation, 
+        ultrasound evaluation, and safe pregnancy termination as per medical guidelines. 
+        We focus on your health, safety, and emotional well-being at every step.
+      </p>
+    </div>
+
+    <div class="seo-item">
+      <h4>Affordable & Legal MTP in Bangalore</h4>
+      <p>
+        We offer legal MTP services in Bangalore with transparent pricing, 
+        affordable cost options, and quick appointment scheduling. Both early pregnancy 
+        abortion (tablet method) and short-stay surgical procedures are available 
+        with full confidentiality.
+      </p>
+    </div>
+
+    <div class="seo-item">
+      <h4>Why Choose Our MTP Clinic in Bangalore?</h4>
+      <p>
+        Safe and approved medical procedures, private consultation rooms, supportive staff, 
+        modern facilities, minimal discomfort techniques, and complete before-and-after 
+        care. Your privacy and safety are our top priority.
+      </p>
+    </div>
+
+  </div>
+</section>  
+
+
+<!-- ===== BOOKING MODAL ===== -->
+<div id="bookingModal" class="booking-modal">
+
+  <div class="booking-box">
+
+    <!-- Close -->
+    <button type="button" class="booking-close" onclick="closeBooking()">×</button>
+
+    <!-- STEP INDICATOR -->
+    <div class="step-indicator">
+      <div class="step active" id="stepIndicator1">1</div>
+      <div class="step-line"></div>
+      <div class="step" id="stepIndicator2">2</div>
+      <div class="step-line"></div>
+      <div class="step" id="stepIndicator3">3</div>
+    </div>
+
+    <!-- ===== STEP 1 ===== -->
+    <div class="booking-step active" id="step1">
+      <h3>Enter Mobile Number</h3>
+
+      <label>Mobile Number</label>
+      <input
+        type="tel"
+        id="bookingMobile"
+        placeholder="10-digit mobile number"
+        maxlength="10"
+      >
+
+      <button
+        type="button"
+        class="primary-btn"
+        onclick="goToStep2()"
+      >
+        Continue
+      </button>
+    </div>
+
+    <!-- ===== STEP 2 ===== -->
+    <div class="booking-step" id="step2">
+      <h3>Complete Booking</h3>
+
+      <label>Your Name</label>
+      <input type="text" id="custName" placeholder="Enter your name">
+
+      <label>Email (optional)</label>
+      <input type="email" id="custEmail" placeholder="Enter your email">
+
+      <label>Service</label>
+      <input
+        type="text"
+        id="serviceType"
+        value="Health Checkup"
+        readonly
+      >
+
+      <button
+        type="button"
+        class="primary-btn"
+        onclick="confirmBooking()"
+      >
+        Confirm Booking
+      </button>
+    </div>
+
+    <!-- ===== STEP 3 ===== -->
+    <div class="booking-step" id="step3">
+      <h3>Booking Confirmed 🎉</h3>
+
+      <p class="confirmation-text" id="confirmationMessage">
+        Thank you! Our team will call you shortly to confirm your booking.
+      </p>
+
+      <button
+        type="button"
+        class="primary-btn"
+        onclick="closeBooking()"
+      >
+        Done
+      </button>
+    </div>
+
+  </div>
+</div>
+
+
+
+<!-- ✅ Toast Notification -->
+<div id="toast" class="toast">Added to Cart</div>
+
+
+  <script src="javascript/lab-carousel.js"></script>
+  <script src="javascript/script.js"></script>
+  <script src="javascript/testscript.js"></script>
+  <script src="javascript/location.js"></script>
+  <script src="javascript/booking.controller.js"></script>
+
+</body>
+</html>

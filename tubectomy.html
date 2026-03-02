@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- Primary SEO -->
+  <title>Book Lab Tests, Diagnostic & Health Packages | Niva Health Kare</title>
+  <meta name="description" content="Niva Health Kare offers diagnostic lab tests, imaging services, and health checkup packages. Book blood tests, scan tests, and full body checkups with trusted labs and home sample collection." />
+  <meta name="robots" content="index, follow">
+<meta name="geo.region" content="IN-KA">
+<meta name="geo.placename" content="Bangalore">
+  <!-- Canonical -->
+  <link rel="canonical" href="https://www.nivahealthkare.com/" />
+
+  <!-- Open Graph (WhatsApp / Facebook) -->
+  <meta property="og:title" content="Niva Health Kare – Diagnostic Tests & Health Packages">
+  <meta property="og:description" content="Book lab tests, blood tests, imaging scans, and health checkup packages online with trusted diagnostic labs.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.nivahealthkare.com/">
+  <meta property="og:image" content="https://www.nivahealthkare.com/images/og-image.webp">
+
+  <!-- Stylesheets (we will merge later) -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/Surgeries.css">
+  <link rel="stylesheet" href="css/booking.routes.css">
+  <link rel="stylesheet" href="css/mainsur.css">
+
+  <!-- Font Awesome (non-blocking for speed) -->
+  <link rel="preload"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        as="style"
+        onload="this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  </noscript>
+</head>
+<body>
+
+<header>
+
+  <!-- ================= DESKTOP HEADER ================= -->
+  <div class="desktop-header">
+
+    <!-- LEFT: LOGO + LOCATION -->
+    <div class="logo-location">
+
+      <div class="logo-section">
+        <div class="lab-name">
+          <span class="niva">Niva</span>
+          <span class="healthcare">Health Kare</span>
+        </div>
+      </div>
+
+      <!-- LOCATION TRIGGER -->
+      <div class="location-trigger" id="openLocation">
+        <span class="label">Location</span>
+        <span class="city">
+          <i class="fa-solid fa-location-dot location-icon"></i>
+          <span id="selectedCity">Select city</span>
+          <i class="fa-solid fa-chevron-down chevron"></i>
+        </span>
+      </div>
+
+
+    </div>
+
+    <!-- RIGHT: MENU ICONS -->
+    <div class="header-actions">
+      <a href="index.html" class="header-item">
+        <i class="fas fa-home header-icon"></i>
+        <span class="header-text">Home</span>
+      </a>
+
+      <a href="surgeries.html" class="header-item">
+        <i class="fas fa-procedures header-icon"></i>
+        <span class="header-text">Surgeries</span>
+      </a>
+
+      <a href="test.html" class="header-item">
+        <i class="fas fa-vials header-icon"></i>
+        <span class="header-text">Lab Tests</span>
+      </a>
+
+      <div class="header-item" onclick="openCheckupModal()">
+        <i class="fas fa-heartbeat header-icon"></i>
+        <span class="header-text">Checkup</span>
+      </div>
+
+      <div class="header-item" onclick="toggleDrawer()">
+        <i class="fas fa-shopping-cart header-icon">
+          <span id="cart-count" class="cart-count">0</span>
+        </i>
+        <span class="header-text">Cart</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================= MOBILE HEADER ================= -->
+  <div class="mobile-header">
+    <div class="logo-section">
+      <div class="lab-name">
+        <span class="niva">Niva</span>
+        <span class="healthcare">Health Kare</span>
+      </div>
+    </div>
+
+    <div class="location-section" id="mobileLocation">
+      <i class="fas fa-map-marker-alt location-icon"></i>
+
+      <div class="location-info">
+        <span class="label">Your Location</span>
+        <span class="city">
+          <span id="mobileSelectedCity">Bangalore</span>
+          <i class="fas fa-chevron-down chevron"></i>
+        </span>
+
+
+      </div>
+    </div>
+
+  </div>
+
+</header>
+
+
+<!-- LOCATION POPUP -->
+<div class="location-popup" id="locationPopup">
+  <div class="popup-card">
+
+    <!-- HEADER -->
+    <div class="popup-header">
+      <h3>Select your city</h3>
+      <button class="close-btn" id="closePopup">×</button>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="search-wrapper">
+      <span class="search-icon">🔍</span>
+
+      <input
+        type="text"
+        id="citySearch"
+        class="city-search"
+        placeholder="Search city (e.g. Mysuru)"
+        autocomplete="off"
+      />
+
+      <!-- Suggestions dropdown -->
+      <ul class="suggestions" id="citySuggestions"></ul>
+    </div>
+
+
+    <!-- POPULAR CITIES -->
+    <p class="section-label" id="popularLabel">Popular cities</p>
+    <div class="city-list popular" id="popularCities"></div>
+
+    <!-- ALL / SEARCH RESULTS -->
+    <div class="city-list" id="cityList"></div>
+
+    <p class="coverage">
+      Services available across major cities in Karnataka
+    </p>
+
+  </div>
+</div>
+
+
+
+<!-- Checkup Modal -->
+<div class="modal-overlay" id="checkupModalOverlay" onclick="closeCheckupModal()" style="display:none;">
+  <div class="modal-box" onclick="event.stopPropagation()">
+
+    <!-- Header -->
+    <div class="modal-header">
+      <h3>Get a call from our medical team</h3>
+      <button class="close-btn" onclick="closeCheckupModal()">×</button>
+    </div>
+
+    <!-- Subtext -->
+    <p class="modal-subtext">
+      Enter your mobile number and we’ll call you shortly.
+    </p>
+
+    <!-- Form -->
+    <form id="checkupForm" onsubmit="return false;">
+      <!-- Name -->
+      <input
+        type="text"
+        id="checkupName"
+        name="name"
+        placeholder="Your name"
+      />
+
+      <!-- Mobile -->
+      <input
+        type="tel"
+        id="checkupMobile"
+        name="mobile_no"
+        placeholder="Mobile number *"
+        required
+      />
+
+      <!-- Optional Message -->
+      <textarea
+        id="checkupMessage"
+        name="message"
+        placeholder="Message (optional)"
+        rows="3"
+      ></textarea>
+
+      <button type="button" onclick="submitCheckupForm()">
+        Request Call Back
+      </button>
+
+      <p class="trust-text">📞 Usually calls within 5 minutes</p>
+    </form>
+
+      <!-- Popup for success -->
+      <div id="simplePopup" style="display:none;">
+        ✅ Thank you! Our expert will call you shortly.
+      </div>
+
+
+  </div>
+</div>
+
+
+  
+  <!-- Cart Drawer (Right Side) -->
+ 
+<!-- Background Blur Overlay -->
+<div id="cartOverlay" class="cart-overlay" onclick="closeDrawer()"></div>
+
+
+<!-- Cart Drawer -->
+<div class="drawer mobile-drawer" id="drawer">
+  <div class="drawer-header">
+    <h3>Your Cart</h3>
+    <button onclick="closeDrawer()">✕</button>
+
+  </div>
+
+  <div class="drawer-body" id="cartItemsContainer"></div>
+
+  <div class="cart-summary">
+    <div class="summary-left">
+      <span class="total-tests">
+        checkout test: <strong id="totalTests">0</strong>
+      </span>
+      <span class="total-price">
+        Total Price: <strong id="totalPrice">₹0</strong>
+      </span>
+    </div>
+    <a href="checkout.html" class="proceed-btn">Proceed</a>
+  </div>
+</div>
+
+
+
+<!-- Mobile Bottom Bar -->
+<div class="mobile-bottom">
+
+  <!-- Home -->
+  <a href="index.html">
+    <i class="fas fa-home"></i>
+  </a>
+
+  <!-- Surgeries -->
+  <a href="surgeries.html">
+    <i class="fas fa-procedures"></i>
+  </a>
+
+  <!-- Lab Tests -->
+  <a href="test.html">
+    <i class="fas fa-vials"></i>
+  </a>
+
+  <!-- Checkups -->
+  <a href="#" onclick="openModal()">
+    <i class="fas fa-heartbeat"></i>
+  </a>
+
+  <!-- Cart -->
+  <a href="#" onclick="toggleDrawer()">
+    <i class="fas fa-shopping-cart"></i>
+  </a>
+
+</div>
+
+<section class="piles-hero">
+  <div class="piles-container">
+    
+    <!-- LEFT CONTENT -->
+    <div class="piles-content">
+      <h1>Safe & Advanced Tubectomy Procedure</h1>
+      <p>
+        Tubectomy is a safe and permanent birth control procedure for women. 
+        Performed by experienced gynecologists using minimally invasive techniques, 
+        it ensures quick recovery, minimal discomfort, and complete privacy.
+      </p>
+
+      <ul class="piles-features">
+        <li>✔ 30–45 Minute Procedure</li>
+        <li>✔ Permanent Birth Control Solution</li>
+        <li>✔ Minimal Pain & Quick Recovery</li>
+        <li>✔ Insurance & Cashless Support</li>
+      </ul>
+
+      <div class="piles-buttons">
+        <a href="tel:+917892287102" class="btn-secondary">
+          📞 Talk to Expert
+        </a>
+      </div>
+    </div>
+
+    <!-- RIGHT IMAGE -->
+    <div class="piles-image">
+      <img src="images/tubectomy.webp" alt="Safe tubectomy procedure and gynecology consultation">
+    </div>
+
+  </div>
+</section>
+
+<section class="piles-overview-section">
+  <div class="piles-overview-container">
+
+    <div class="piles-overview-header">
+      <h2>Overview of Tubectomy</h2>
+      <p>
+        Tubectomy, also known as female sterilization, is a surgical procedure 
+        that permanently prevents pregnancy by blocking or sealing the fallopian tubes. 
+        It is a highly effective and safe method of contraception for women 
+        who do not wish to conceive in the future.
+      </p>
+    </div>
+
+    <div class="piles-overview-grid">
+
+      <!-- What is Tubectomy -->
+      <div class="overview-card">
+        <h3>What Is Tubectomy?</h3>
+        <p>
+          Tubectomy is a minor surgical procedure where the fallopian tubes 
+          are cut, tied, or sealed to prevent the egg from meeting sperm. 
+          It is considered a permanent method of birth control.
+        </p>
+      </div>
+
+      <!-- When Needed -->
+      <div class="overview-card">
+        <h3>When Is Tubectomy Recommended?</h3>
+        <ul>
+          <li>When a woman has completed her family</li>
+          <li>When permanent contraception is desired</li>
+          <li>If pregnancy may pose health risks</li>
+          <li>After delivery (postpartum sterilization)</li>
+          <li>As a planned elective procedure</li>
+        </ul>
+      </div>
+
+      <!-- Benefits -->
+      <div class="overview-card">
+        <h3>Benefits of Tubectomy</h3>
+        <ul>
+          <li>Permanent and highly effective birth control</li>
+          <li>No ongoing medication required</li>
+          <li>Does not affect hormones</li>
+          <li>Quick recovery with minimally invasive techniques</li>
+          <li>Safe procedure when performed by specialists</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section class="piles-treatment-section">
+  <div class="piles-treatment-container">
+
+    <div class="treatment-header">
+      <h2>Tubectomy Procedure Options</h2>
+      <p>
+        Tubectomy can be performed using minimally invasive laparoscopic techniques 
+        or conventional surgical methods. The choice depends on the patient’s 
+        medical condition and doctor’s recommendation.
+      </p>
+    </div>
+
+    <div class="treatment-comparison">
+
+      <div class="treatment-card">
+        <h3>Laparoscopic Tubectomy</h3>
+        <ul>
+          <li>Minimally invasive keyhole procedure</li>
+          <li>Small incisions with minimal scarring</li>
+          <li>Less pain and quicker recovery</li>
+          <li>Short hospital stay</li>
+          <li>Faster return to normal activities</li>
+        </ul>
+      </div>
+
+      <div class="treatment-card highlight-card">
+        <h3>Conventional Tubectomy Surgery</h3>
+        <ul>
+          <li>Traditional surgical method</li>
+          <li>May involve slightly larger incision</li>
+          <li>Effective permanent contraception</li>
+          <li>Slightly longer recovery time</li>
+          <li>Recommended in specific medical cases</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<section id="book-consult" class="consult-section">
+  <div class="container">
+    <div class="consult-content">
+
+      <div class="consult-info">
+        <h2>Get a Call Back in Minutes</h2>
+        <p>
+          Our medical experts will help you with treatment guidance,
+          cost estimates, hospital options, doctor availability and insurance support.
+        </p>
+
+        <ul class="consult-points">
+          <li><i class="fas fa-check-circle"></i> Free expert consultation</li>
+          <li><i class="fas fa-check-circle"></i> Cashless Insurance & EMI Available</li>
+          <li><i class="fas fa-check-circle"></i> Fast admission & discharge support</li>
+        </ul>
+
+                <!-- PRIMARY ACTIONS FIRST -->
+        <div class="alt-contact">
+          <a href="tel:+919876543210" class="call-link">
+            <i class="fas fa-phone-alt"></i> Call Now
+          </a>
+
+          <a href="https://wa.me/919876543210" class="whatsapp-link">
+            <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+          </a>
+        </div>
+
+        
+      </div>
+      
+      <div class="consult-form-box">
+        <h3>Get a Call Back</h3>
+
+
+        <form class="consult-form" onsubmit="return false;">
+
+          <div class="form-group">
+          <input
+            type="text"
+            id="consultName"
+            placeholder="Full Name *"
+            required
+          >
+
+          </div>
+
+          <div class="form-group">
+            <input
+              type="tel"
+              id="consultMobile"
+              placeholder="Mobile Number *"
+              maxlength="10"
+              pattern="[0-9]{10}"
+              required
+            >
+
+          </div>
+
+          <button type="button" class="submit-btn" onclick="submitConsultForm()">
+            Get a Call Back
+          </button>
+
+
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SIMPLE CONFIRMATION POPUP -->
+<div id="simplePopup" class="simple-popup">
+  <div class="popup-box">
+    <p>✅ Thank you! Our medical expert will contact you shortly.</p>
+    <button onclick="closePopup()">OK</button>
+  </div>
+</div>
+
+
+<section class="piles-faq-section">
+  <div class="piles-faq-container">
+
+    <h2>Frequently Asked Questions (FAQs)</h2>
+
+    <div class="faq-item">
+      <h3>Is tubectomy a painful procedure?</h3>
+      <p>
+        Tubectomy is performed under anesthesia, so the procedure itself is not painful. 
+        After surgery, mild discomfort or soreness may occur, which can be managed 
+        with prescribed medications and proper rest.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>How long does tubectomy surgery take?</h3>
+      <p>
+        Tubectomy usually takes about 30–45 minutes, depending on the surgical method used. 
+        In most cases, it is a short hospital stay procedure, and patients can return home 
+        the same day or within 24 hours.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>How long is the recovery period after tubectomy?</h3>
+      <p>
+        Most women recover within a few days to one week after laparoscopic tubectomy. 
+        Complete recovery may take slightly longer depending on individual health 
+        and the surgical technique used.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Is tubectomy a permanent birth control method?</h3>
+      <p>
+        Yes, tubectomy is considered a permanent method of contraception. 
+        It is recommended for women who have completed their family 
+        and do not wish to conceive in the future.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Is tubectomy a safe procedure?</h3>
+      <p>
+        Yes, tubectomy is a safe and commonly performed procedure when done by 
+        experienced gynecologists. It is highly effective and does not affect 
+        hormonal balance or regular menstrual cycles.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<section class="reviews-banner">
+
+  <div class="reviews-container">
+
+    <!-- LEFT: AUTO SLIDING REVIEWS -->
+    <div class="reviews-slider">
+      <div class="reviews-track">
+
+        <div class="review-item">
+          <p>“Fast reports & polite support. Highly recommended.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=15" alt="">
+            <div>
+              <strong>Shashank N.</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+        <div class="review-item">
+          <p>“Home sample collection was on time and very hygienic.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=22" alt="">
+            <div>
+              <strong>Ananya R.</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+        <div class="review-item">
+          <p>“Booked a full body checkup. Got reports within hours.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=5" alt="">
+            <div>
+              <strong>Rohit Kumar</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+        <div class="review-item">
+          <p>“Very smooth experience. Support team was helpful.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=9" alt="">
+            <div>
+              <strong>Divya M.</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT: TRUST CONTENT (DESKTOP ONLY) -->
+    <div class="reviews-info">
+      <h2>What Patients Say<br>On Google</h2>
+
+      <p>
+        Trusted by thousands for accurate reports and convenient home
+        sample collection. Rated <strong>4.3★ on Google</strong>.
+      </p>
+
+      <div class="trust-stats">
+        <div>
+          ⭐<br><strong>4.3</strong><br>Rating
+        </div>
+        <div>
+          👥<br><strong>10k+</strong><br>Users
+        </div>
+        <div>
+          🏥<br><strong>NABL</strong><br>Labs
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+
+<div id="sticky-icon-popup">
+
+  <a href="https://wa.me/+917892287102" target="_blank" class="icon-btn whatsapp" aria-label="Chat on WhatsApp" rel="noopener">
+    <i class="fab fa-whatsapp"></i>
+    <span class="tooltip">WhatsApp</span>
+  </a>
+
+  <a href="tel:+917892287102" class="icon-btn call" aria-label="Call Support" rel="noopener">
+    <i class="fas fa-phone-alt"></i>
+    <span class="tooltip">Call Support</span>
+  </a>
+
+</div>
+
+
+<footer class="footer-section">
+  <div class="footer-container">
+
+    <!-- Brand / Trust -->
+    <div class="footer-left">
+      <h2 class="footer-brand">
+        <span class="footer-niva">Niva</span>
+        <span class="footer-healthcare">Health Kare</span>
+      </h2>
+
+      <p class="footer-tagline">
+        Trusted healthcare services delivering quality, care, and compassion.
+      </p>
+
+      <div class="social-icons">
+        <a href="https://www.instagram.com/nivahealthkare/" aria-label="Instagram">
+      <img
+        src="images/instagram.webp"
+        alt="Follow Niva Health Kare on Instagram"
+        width="24"
+        height="24"
+        loading="lazy">
+      </a>
+        <a href="https://www.facebook.com/profile.php?id=61583126009241" aria-label="Facebook">
+        <img
+          src="images/facebook.webp"
+          alt="Follow Niva Health Kare on Facebook"
+          width="24"
+          height="24"
+          loading="lazy">
+
+        </a>
+        <a href="https://www.youtube.com/@nivahealthkare" aria-label="YouTube">
+        <img
+          src="images/youtube.webp"
+          alt="Subscribe to Niva Health Kare on YouTube"
+          width="24"
+          height="24"
+          loading="lazy">
+
+        </a>
+      </div>
+    </div>
+
+    <!-- Links -->
+    <div class="footer-right">
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="index.html">Home</a>
+        <a href="about-us.html">About Us</a>
+        <a href="locate-us.html">Locate Us</a>
+        
+      </div>
+
+      <div class="footer-col">
+        <h4>Medical Network</h4>
+        <a href="our-partners.html">Our Partners</a>
+        <a href="for-doctors.html">Doctors</a>
+        <a href="service.html">Our Services</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="refund-policy.html">Refund Policy</a>
+        <a href="disclaimer.html">Disclaimer</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom -->
+  <div class="footer-bottom">
+  <p>
+    © 2025 Niva Health Kare Healthcare Services. All rights reserved.
+  </p>
+
+
+    <div class="footer-links">
+      <a href="terms.html">Terms</a>
+      <a href="privacy-policy.html">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+<section class="simple-seo-footer">
+  <div class="simple-seo-container">
+
+    <div class="seo-item">
+      <h4>Tubectomy Treatment Services</h4>
+      <p>
+        Advanced laparoscopic tubectomy procedure in Bangalore, safe and permanent 
+        female sterilization surgery, and minimally invasive birth control treatment 
+        performed by experienced gynecologists.
+      </p>
+    </div>
+
+    <div class="seo-item">
+      <h4>Expert Gynecologists for Tubectomy</h4>
+      <p>
+        Skilled and experienced gynecologists in Bangalore providing safe tubectomy surgery, 
+        proper consultation, and complete care with minimal pain and faster recovery.
+      </p>
+    </div>
+
+    <div class="seo-item">
+      <h4>Best Tubectomy Surgery in Bangalore</h4>
+      <p>
+        Trusted tubectomy hospital in Bangalore offering affordable tubectomy cost, 
+        same-day laparoscopic sterilization procedure, insurance and cashless support, 
+        and easy appointment booking with complete privacy.
+      </p>
+    </div>
+
+    <div class="seo-item">
+      <h4>Why Choose Our Tubectomy Clinic in Bangalore?</h4>
+      <p>
+        Advanced laparoscopic technology, expert lady gynecologists, hygienic operation 
+        theatres, transparent pricing, quick recovery plans, and full pre- and post-surgery 
+        support for women seeking permanent birth control in Bangalore.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ===== BOOKING MODAL ===== -->
+<div id="bookingModal" class="booking-modal">
+
+  <div class="booking-box">
+
+    <!-- Close -->
+    <button type="button" class="booking-close" onclick="closeBooking()">×</button>
+
+    <!-- STEP INDICATOR -->
+    <div class="step-indicator">
+      <div class="step active" id="stepIndicator1">1</div>
+      <div class="step-line"></div>
+      <div class="step" id="stepIndicator2">2</div>
+      <div class="step-line"></div>
+      <div class="step" id="stepIndicator3">3</div>
+    </div>
+
+    <!-- ===== STEP 1 ===== -->
+    <div class="booking-step active" id="step1">
+      <h3>Enter Mobile Number</h3>
+
+      <label>Mobile Number</label>
+      <input
+        type="tel"
+        id="bookingMobile"
+        placeholder="10-digit mobile number"
+        maxlength="10"
+      >
+
+      <button
+        type="button"
+        class="primary-btn"
+        onclick="goToStep2()"
+      >
+        Continue
+      </button>
+    </div>
+
+    <!-- ===== STEP 2 ===== -->
+    <div class="booking-step" id="step2">
+      <h3>Complete Booking</h3>
+
+      <label>Your Name</label>
+      <input type="text" id="custName" placeholder="Enter your name">
+
+      <label>Email (optional)</label>
+      <input type="email" id="custEmail" placeholder="Enter your email">
+
+      <label>Service</label>
+      <input
+        type="text"
+        id="serviceType"
+        value="Health Checkup"
+        readonly
+      >
+
+      <button
+        type="button"
+        class="primary-btn"
+        onclick="confirmBooking()"
+      >
+        Confirm Booking
+      </button>
+    </div>
+
+    <!-- ===== STEP 3 ===== -->
+    <div class="booking-step" id="step3">
+      <h3>Booking Confirmed 🎉</h3>
+
+      <p class="confirmation-text" id="confirmationMessage">
+        Thank you! Our team will call you shortly to confirm your booking.
+      </p>
+
+      <button
+        type="button"
+        class="primary-btn"
+        onclick="closeBooking()"
+      >
+        Done
+      </button>
+    </div>
+
+  </div>
+</div>
+
+
+
+<!-- ✅ Toast Notification -->
+<div id="toast" class="toast">Added to Cart</div>
+
+
+  <script src="javascript/lab-carousel.js"></script>
+  <script src="javascript/script.js"></script>
+  <script src="javascript/testscript.js"></script>
+  <script src="javascript/location.js"></script>
+  <script src="javascript/booking.controller.js"></script>
+
+</body>
+</html>

@@ -5,9 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
   <!-- Primary SEO -->
-  <title>Book Lab Tests, Diagnostic & Health Packages | Niva Health Kare</title>
-  <meta name="description" content="Niva Health Kare offers diagnostic lab tests, imaging services, and health checkup packages. Book blood tests, scan tests, and full body checkups with trusted labs and home sample collection." />
+<title>Best Laser Surgery in Bangalore | Niva Health Kare</title>
+
+<meta name="description" content="Advanced laser surgery in Bangalore for piles, fissure, fistula, lipoma and more at Niva Health Kare. Book expert consultation today.">
   <meta name="robots" content="index, follow">
+  <meta name="geo.region" content="IN-KA">
+<meta name="geo.placename" content="Bangalore">
 
   <!-- Canonical -->
   <link rel="canonical" href="https://www.nivahealthkare.com/" />
@@ -328,7 +331,7 @@
 
       <!-- Banner Text -->
       <div class="banner-text">
-        <h1>Expert Surgeons, Seamless Procedures</h1>
+        <h2>Expert Surgeons, Seamless Procedures</h2>
         <p>Certified surgical teams with advanced tools for the highest safety standards</p>
         <div class="banner-points">
           <span><i class="fas fa-user-md"></i> Expert Doctors</span>
@@ -354,7 +357,7 @@
 
       <!-- Banner Text -->
       <div class="banner-text">
-        <h1>Trusted Labs. Accurate Reports</h1>
+        <h2>Trusted Labs. Accurate Reports</h2>
         <p>Certified labs delivering precise results you can trust</p>
         <div class="banner-points">
           <span><i class="fas fa-vials"></i> Accurate Results</span>
@@ -504,10 +507,6 @@
 </section>
 
 
-
-
-
-
 <section class="test-slider-section">
   <h2>Health Checkup Packages in Bangalore</h2>
   <div class="slider-container">
@@ -516,10 +515,14 @@
       <div class="test-card" data-id="1">
         <div class="card-header">Checkup</div>
         <h3>Basic Health Check Up</h3>
-        <p class="price"><del>₹2700</del> ₹1890 <span class="discount">30% Off</span></p>
+        <p class="price">
+          <del>₹1458</del> ₹699 
+          <span class="discount">52% Off</span>
+        </p>
+
         <div class="card-info">
         <span style="font-weight:bold; color:#00897b;">
-         <i class="fas fa-flask"></i> 50 Parameters
+         <i class="fas fa-flask"></i> 50+ Parameters
         </span>
         <span style="font-weight:bold; color:#1565c0;">
           <i class="fas fa-clock"></i> Reports within 6 hours
@@ -535,7 +538,7 @@
       <div class="test-card" data-id="2">
         <div class="card-header">Checkup</div>
         <h3>Master Health Check Up</h3>
-        <p class="price"><del>₹5500</del> ₹3850 <span class="discount">30% Off</span></p>
+        <p class="price"><del>₹1899</del>₹899 <span class="discount">50% Off</span></p>
         <div class="card-info">
         <span style="font-weight:bold; color:#00897b;">
          <i class="fas fa-flask"></i> 80 Parameters
@@ -553,7 +556,10 @@
       <div class="test-card" data-id="3">
         <div class="card-header">Checkup</div>
         <h3>Heart Check up</h3>
-        <p class="price"><del>₹4000</del> ₹2800<span class="discount">30% Off</span></p>
+        <p class="price">
+          <del>₹3198</del> ₹1599
+          <span class="discount">50% Off</span>
+        </p>
         <div class="card-info">
         <span style="font-weight:bold; color:#00897b;">
          <i class="fas fa-flask"></i> 50 Parameters
@@ -571,7 +577,10 @@
       <div class="test-card" data-id="4">
         <div class="card-header">Checkup</div>
         <h3>Well Women Check up</h3>
-        <p class="price"><del>₹3000</del> ₹2100 <span class="discount">30% Off</span></p>
+        <p class="price">
+          <del>₹2713</del> ₹1899
+          <span class="discount">30% Off</span>
+        </p>
         <div class="card-info">
         <span style="font-weight:bold; color:#00897b;">
          <i class="fas fa-flask"></i> 50 Parameters
@@ -1112,10 +1121,10 @@
 
   <!-- Bottom -->
   <div class="footer-bottom">
-    <p>
-      © 2025 Niva Health Kare Pvt. Ltd. All rights reserved.  
-      <span>An initiative by Vinayaka Hospital.</span>
-    </p>
+  <p>
+    © 2025 Niva Health Kare Healthcare Services. All rights reserved.
+  </p>
+
 
     <div class="footer-links">
       <a href="terms.html">Terms</a>
@@ -1250,10 +1259,6 @@
 
 
 
-
-
-
-
 <!-- ✅ Toast Notification -->
 <div id="toast" class="toast">Added to Cart</div>
 
@@ -1263,81 +1268,6 @@
   <script src="javascript/testscript.js"></script>
   <script src="javascript/location.js"></script>
   <script src="javascript/booking.controller.js"></script>
-  <button onclick="startPayment()">Pay ₹500</button>
-
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<script>
-async function startPayment() {
-    try {
-        // 1. Create order from backend
-        const response = await fetch("http://localhost:5000/create-order", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                amount: 500, // ₹500
-                receipt: "healthcheck_001"
-            })
-        });
-
-        if (!response.ok) {
-            throw new Error("Order creation failed");
-        }
-
-        const orderData = await response.json();
-
-        // 2. Razorpay Checkout options
-        const options = {
-            key: "rzp_test_S7I859kX36Fl1l", // TEST Key
-            amount: orderData.amount,
-            currency: orderData.currency,
-            name: "NIVA HEALTH KARE",
-            description: "Health Checkup Booking",
-            order_id: orderData.order_id,
-
-            handler: function (response) {
-                alert("Payment Successful");
-                console.log("Payment Response:", response);
-            },
-
-            prefill: {
-                name: "Test User",
-                email: "test@example.com",
-                contact: "9999999999"
-            },
-
-            theme: {
-                color: "#3399cc"
-            },
-
-            // ✅ Enable ALL payment methods
-            method: {
-                upi: true,
-                card: true,
-                netbanking: true,
-                wallet: true,
-                emi: false,
-                paylater: false
-            },
-
-            modal: {
-                ondismiss: function () {
-                    console.log("Checkout closed");
-                }
-            }
-        };
-
-        // 3. Open Razorpay Checkout
-        const rzp = new Razorpay(options);
-        rzp.open();
-
-    } catch (error) {
-        console.error("Payment initiation failed:", error);
-        alert("Payment failed. Please try again.");
-    }
-}
-</script>
 
 
 

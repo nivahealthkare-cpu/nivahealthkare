@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- Primary SEO -->
+ <title>Lipoma Removal Surgery in Bangalore | Niva Health Kare</title>
+
+<meta name="description" content="Expert lipoma removal surgery in Bangalore at Niva Health Kare with minimal scarring.">
+  <meta name="robots" content="index, follow">
+<meta name="geo.region" content="IN-KA">
+<meta name="geo.placename" content="Bangalore">
+  <!-- Canonical -->
+  <link rel="canonical" href="https://www.nivahealthkare.com/" />
+
+  <!-- Open Graph (WhatsApp / Facebook) -->
+  <meta property="og:title" content="Niva Health Kare – Diagnostic Tests & Health Packages">
+  <meta property="og:description" content="Book lab tests, blood tests, imaging scans, and health checkup packages online with trusted diagnostic labs.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.nivahealthkare.com/">
+  <meta property="og:image" content="https://www.nivahealthkare.com/images/og-image.webp">
+
+  <!-- Stylesheets (we will merge later) -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/Surgeries.css">
+  <link rel="stylesheet" href="css/booking.routes.css">
+  <link rel="stylesheet" href="css/mainsur.css">
+
+  <!-- Font Awesome (non-blocking for speed) -->
+  <link rel="preload"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        as="style"
+        onload="this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  </noscript>
+</head>
+<body>
+
+<header>
+
+  <!-- ================= DESKTOP HEADER ================= -->
+  <div class="desktop-header">
+
+    <!-- LEFT: LOGO + LOCATION -->
+    <div class="logo-location">
+
+      <div class="logo-section">
+        <div class="lab-name">
+          <span class="niva">Niva</span>
+          <span class="healthcare">Health Kare</span>
+        </div>
+      </div>
+
+      <!-- LOCATION TRIGGER -->
+      <div class="location-trigger" id="openLocation">
+        <span class="label">Location</span>
+        <span class="city">
+          <i class="fa-solid fa-location-dot location-icon"></i>
+          <span id="selectedCity">Select city</span>
+          <i class="fa-solid fa-chevron-down chevron"></i>
+        </span>
+      </div>
+
+
+    </div>
+
+    <!-- RIGHT: MENU ICONS -->
+    <div class="header-actions">
+      <a href="index.html" class="header-item">
+        <i class="fas fa-home header-icon"></i>
+        <span class="header-text">Home</span>
+      </a>
+
+      <a href="surgeries.html" class="header-item">
+        <i class="fas fa-procedures header-icon"></i>
+        <span class="header-text">Surgeries</span>
+      </a>
+
+      <a href="test.html" class="header-item">
+        <i class="fas fa-vials header-icon"></i>
+        <span class="header-text">Lab Tests</span>
+      </a>
+
+      <div class="header-item" onclick="openCheckupModal()">
+        <i class="fas fa-heartbeat header-icon"></i>
+        <span class="header-text">Checkup</span>
+      </div>
+
+      <div class="header-item" onclick="toggleDrawer()">
+        <i class="fas fa-shopping-cart header-icon">
+          <span id="cart-count" class="cart-count">0</span>
+        </i>
+        <span class="header-text">Cart</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================= MOBILE HEADER ================= -->
+  <div class="mobile-header">
+    <div class="logo-section">
+      <div class="lab-name">
+        <span class="niva">Niva</span>
+        <span class="healthcare">Health Kare</span>
+      </div>
+    </div>
+
+    <div class="location-section" id="mobileLocation">
+      <i class="fas fa-map-marker-alt location-icon"></i>
+
+      <div class="location-info">
+        <span class="label">Your Location</span>
+        <span class="city">
+          <span id="mobileSelectedCity">Bangalore</span>
+          <i class="fas fa-chevron-down chevron"></i>
+        </span>
+
+
+      </div>
+    </div>
+
+  </div>
+
+</header>
+
+
+<!-- LOCATION POPUP -->
+<div class="location-popup" id="locationPopup">
+  <div class="popup-card">
+
+    <!-- HEADER -->
+    <div class="popup-header">
+      <h3>Select your city</h3>
+      <button class="close-btn" id="closePopup">×</button>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="search-wrapper">
+      <span class="search-icon">🔍</span>
+
+      <input
+        type="text"
+        id="citySearch"
+        class="city-search"
+        placeholder="Search city (e.g. Mysuru)"
+        autocomplete="off"
+      />
+
+      <!-- Suggestions dropdown -->
+      <ul class="suggestions" id="citySuggestions"></ul>
+    </div>
+
+
+    <!-- POPULAR CITIES -->
+    <p class="section-label" id="popularLabel">Popular cities</p>
+    <div class="city-list popular" id="popularCities"></div>
+
+    <!-- ALL / SEARCH RESULTS -->
+    <div class="city-list" id="cityList"></div>
+
+    <p class="coverage">
+      Services available across major cities in Karnataka
+    </p>
+
+  </div>
+</div>
+
+
+
+<!-- Checkup Modal -->
+<div class="modal-overlay" id="checkupModalOverlay" onclick="closeCheckupModal()" style="display:none;">
+  <div class="modal-box" onclick="event.stopPropagation()">
+
+    <!-- Header -->
+    <div class="modal-header">
+      <h3>Get a call from our medical team</h3>
+      <button class="close-btn" onclick="closeCheckupModal()">×</button>
+    </div>
+
+    <!-- Subtext -->
+    <p class="modal-subtext">
+      Enter your mobile number and we’ll call you shortly.
+    </p>
+
+    <!-- Form -->
+    <form id="checkupForm" onsubmit="return false;">
+      <!-- Name -->
+      <input
+        type="text"
+        id="checkupName"
+        name="name"
+        placeholder="Your name"
+      />
+
+      <!-- Mobile -->
+      <input
+        type="tel"
+        id="checkupMobile"
+        name="mobile_no"
+        placeholder="Mobile number *"
+        required
+      />
+
+      <!-- Optional Message -->
+      <textarea
+        id="checkupMessage"
+        name="message"
+        placeholder="Message (optional)"
+        rows="3"
+      ></textarea>
+
+      <button type="button" onclick="submitCheckupForm()">
+        Request Call Back
+      </button>
+
+      <p class="trust-text">📞 Usually calls within 5 minutes</p>
+    </form>
+
+      <!-- Popup for success -->
+      <div id="simplePopup" style="display:none;">
+        ✅ Thank you! Our expert will call you shortly.
+      </div>
+
+
+  </div>
+</div>
+
+
+  
+  <!-- Cart Drawer (Right Side) -->
+ 
+<!-- Background Blur Overlay -->
+<div id="cartOverlay" class="cart-overlay" onclick="closeDrawer()"></div>
+
+
+<!-- Cart Drawer -->
+<div class="drawer mobile-drawer" id="drawer">
+  <div class="drawer-header">
+    <h3>Your Cart</h3>
+    <button onclick="closeDrawer()">✕</button>
+
+  </div>
+
+  <div class="drawer-body" id="cartItemsContainer"></div>
+
+  <div class="cart-summary">
+    <div class="summary-left">
+      <span class="total-tests">
+        checkout test: <strong id="totalTests">0</strong>
+      </span>
+      <span class="total-price">
+        Total Price: <strong id="totalPrice">₹0</strong>
+      </span>
+    </div>
+    <a href="checkout.html" class="proceed-btn">Proceed</a>
+  </div>
+</div>
+
+
+
+<!-- Mobile Bottom Bar -->
+<div class="mobile-bottom">
+
+  <!-- Home -->
+  <a href="index.html">
+    <i class="fas fa-home"></i>
+  </a>
+
+  <!-- Surgeries -->
+  <a href="surgeries.html">
+    <i class="fas fa-procedures"></i>
+  </a>
+
+  <!-- Lab Tests -->
+  <a href="test.html">
+    <i class="fas fa-vials"></i>
+  </a>
+
+  <!-- Checkups -->
+  <a href="#" onclick="openModal()">
+    <i class="fas fa-heartbeat"></i>
+  </a>
+
+  <!-- Cart -->
+  <a href="#" onclick="toggleDrawer()">
+    <i class="fas fa-shopping-cart"></i>
+  </a>
+
+</div>
+
+<section class="piles-hero">
+  <div class="piles-container">
+    
+    <!-- LEFT CONTENT -->
+    <div class="piles-content">
+      <h1>Advanced Lipoma Removal Treatment</h1>
+      <p>
+        Safe and minimally invasive lipoma removal performed by experienced surgeons. 
+        Quick procedure with minimal scarring, faster recovery, and same-day discharge 
+        for complete comfort and peace of mind.
+      </p>
+
+      <ul class="piles-features">
+        <li>✔ 30–45 Minute Procedure</li>
+        <li>✔ Minimal Scarring</li>
+        <li>✔ Quick Recovery</li>
+        <li>✔ Insurance & Cashless Support</li>
+      </ul>
+
+      <div class="piles-buttons">
+        <a href="tel:+917892287102" class="btn-secondary">
+          📞 Talk to Expert
+        </a>
+      </div>
+    </div>
+
+    <!-- RIGHT IMAGE -->
+    <div class="piles-image">
+      <img src="images/lipoma.webp" alt="Advanced lipoma removal surgery and consultation">
+    </div>
+
+  </div>
+</section>
+
+<section class="piles-overview-section">
+  <div class="piles-overview-container">
+
+    <div class="piles-overview-header">
+      <h2>Overview of Lipoma</h2>
+      <p>
+        A lipoma is a soft, slow-growing, non-cancerous lump made up of fat tissue. 
+        It usually develops just under the skin and is commonly found on the neck, 
+        shoulders, back, arms, or thighs.
+      </p>
+    </div>
+
+    <div class="piles-overview-grid">
+
+      <!-- What is Lipoma -->
+      <div class="overview-card">
+        <h3>What Is a Lipoma?</h3>
+        <p>
+          A lipoma is a benign (non-cancerous) growth of fatty tissue that forms 
+          between the skin and underlying muscle layer. It feels soft to touch, 
+          moves easily when pressed, and usually grows slowly over time. 
+          Lipomas are generally painless but may cause discomfort if they press on nearby nerves.
+        </p>
+      </div>
+
+      <!-- How to Identify -->
+      <div class="overview-card">
+        <h3>How to Identify a Lipoma?</h3>
+        <ul>
+          <li>Soft, doughy lump under the skin</li>
+          <li>Moves slightly when pressed</li>
+          <li>Usually painless</li>
+          <li>Slow-growing over months or years</li>
+          <li>Commonly found on neck, shoulders, back, or arms</li>
+        </ul>
+      </div>
+
+      <!-- Symptoms -->
+      <div class="overview-card">
+        <h3>Common Symptoms & Concerns</h3>
+        <ul>
+          <li>Visible lump under the skin</li>
+          <li>Mild discomfort if pressing on nerves</li>
+          <li>Cosmetic concerns due to size</li>
+          <li>Rarely painful if inflamed</li>
+          <li>Increase in size over time</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section class="piles-treatment-section">
+  <div class="piles-treatment-container">
+
+    <div class="treatment-header">
+      <h2>Lipoma Treatment Options</h2>
+      <p>
+        Lipoma treatment depends on the size, location, and symptoms of the lump. 
+        While small and painless lipomas may not require immediate removal, 
+        surgical procedures are recommended if the lipoma causes discomfort, 
+        pain, or cosmetic concerns.
+      </p>
+    </div>
+
+    <div class="treatment-comparison">
+
+      <div class="treatment-card">
+        <h3>Laser Lipoma Removal</h3>
+        <ul>
+          <li>Minimally invasive and advanced technique</li>
+          <li>Smaller incision with minimal bleeding</li>
+          <li>Precise removal of fatty tissue</li>
+          <li>Reduced scarring compared to traditional surgery</li>
+          <li>Faster recovery and same-day discharge in most cases</li>
+        </ul>
+      </div>
+
+      <div class="treatment-card highlight-card">
+        <h3>Conventional Lipoma Surgery</h3>
+        <ul>
+          <li>Traditional surgical excision using scalpel</li>
+          <li>May require stitches depending on size</li>
+          <li>Effective for large or deep lipomas</li>
+          <li>Slightly longer healing time</li>
+          <li>Recommended for complex or multiple lipomas</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<section id="book-consult" class="consult-section">
+  <div class="container">
+    <div class="consult-content">
+
+      <div class="consult-info">
+        <h2>Get a Call Back in Minutes</h2>
+        <p>
+          Our medical experts will help you with treatment guidance,
+          cost estimates, hospital options, doctor availability and insurance support.
+        </p>
+
+        <ul class="consult-points">
+          <li><i class="fas fa-check-circle"></i> Free expert consultation</li>
+          <li><i class="fas fa-check-circle"></i> Cashless Insurance & EMI Available</li>
+          <li><i class="fas fa-check-circle"></i> Fast admission & discharge support</li>
+        </ul>
+
+                <!-- PRIMARY ACTIONS FIRST -->
+        <div class="alt-contact">
+          <a href="tel:+919876543210" class="call-link">
+            <i class="fas fa-phone-alt"></i> Call Now
+          </a>
+
+          <a href="https://wa.me/919876543210" class="whatsapp-link">
+            <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+          </a>
+        </div>
+
+        
+      </div>
+      
+      <div class="consult-form-box">
+        <h3>Get a Call Back</h3>
+
+
+        <form class="consult-form" onsubmit="return false;">
+
+          <div class="form-group">
+          <input
+            type="text"
+            id="consultName"
+            placeholder="Full Name *"
+            required
+          >
+
+          </div>
+
+          <div class="form-group">
+            <input
+              type="tel"
+              id="consultMobile"
+              placeholder="Mobile Number *"
+              maxlength="10"
+              pattern="[0-9]{10}"
+              required
+            >
+
+          </div>
+
+          <button type="button" class="submit-btn" onclick="submitConsultForm()">
+            Get a Call Back
+          </button>
+
+
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SIMPLE CONFIRMATION POPUP -->
+<div id="simplePopup" class="simple-popup">
+  <div class="popup-box">
+    <p>✅ Thank you! Our medical expert will contact you shortly.</p>
+    <button onclick="closePopup()">OK</button>
+  </div>
+</div>
+
+
+
+<section class="piles-faq-section">
+  <div class="piles-faq-container">
+
+    <h2>Frequently Asked Questions (FAQs)</h2>
+
+    <div class="faq-item">
+      <h3>What is a lipoma?</h3>
+      <p>
+        A lipoma is a soft, slow-growing lump made of fatty tissue that develops 
+        under the skin. It is usually painless, movable, and non-cancerous. 
+        Lipomas commonly appear on the neck, shoulders, back, arms, or thighs.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Is lipoma removal painful?</h3>
+      <p>
+        Lipoma removal is typically performed under local anesthesia, 
+        making the procedure painless. Patients may experience mild 
+        discomfort after surgery, which can be managed with medications.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>When should a lipoma be removed?</h3>
+      <p>
+        Removal is recommended if the lipoma causes pain, increases in size, 
+        restricts movement, creates cosmetic concerns, or shows unusual changes 
+        that require medical evaluation.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>How long does lipoma surgery take?</h3>
+      <p>
+        Lipoma removal usually takes 20–40 minutes, depending on the size 
+        and location of the lump. Most procedures are done as same-day surgery.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Can a lipoma come back after removal?</h3>
+      <p>
+        Recurrence is rare when the lipoma is completely removed. However, 
+        in some cases, new lipomas may develop in other areas of the body.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="reviews-banner">
+
+  <div class="reviews-container">
+
+    <!-- LEFT: AUTO SLIDING REVIEWS -->
+    <div class="reviews-slider">
+      <div class="reviews-track">
+
+        <div class="review-item">
+          <p>“Fast reports & polite support. Highly recommended.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=15" alt="">
+            <div>
+              <strong>Shashank N.</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+        <div class="review-item">
+          <p>“Home sample collection was on time and very hygienic.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=22" alt="">
+            <div>
+              <strong>Ananya R.</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+        <div class="review-item">
+          <p>“Booked a full body checkup. Got reports within hours.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=5" alt="">
+            <div>
+              <strong>Rohit Kumar</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+        <div class="review-item">
+          <p>“Very smooth experience. Support team was helpful.”</p>
+          <div class="review-user">
+            <img src="https://i.pravatar.cc/60?img=9" alt="">
+            <div>
+              <strong>Divya M.</strong><br>
+              ⭐⭐⭐⭐⭐
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT: TRUST CONTENT (DESKTOP ONLY) -->
+    <div class="reviews-info">
+      <h2>What Patients Say<br>On Google</h2>
+
+      <p>
+        Trusted by thousands for accurate reports and convenient home
+        sample collection. Rated <strong>4.3★ on Google</strong>.
+      </p>
+
+      <div class="trust-stats">
+        <div>
+          ⭐<br><strong>4.3</strong><br>Rating
+        </div>
+        <div>
+          👥<br><strong>10k+</strong><br>Users
+        </div>
+        <div>
+          🏥<br><strong>NABL</strong><br>Labs
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+
+<div id="sticky-icon-popup">
+
+  <a href="https://wa.me/+917892287102" target="_blank" class="icon-btn whatsapp" aria-label="Chat on WhatsApp" rel="noopener">
+    <i class="fab fa-whatsapp"></i>
+    <span class="tooltip">WhatsApp</span>
+  </a>
+
+  <a href="tel:+917892287102" class="icon-btn call" aria-label="Call Support" rel="noopener">
+    <i class="fas fa-phone-alt"></i>
+    <span class="tooltip">Call Support</span>
+  </a>
+
+</div>
+
+
+<footer class="footer-section">
+  <div class="footer-container">
+
+    <!-- Brand / Trust -->
+    <div class="footer-left">
+      <h2 class="footer-brand">
+        <span class="footer-niva">Niva</span>
+        <span class="footer-healthcare">Health Kare</span>
+      </h2>
+
+      <p class="footer-tagline">
+        Trusted healthcare services delivering quality, care, and compassion.
+      </p>
+
+      <div class="social-icons">
+        <a href="https://www.instagram.com/nivahealthkare/" aria-label="Instagram">
+      <img
+        src="images/instagram.webp"
+        alt="Follow Niva Health Kare on Instagram"
+        width="24"
+        height="24"
+        loading="lazy">
+      </a>
+        <a href="https://www.facebook.com/profile.php?id=61583126009241" aria-label="Facebook">
+        <img
+          src="images/facebook.webp"
+          alt="Follow Niva Health Kare on Facebook"
+          width="24"
+          height="24"
+          loading="lazy">
+
+        </a>
+        <a href="https://www.youtube.com/@nivahealthkare" aria-label="YouTube">
+        <img
+          src="images/youtube.webp"
+          alt="Subscribe to Niva Health Kare on YouTube"
+          width="24"
+          height="24"
+          loading="lazy">
+
+        </a>
+      </div>
+    </div>
+
+    <!-- Links -->
+    <div class="footer-right">
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="index.html">Home</a>
+        <a href="about-us.html">About Us</a>
+        <a href="locate-us.html">Locate Us</a>
+        
+      </div>
+
+      <div class="footer-col">
+        <h4>Medical Network</h4>
+        <a href="our-partners.html">Our Partners</a>
+        <a href="for-doctors.html">Doctors</a>
+        <a href="service.html">Our Services</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="refund-policy.html">Refund Policy</a>
+        <a href="disclaimer.html">Disclaimer</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom -->
+  <div class="footer-bottom">
+  <p>
+    © 2025 Niva Health Kare Healthcare Services. All rights reserved.
+  </p>
+
+
+    <div class="footer-links">
+      <a href="terms.html">Terms</a>
+      <a href="privacy-policy.html">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+
+<section class="simple-seo-footer">
+  <div class="simple-seo-container">
+
+    <div class="seo-item">
+      <h4>Lipoma Treatment Services</h4>
+      <p>
+        Advanced lipoma removal treatment, laser lipoma surgery, painless fatty lump removal, 
+        and minimally invasive procedures for small, large, and deep-seated lipomas.
+      </p>
+    </div>
+
+    <div class="seo-item">
+      <h4>Expert Lipoma Care</h4>
+      <p>
+        Experienced surgeons providing accurate diagnosis, safe surgical excision, 
+        and effective treatment for single or multiple lipomas with minimal scarring 
+        and faster recovery.
+      </p>
+    </div>
+
+    <div class="seo-item">
+      <h4>Lipoma Treatment in Bangalore</h4>
+      <p>
+        Trusted lipoma treatment center in Bangalore offering same-day lipoma removal, 
+        advanced laser procedures, affordable treatment cost, insurance assistance, 
+        and easy appointment booking.
+      </p>
+    </div>
+
+    <div class="seo-item">
+      <h4>Why Choose Our Clinic?</h4>
+      <p>
+        Modern surgical techniques, expert doctors, minimal pain procedures, 
+        hygienic operation facilities, transparent pricing, and complete 
+        pre- and post-surgery patient support.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ===== BOOKING MODAL ===== -->
+<div id="bookingModal" class="booking-modal">
+
+  <div class="booking-box">
+
+    <!-- Close -->
+    <button type="button" class="booking-close" onclick="closeBooking()">×</button>
+
+    <!-- STEP INDICATOR -->
+    <div class="step-indicator">
+      <div class="step active" id="stepIndicator1">1</div>
+      <div class="step-line"></div>
+      <div class="step" id="stepIndicator2">2</div>
+      <div class="step-line"></div>
+      <div class="step" id="stepIndicator3">3</div>
+    </div>
+
+    <!-- ===== STEP 1 ===== -->
+    <div class="booking-step active" id="step1">
+      <h3>Enter Mobile Number</h3>
+
+      <label>Mobile Number</label>
+      <input
+        type="tel"
+        id="bookingMobile"
+        placeholder="10-digit mobile number"
+        maxlength="10"
+      >
+
+      <button
+        type="button"
+        class="primary-btn"
+        onclick="goToStep2()"
+      >
+        Continue
+      </button>
+    </div>
+
+    <!-- ===== STEP 2 ===== -->
+    <div class="booking-step" id="step2">
+      <h3>Complete Booking</h3>
+
+      <label>Your Name</label>
+      <input type="text" id="custName" placeholder="Enter your name">
+
+      <label>Email (optional)</label>
+      <input type="email" id="custEmail" placeholder="Enter your email">
+
+      <label>Service</label>
+      <input
+        type="text"
+        id="serviceType"
+        value="Health Checkup"
+        readonly
+      >
+
+      <button
+        type="button"
+        class="primary-btn"
+        onclick="confirmBooking()"
+      >
+        Confirm Booking
+      </button>
+    </div>
+
+    <!-- ===== STEP 3 ===== -->
+    <div class="booking-step" id="step3">
+      <h3>Booking Confirmed 🎉</h3>
+
+      <p class="confirmation-text" id="confirmationMessage">
+        Thank you! Our team will call you shortly to confirm your booking.
+      </p>
+
+      <button
+        type="button"
+        class="primary-btn"
+        onclick="closeBooking()"
+      >
+        Done
+      </button>
+    </div>
+
+  </div>
+</div>
+
+
+
+<!-- ✅ Toast Notification -->
+<div id="toast" class="toast">Added to Cart</div>
+
+
+  <script src="javascript/lab-carousel.js"></script>
+  <script src="javascript/script.js"></script>
+  <script src="javascript/testscript.js"></script>
+  <script src="javascript/location.js"></script>
+  <script src="javascript/booking.controller.js"></script>
+
+</body>
+</html>
