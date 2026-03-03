@@ -112,10 +112,6 @@
       </button>
     </div>
 
-    <button type="button" class="btn" onclick="proceedToPayment()">
-      Continue
-    </button>
-
   </form>
 </div>
 
@@ -357,13 +353,16 @@ async function startRazorpayPayment() {
 
     handler: async function (response) {
       try {
+        const leadId = window.currentLeadId; // 🔹 set this from your code when creating lead/order
+
         const verifyRes = await fetch("http://localhost:5000/verify-payment", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             razorpay_order_id: response.razorpay_order_id,
             razorpay_payment_id: response.razorpay_payment_id,
-            razorpay_signature: response.razorpay_signature
+            razorpay_signature: response.razorpay_signature,
+            lead_id: leadId // 🔹 now backend knows which lead to update
           })
         });
 
@@ -374,6 +373,7 @@ async function startRazorpayPayment() {
           return;
         }
 
+        // Success banner
         const successBanner = document.getElementById("successBanner");
         successBanner.innerHTML =
           "✅ Payment successful & verified!<br>We will contact you shortly.";
