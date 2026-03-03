@@ -75,7 +75,7 @@ async function confirmBooking() {
   console.log("SENDING DATA:", bookingData);
 
   try {
-    const response = await fetch("http://127.0.0.1:5000/api/web-leads", {
+    const response = await fetch("https://api.nivahealthkare.com/api/web-leads", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(bookingData)
@@ -175,7 +175,7 @@ async function submitConsultForm() {
       location: localStorage.getItem("selectedCity") || "Unknown"
     };
 
-    const response = await fetch("http://127.0.0.1:5000/api/web-leads", {
+    const response = await fetch("https://api.nivahealthkare.com/api/web-leads", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
@@ -251,7 +251,7 @@ async function submitCheckupForm() {
     };
 
     // Use same backend URL as working Surgery form
-    const response = await fetch("http://127.0.0.1:5000/api/web-leads", {
+    const response = await fetch("https://api.nivahealthkare.com/api/web-leads", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)

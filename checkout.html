@@ -249,7 +249,7 @@ function hidePaymentModal() {
    PLACE ORDER (FRONTEND ONLY)
 ================================ */
 
-const API_BASE = "http://localhost:5000";
+const API_BASE = "https://api.nivahealthkare.com";
 
 async function postJSON(path, payload) {
   const res = await fetch(API_BASE + path, {
@@ -334,7 +334,7 @@ async function startRazorpayPayment() {
   }
 
   // 1️⃣ Call backend to create Razorpay order
-  const res = await fetch("http://localhost:5000/create-order", {
+  const res = await fetch("https://api.nivahealthkare.com/create-order", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ items: cartItems })
@@ -355,7 +355,7 @@ async function startRazorpayPayment() {
       try {
         const leadId = window.currentLeadId; // 🔹 set this from your code when creating lead/order
 
-        const verifyRes = await fetch("http://localhost:5000/verify-payment", {
+        const verifyRes = await fetch("https://api.nivahealthkare.com/verify-payment", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
